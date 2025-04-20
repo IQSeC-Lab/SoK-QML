@@ -137,7 +137,7 @@ train(model, train_loader, test_loader, optimizer, criterion, device, epochs)
 torch.save(model.state_dict(), 'mnist_mlp_model.pth')
 
 model.load_state_dict(torch.load('mnist_mlp_model.pth'))
-model.eval()  # Set the model to evaluation mode
+model.eval() 
 
 # Evaluate on the test dataset
 test_loss, test_acc = evaluate(model, test_loader, criterion, device)
@@ -150,8 +150,6 @@ def fgsm_attack(model, images, labels, epsilon):
     images = images.clone().detach().to(device)
     labels = labels.to(device)
     images.requires_grad = True
-
-    # Flatten images before passing them through the model
     outputs, _ = model(images)
 
     loss = F.cross_entropy(outputs, labels)
