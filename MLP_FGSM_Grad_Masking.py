@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""MLP_FGSM_Adversarial Training
-
+"""MLP_FGSM_Gradient Masking
 Original file is located at
     https://colab.research.google.com/drive/1awK5oX1tcjBd-7u8CwHgRXt-FTOllEwG?usp=sharing
 """
