@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""MLP_FGSM_Adversarial Training
+"""MLP_PGD_Adversarial Training
 
 Original file is located at
-    https://colab.research.google.com/drive/1x1JthiDpLlN3EAcgRj3cwJiJ0QbOyPSD?usp=sharing
+    https://colab.research.google.com/drive/1UcI5JzWKS6S7vmdf8pMU1jpElIG6XXn9?usp=sharing
 """
 
 
