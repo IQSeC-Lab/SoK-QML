@@ -165,7 +165,7 @@ def fgsm_attack(model, images, labels, epsilon):
 
 
 # Adversarial Training Function
-def train_adv_on_the_fly(model, train_loader, optimizer, criterion, device, attack_func, epsilon, pgd_iters):
+def train_adv(model, train_loader, optimizer, criterion, device, attack_func, epsilon, pgd_iters):
     model.train()
     total_loss = 0
 
@@ -239,7 +239,7 @@ pgd_iters = 1
 for epoch in range(epochs):
     print(f"\nEpoch [{epoch+1}/{epochs}]")
 
-    train_loss = train_adv_on_the_fly(defensive_model, train_loader, optimizer, criterion, device, fgsm_attack, epsilon, pgd_iters)
+    train_loss = train_adv(defensive_model, train_loader, optimizer, criterion, device, fgsm_attack, epsilon, pgd_iters)
 
     clean_loss, clean_acc = evaluate(defensive_model, test_loader, criterion, device)
     adv_loss, adv_acc = evaluate_on_adv(defensive_model, test_loader, fgsm_attack, criterion, device, epsilon, pgd_iters)
