@@ -164,138 +164,104 @@ def fgsm_attack(model, images, labels, epsilon):
     return perturbed_images.detach()
 
 
-# Generate adversarial examples
-def generate_adversarial_data(model, loader, attack_func, epsilon, device='cpu'):
-    adv_examples = []
-    adv_labels = []
+# Adversarial Training Function
+def train_adv_on_the_fly(model, train_loader, optimizer, criterion, device, attack_func, epsilon, pgd_iters):
+    model.train()
+    total_loss = 0
+
+    for images, labels in tqdm(train_loader, desc="Training Progress"):
+        images, labels = images.to(device), labels.to(device)
+
+        adv_images = attack_func(model, images, labels, epsilon)
+
+        optimizer.zero_grad()
+        outputs, _ = model(adv_images)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        total_loss += loss.item()
+
+    return total_loss / len(train_loader)
+
+
+def evaluate(model, loader, criterion, device):
     model.eval()
+    correct = 0
+    total = 0
+    loss_total = 0
+
+    with torch.no_grad():
+        for images, labels in loader:
+            images, labels = images.to(device), labels.to(device)
+
+            outputs, _ = model(images)
+            loss = criterion(outputs, labels)
+            
+            loss_total += loss.item()
+            preds = outputs.argmax(dim=1)
+            correct += (preds == labels).sum().item()
+            total += labels.size(0)
+
+    return loss_total / len(loader), correct / total
+
+
+# Evaluate on Adversarial Samples
+def evaluate_on_adv(model, loader, attack_func, criterion, device, epsilon, pgd_iters):
+    model.eval()
+    correct = 0
+    total = 0
+    loss_total = 0
+
     for images, labels in loader:
         images, labels = images.to(device), labels.to(device)
-        perturbed_images = attack_func(model, images, labels, epsilon)
-        adv_examples.append(perturbed_images)
-        adv_labels.append(labels)
-    return torch.cat(adv_examples, dim=0), torch.cat(adv_labels, dim=0)
+        adv_images = attack_func(model, images, labels, epsilon)
 
-adv_test_images, adv_test_labels = generate_adversarial_data(model, test_loader, fgsm_attack, epsilon=0.1, device=device)
+        outputs, _ = model(adv_images)
+        loss = criterion(outputs, labels)
+        
+        loss_total += loss.item()
+        preds = outputs.argmax(dim=1)
+        correct += (preds == labels).sum().item()
+        total += labels.size(0)
 
-# Create a DataLoader from the new tensors
-adv_test_dataset = torch.utils.data.TensorDataset(adv_test_images, adv_test_labels)
-adv_test_loader = DataLoader(adv_test_dataset, batch_size=128, shuffle=False)
-
-# evaluate() returns avg_loss and accuracy, unpack it
-adv_loss, adv_acc = evaluate(model, adv_test_loader, criterion, device)
-print(f"Adversarial Accuracy: {adv_acc * 100:.2f}%")
+    return loss_total / len(loader), correct / total
 
 
-import matplotlib.pyplot as plt
-
-epsilon_values = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-accuracies = []
-
-for epsilon in epsilon_values:
-    # Generate adversarial examples
-    adv_test_images, adv_test_labels = generate_adversarial_data(model, test_loader, fgsm_attack, epsilon, device)
-
-    # Create a DataLoader for adversarial examples
-    adv_test_dataset = torch.utils.data.TensorDataset(adv_test_images, adv_test_labels)
-    adv_test_loader = DataLoader(adv_test_dataset, batch_size=128, shuffle=False)
-
-    # Evaluate model accuracy on adversarial examples
-    adv_loss, adv_acc = evaluate(model, adv_test_loader, criterion, device)  
-    accuracies.append(adv_acc)
-    print(f"Epsilon: {epsilon:.1f}, Accuracy: {adv_acc:.4f}")
-
-plt.plot(epsilon_values, accuracies, marker='o')
-plt.xlabel("Epsilon")
-plt.ylabel("Accuracy")
-plt.title("Accuracy vs Epsilon")
-plt.grid(True)
-plt.show()
-
-
-# Effect on images with different noise rates
-epsilon_values = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-
-test_iter = iter(test_loader)
-images, labels = next(test_iter)
-
-# Select a single image to visualize
-image_index = 0
-image = images[image_index]
-label = labels[image_index]
-
-# Create a figure with subplots
-fig, axes = plt.subplots(1, len(epsilon_values), figsize=(15, 3))
-
-# Iterate through epsilon values
-for i, epsilon in enumerate(epsilon_values):
-    perturbed_image = fgsm_attack(model, image.unsqueeze(0), label.unsqueeze(0), epsilon).squeeze(0)
-
-    axes[i].imshow(perturbed_image.cpu().numpy().reshape(28, 28), cmap='gray')
-    axes[i].set_title(f"Epsilon: {epsilon}")
-    axes[i].axis('off')
-
-plt.tight_layout()
-plt.show()
-
-
-# Defense: Adversarial Training 
-defensive_model = MLP(28*28, 10).to(device) 
-defensive_optimizer = optim.Adam(defensive_model.parameters(), lr=0.001)
+# Defensive Model
+defensive_model = MLP(28*28, 10).to(device)
+optimizer = optim.Adam(defensive_model.parameters(), lr=0.001)
 
 epochs = 5
+epsilon = 0.1
+pgd_iters = 1 
 
 for epoch in range(epochs):
-    # Generate adversarial examples using training data
-    adv_train_images, adv_train_labels = generate_adversarial_data(model, train_loader, fgsm_attack, epsilon=0.1, device=device)
+    print(f"\nEpoch [{epoch+1}/{epochs}]")
 
-    # Create a DataLoader for adversarial training examples
-    adv_train_dataset = torch.utils.data.TensorDataset(adv_train_images, adv_train_labels)
-    adv_train_loader = DataLoader(adv_train_dataset, batch_size=128, shuffle=True)
+    train_loss = train_adv_on_the_fly(defensive_model, train_loader, optimizer, criterion, device, fgsm_attack, epsilon, pgd_iters)
 
-    train(defensive_model, train_loader, test_loader, defensive_optimizer, criterion, device, epochs=1)
+    clean_loss, clean_acc = evaluate(defensive_model, test_loader, criterion, device)
+    adv_loss, adv_acc = evaluate_on_adv(defensive_model, test_loader, fgsm_attack, criterion, device, epsilon, pgd_iters)
 
-    train(defensive_model, adv_train_loader, test_loader, defensive_optimizer, criterion, device, epochs=1)
-
-    # Evaluate the defensive model's performance
-    def_loss, def_acc = evaluate(defensive_model, adv_test_loader, criterion, device)
-    print(f"Epoch [{epoch+1}/{epochs}] - Defense Accuracy: {def_acc * 100:.2f}%")
-
-print(f"Final Defense Accuracy: {def_acc * 100:.2f}%")
+    print(f"Train Loss: {train_loss:.4f}")
+    print(f"Clean Accuracy: {clean_acc * 100:.2f}%")
+    print(f"Adversarial Accuracy (FGSM eps={epsilon}): {adv_acc * 100:.2f}%")
 
 
-# Evaluate on clean test data
-clean_loss, clean_acc = evaluate(defensive_model, test_loader, criterion, device)
-print(f"Defense Accuracy on Clean Data: {clean_acc * 100:.2f}%")
+# Test with Different Noise Rates
+epsilon_list = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40]
+adv_accuracies = []
 
-# Evaluate on adversarial test data
-adv_loss, adv_acc = evaluate(defensive_model, adv_test_loader, criterion, device)
-print(f"Defense Accuracy on Attacked Data: {adv_acc * 100:.2f}%")
+for eps in epsilon_list:
+    _, adv_acc = evaluate_on_adv(defensive_model, test_loader, fgsm_attack, criterion, device, epsilon=eps, pgd_iters=1)  
+    adv_accuracies.append(adv_acc)
+    print(f"Epsilon: {eps:.2f}, Accuracy: {adv_acc * 100:.2f}%")
 
-
-
-#Accuracy under different noise rates (epsilon from 0.0 to 1.0)
 import matplotlib.pyplot as plt
-
-epsilon_values = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-accuracies = []
-
-for epsilon in epsilon_values:
-    adv_test_images, adv_test_labels = generate_adversarial_data(model, test_loader, fgsm_attack, epsilon, device)
-
-    # Create a DataLoader for adversarial examples
-    adv_test_dataset = torch.utils.data.TensorDataset(adv_test_images, adv_test_labels)
-    adv_test_loader = DataLoader(adv_test_dataset, batch_size=128, shuffle=False)
-
-    # Evaluate model accuracy on adversarial examples
-    adv_loss, adv_acc = evaluate(defensive_model, adv_test_loader, criterion, device)  
-    accuracies.append(adv_acc)
-    print(f"Epsilon: {epsilon:.1f}, Accuracy: {adv_acc:.4f}")
-
-# Plot the relationship
-plt.plot(epsilon_values, accuracies, marker='o')
+plt.plot(epsilon_list, adv_accuracies, marker='o')
 plt.xlabel("Epsilon")
 plt.ylabel("Accuracy")
-plt.title("Accuracy vs Epsilon for Defended Model")
+plt.title("FGSM Adversarial Accuracy vs Epsilon")
 plt.grid(True)
 plt.show()
