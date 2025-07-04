@@ -1,6 +1,10 @@
+#################################################################################################
+######################################## Library Import ######################################### 
+#################################################################################################
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2" # setting
+os.environ["CUDA_VISIBLE_DEVICES"] = "3" 
 import pennylane as qml
+import random
 from pennylane import numpy as np
 from pennylane.optimize import AdamOptimizer, GradientDescentOptimizer
 import matplotlib.pyplot as plt
@@ -28,15 +32,73 @@ from torchvision import transforms
 import qiskit_aer.noise as noise
 from qiskit_aer.noise import NoiseModel
 import idx2numpy
-#################################################################################################
-#################################################################################################
-#################################################################################################
+####################################################################################################
+# Global Parameters
+bsz = 64
+epochs = 2
+lr = 0.001
+w_decay = 1e-4
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+# prefixname for the results to save
+best_model_prefix = "qmlp-mnist-run"
+cm_name_prefix= "cm_qmlp-mnist-run"
+filename_prefix = "qmlp-mnist-run"
+
+# Circuit 
+n_qubits = 16
+n_layers = 2
+
+dev = qml.device("default.qubit", wires=n_qubits) # w/o noise
+####################################################################################################
+
+# Train and test functions for the hybrid models
+def train(model, DEVICE, train_loader, optimizer, epoch):
+    model.train()
+    running_loss = 0.0
+    correct = 0.0
+    total = 0.0
+
+    for batch_idx, (inputs, target) in enumerate(train_loader, 0):
+        inputs, target = inputs.to(DEVICE), target.to(DEVICE)
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        loss = F.nll_loss(outputs, target)
+        loss.backward()
+        optimizer.step()
+
+        _, predicted = torch.max(outputs.data, dim=1)
+        total += target.size(0)
+        correct += (predicted == target).sum().item()
+        running_loss += loss.item()
+
+        if (batch_idx + 1) % 10 == 0:
+            print(f"Epoch: {epoch}, Batch: {batch_idx+1}, Acc: {100 * correct / total:.2f}%, Loss: {running_loss / 10:.4f}")
+            running_loss = 0.0
+
+def test(model, DEVICE, test_loader):
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for inputs, labels in test_loader:
+            inputs, labels = inputs.to(DEVICE), labels.to(DEVICE)
+            outputs = model(inputs)
+            _, predicted = torch.max(outputs.data, dim=1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+    acc = 100 * correct / total
+    print(f"Accuracy on test set: {acc:.2f}%")
+    return acc
+####################################################################################################
+
+"""
+Image downscaler for processing MNIST Dataset
+"""
 def downscale_images(X, new_size=(4, 4)):
     downscaled = []
     to_tensor = transforms.ToTensor()
     resize = transforms.Resize(new_size)
-
     for img_array in X:
         # Convert numpy array (28x28) to PIL Image
         img = Image.fromarray(img_array.astype(np.uint8))
@@ -44,22 +106,29 @@ def downscale_images(X, new_size=(4, 4)):
         img_resized = resize(img)
         img_tensor = to_tensor(img_resized).squeeze(0).numpy()
         downscaled.append(img_tensor)
-
     return np.array(downscaled)
 
-#################################################################################################
-# Evaluation
-#################################################################################################
-def evaluation(model, test_loader, epsilon, num_classes):
+
+"""
+Evaluation Function for the QML Models
+"""
+def evaluation(model, test_loader, epsilon, num_classes, attack_type, pgd_alpha, pgd_num_iter, pgd_random_start):
     model.eval()
     outputs, y_true = [], []
-
+    
     for x_batch, y_batch in test_loader:
         x_batch = x_batch.to(device)
         y_batch = y_batch.to(device)
 
         if epsilon > 0:
-            x_batch = fgsm_attack(model, x_batch, y_batch, epsilon)
+            if attack_type == 'fgsm':
+                x_batch = fgsm_attack(model, x_batch, y_batch, epsilon)
+            elif attack_type == 'pgd':
+                x_batch = pgd_attack(model, x_batch, y_batch, epsilon, pgd_alpha, pgd_num_iter, pgd_random_start)
+            elif attack_type == 'none':
+                pass 
+            else:
+                raise ValueError(f"Unknown attack type: {attack_type}. Choose 'none', 'fgsm', or 'pgd'.")
 
         with torch.no_grad():
             out = model(x_batch)
@@ -108,47 +177,68 @@ def evaluation(model, test_loader, epsilon, num_classes):
         'pr_auc': pr_auc
     }
     return metrics
-#################################################################################################
 
 #################################################################################################
 # Attacks
 #################################################################################################
-
+"""
+FGSM Attack
+"""
 def fgsm_attack(model, X, y, epsilon):
-    # Clone and enable gradient tracking on input
     X_adv = X.clone().detach().requires_grad_(True)
-    
-    # Forward pass
     output = model(X_adv)
     loss = torch.nn.functional.cross_entropy(output, y)
-
-    # Backward pass
     model.zero_grad()
     loss.backward()
-
-    # Apply FGSM perturbation
     X_adv = X_adv + epsilon * X_adv.grad.sign()
-
-    # Clamp to valid data range [0, 1]
     X_adv = torch.clamp(X_adv, 0, 1)
-
     return X_adv.detach() 
-#################################################################################################
 
-bsz = 64
-epochs = 30
-lr = 0.001
-w_decay = 1e-4
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+"""
+PGD Attack
+"""
+def pgd_attack(model, X, y, epsilon, alpha, num_iter, random_start):
+    model.eval() # Ensure model is in evaluation mode
+    X_original = X.clone().detach() # Keep a copy of the original input
+    # Initialize adversarial example
+    if random_start:
+        random_noise = (torch.rand_like(X) * 2 * epsilon - epsilon) # Noise within [-epsilon, epsilon]
+        X_adv = X_original + random_noise
+        X_adv = torch.clamp(X_adv, 0, 1).detach() # Clamp and detach
+    else:
+        X_adv = X_original.clone().detach()
 
-#################################################################################################
+    for i in range(num_iter):
+        X_adv.requires_grad_(True) # Enable gradient tracking for the adversarial example
+        
+        output = model(X_adv)
+        loss = F.nll_loss(output, y) # Or F.cross_entropy if model outputs logits
 
+        model.zero_grad()
+        loss.backward()
 
-best_model_prefix = "qmlp-mnist-run"
-cm_name_prefix= "cm_qmlp-mnist-run"
-filename_prefix = "qmlp-mnist-run"
-############################################################################################################################################################################
+        if X_adv.grad is None:
+             raise RuntimeError("Gradient of input is None during PGD. Check model/computation graph.")
 
+        grad_sign = X_adv.grad.sign()
+
+        # Gradient ascent step
+        X_adv_perturbed = X_adv.detach() + alpha * grad_sign
+
+        # Projection back into epsilon-ball (L_infinity)
+        eta = X_adv_perturbed - X_original
+        eta = torch.clamp(eta, -epsilon, epsilon) # Clamp perturbation
+        X_adv = X_original + eta # Apply clamped perturbation to original
+
+        # Clamp to valid data range [0, 1]
+        X_adv = torch.clamp(X_adv, 0, 1).detach() # Detach after each step
+
+    return X_adv
+
+###################################################################################
+# Load the dataset
+###################################################################################
+# #uncomment this for using theother dataset
 # data_train = np.load("../dataset/API_graph/APIgraph_train23-fam.npz") 
 # data_test = np.load("../dataset/API_graph/APIgraph_test23-fam.npz") 
 # Ember and AZ
@@ -165,15 +255,15 @@ X_test = idx2numpy.convert_from_file('../datasets/mnist/t10k-images-idx3-ubyte')
 y_test = idx2numpy.convert_from_file('../datasets/mnist/t10k-labels-idx1-ubyte')
 
 
-X_train = downscale_images(X_train)  # Shape: (N, 14, 14)
+X_train = downscale_images(X_train) 
 X_test = downscale_images(X_test)
 
-# Flatten
-X_train = X_train.reshape(X_train.shape[0], -1).astype(np.float32)  # (N, 196)
+X_train = X_train.reshape(X_train.shape[0], -1).astype(np.float32) 
 X_test = X_test.reshape(X_test.shape[0], -1).astype(np.float32)
 
 num_classes = len(np.unique(y_train)) 
 print(num_classes)
+
 # Normalize to [0, 1]
 scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
@@ -197,6 +287,11 @@ train_loader = DataLoader(train_dataset, shuffle=True, batch_size=bsz)
 test_loader = DataLoader(test_dataset, shuffle=False, batch_size=bsz)
 
 ###########################################################################################################################################################################
+"""
+----Modular Weights QMLP----
+This function will create modular weights for the QMLP based on 
+the number of qubits and the number of layers are required.
+"""
 def modular_w(n_qubits,n_layers):
     shapes = {}
     for n in range(n_layers):
@@ -204,14 +299,11 @@ def modular_w(n_qubits,n_layers):
         shapes[f"crx_layer_{n}"] = (n_qubits, 1) 
     return shapes
 
+# Call the function to have the weights for the model
+weight_shapes = modular_w(n_qubits, n_layers)
 ###########################################################################################################################################################################
-n_qubits = 16
-n_layers = 5
-# HERE CHANGE THE SIMULATOR
 
-dev = qml.device("default.qubit", wires=n_qubits) # w/o noise
-
-
+# Main circuit for the QMLP structure
 @qml.qnode(dev, interface="torch")
 def qnode(inputs,**weights_kwargs):
     # Layer 1 — Data reuploading + trainable Rot + entanglement
@@ -226,10 +318,8 @@ def qnode(inputs,**weights_kwargs):
     # Measurement
     return [qml.expval(qml.PauliZ(i)) for i in range(16)]
 
+####################################################################################
 
-weight_shapes = modular_w(n_qubits, n_layers)
-
-#################################################################################################################################################################################
 qlayer = TorchLayer(qnode, weight_shapes)
 class drebin(nn.Module):
     def __init__(self):
@@ -243,81 +333,46 @@ class drebin(nn.Module):
         return F.log_softmax(out, dim=1)
 
 
+####################################################################################
+# Train Loop for the models
+####################################################################################
 
 
-###########################################################################################################################################################################
-def train(model, DEVICE, train_loader, optimizer, epoch):
-    model.train()
-    running_loss = 0.0
-    correct = 0.0
-    total = 0.0
-
-    for batch_idx, (inputs, target) in enumerate(train_loader, 0):
-        inputs, target = inputs.to(DEVICE), target.to(DEVICE)
-        optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = F.nll_loss(outputs, target)
-        loss.backward()
-        optimizer.step()
-
-        _, predicted = torch.max(outputs.data, dim=1)
-        total += target.size(0)
-        correct += (predicted == target).sum().item()
-        running_loss += loss.item()
-
-        if (batch_idx + 1) % 10 == 0:
-            print(f"Epoch: {epoch}, Batch: {batch_idx+1}, Acc: {100 * correct / total:.2f}%, Loss: {running_loss / 10:.4f}")
-            running_loss = 0.0
-
-def test(model, DEVICE, test_loader):
-    model.eval()
-    correct = 0
-    total = 0
-    with torch.no_grad():
-        for inputs, labels in test_loader:
-            inputs, labels = inputs.to(DEVICE), labels.to(DEVICE)
-            outputs = model(inputs)
-            _, predicted = torch.max(outputs.data, dim=1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-    acc = 100 * correct / total
-    print(f"Accuracy on test set: {acc:.2f}%")
-    return acc
-
-###########################################################################################################################################################################
-best_acc = 0.0
-
-for run_id  in range (1,4):
-    print(f' Training Run {run_id}')
-    best_model = f'{best_model_prefix}{run_id}-layer{n_layers}.pt'
-    # cm_name = f'{cm_name}{run_id}.png'
-    # filename = f'{filename_prefix}{run_id}.txt' 
-    best_acc = 0.0
-    model = drebin().to(device)
-    optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=w_decay)
+# for run_id  in range (1,4):
+#     print(f' Training Run {run_id}')
+#     best_model = f'{best_model_prefix}{run_id}-layer{n_layers}.pt'
 
 
-    start_time = time.time()
-    for epoch in range(1, epochs + 1):
-        train(model, device, train_loader, optimizer, epoch)
-        acc = test(model, device, test_loader)
-        if acc > best_acc:
-            best_acc = acc
-            torch.save(model.state_dict(), best_model)
-    end_time = time.time()
-    print(f"Training Time: {end_time - start_time:.2f} seconds")
-########################################################################
+#     manual_seed = 42 + run_id
+#     torch.manual_seed(manual_seed)
+#     if torch.cuda.is_available():
+#         torch.cuda.manual_seed(manual_seed)
+#         torch.cuda.manual_seed_all(manual_seed)
+#     np.random.seed(manual_seed)
+#     random.seed(manual_seed)
+
+#     best_acc = 0.0
+#     model = drebin().to(device)
+#     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=w_decay)
 
 
-
+#     start_time = time.time()
+#     for epoch in range(1, epochs + 1):
+#         train(model, device, train_loader, optimizer, epoch)
+#         acc = test(model, device, test_loader)
+#         if acc > best_acc:
+#             best_acc = acc
+#             torch.save(model.state_dict(), best_model)
+#     end_time = time.time()
+#     print(f"Training Time: {end_time - start_time:.2f} seconds")
+#     print(f"Best Accuracy for Run {run_id}: {best_acc:.2f}%")
 
 ######################################################################
 # EVALUATION
 #######################################################################
-
-
-# Evaluation
+attack_types_to_evaluate = ['none', 'fgsm', 'pgd']
 for run_id in range (1,4):
+    # names for the results
     best_model = f'{best_model_prefix}{run_id}-layer{n_layers}.pt'
     cm_name = f'{cm_name_prefix}{run_id}-layer{n_layers}.png'
     filename = f'{filename_prefix}_runs-layer{n_layers}.csv' 
@@ -325,56 +380,70 @@ for run_id in range (1,4):
         print("Loading previous model...")
         model = drebin().to(device)
         model.load_state_dict(torch.load(best_model))
+        PGD_RANDOM_START = True # Recommended for stronger PGD
+        PGD_NUM_ITER = 10 
+        # epsilons for attacks
         epsilons = [0, 0.01, 0.1, 0.15]
-        results = {}
-        for eps in epsilons:
-            print(f"\n>>> Evaluating for ε = {eps}")
-            metrics = evaluation(model, test_loader, epsilon=eps, num_classes=num_classes)
-            results[eps] = metrics
+        all_results_for_run = [] 
 
-            for k, v in metrics.items():
-                print(f"{k.capitalize():<10}: {v:.4f}")
-        plt.figure(figsize=(8, 5))
-        plt.plot(epsilons, [results[eps]['accuracy'] for eps in epsilons], marker='o')
-        plt.title(f"Adversarial Robustness of QCNN (FGSM) -- run {run_id}")
-        plt.xlabel("Epsilon (FGSM strength)")
-        plt.ylabel("Accuracy")
-        plt.grid(True)
-        plt.tight_layout()
-        plt.savefig(f"qcnn_fgsm_accuracy_plot_{run_id}_{n_layers}.png", dpi=300)
-        
-        if os.path.exists(filename): 
-            with open(filename, 'a', newline='') as f:
-                writer = csv.writer(f)
-                # Get metric names from the results (assuming consistent metrics across epsilons)
-                if epsilons: 
-                    metric_names = list(results[epsilons[0]].keys())
-                else:
-                    metric_names = [] 
-                # writer.writerow(header) # Write header for this specific CSV file
-                
-                # Write data rows for all epsilons of the current run_id
-                for eps in epsilons:
-                    row = [run_id, eps] + [results[eps][k] for k in metric_names]
-                    writer.writerow(row)
-            print(f"Results saved to {filename}")
-        else:
-            with open(filename, 'w', newline='') as f:
-                writer = csv.writer(f)
-                # Get metric names from the results (assuming consistent metrics across epsilons)
-                if epsilons: 
-                    metric_names = list(results[epsilons[0]].keys())
-                else:
-                    metric_names = [] 
+        for current_attack in attack_types_to_evaluate :
+            print(f"\n--- Evaluating Model Run {run_id} with {current_attack.upper()} Attack ---")
+            results = {}
+            for eps in epsilons:
+                if current_attack == 'none' and eps != 0:
+                    continue 
 
-                header = ['Run ID', 'Epsilon'] + metric_names
-                writer.writerow(header) # Write header for this specific CSV file
-                
-                # Write data rows for all epsilons of the current run_id
-                for eps in epsilons:
-                    row = [run_id, eps] + [results[eps][k] for k in metric_names]
-                    writer.writerow(row)
-            print(f"Results saved to {filename}")
-    else: 
-        print(f'{best_model} not found')
+                PGD_ALPHA = eps / PGD_NUM_ITER * 1.25
+                print(f"\n>>> Evaluating for ε = {eps} (Attack: {current_attack})")
+                metrics = evaluation(
+                    model, test_loader, epsilon=eps, num_classes=num_classes,
+                    attack_type=current_attack,
+                    pgd_alpha=PGD_ALPHA,         
+                    pgd_num_iter=PGD_NUM_ITER,   
+                    pgd_random_start=PGD_RANDOM_START 
+                )
+                results[eps] = metrics
+                for k, v in metrics.items():
+                    print(f"{k.capitalize():<10}: {v:.4f}")
+            for eps in epsilons:
+                if eps in results: # Only add if data exists for this epsilon
+                    # Append a dictionary for each row, including run_id, epsilon, and attack_type
+                    row_data = {
+                        'Run ID': run_id,
+                        'Epsilon': eps,
+                        'Attack Type': current_attack,
+                        **results[eps] # Unpack all metrics (accuracy, precision, etc.)
+                    }
+                    all_results_for_run.append(row_data)
+            ############################################
+            # Graph
+            ############################################
+            plt.figure(figsize=(8, 5))
+            # plt.plot(epsilons, [results[eps]['accuracy'] for eps in epsilons], marker='o')
+            plt.plot([e for e in epsilons if e in results], 
+                     [results[e]['accuracy'] for e in epsilons if e in results], 
+                     marker='o')
+            plt.title(f"Adversarial Robustness of QMLP ({current_attack}) -- run {run_id}")
+            plt.xlabel(f"Epsilon ({current_attack})")
+            plt.ylabel("Accuracy")
+            plt.grid(True)
+            plt.tight_layout()
+            plt.savefig(f"qcnn_{current_attack}_accuracy_plot_run{run_id}_numlayers{n_layers}.png", dpi=300)
+        final_csv_filename = f'{filename_prefix}_run{run_id}-layer{n_layers}_all_attacks.csv' 
+        write_header = not os.path.exists(final_csv_filename) or os.stat(final_csv_filename).st_size == 0
+        with open(final_csv_filename, 'w', newline='') as f:
+            writer = csv.writer(f)
+            
+            if all_results_for_run:
+                header_keys = list(all_results_for_run[0].keys())
+                ordered_header = ['Run ID', 'Epsilon', 'Attack Type'] + \
+                                [k for k in header_keys if k not in ['Run ID', 'Epsilon', 'Attack Type']]
+                writer.writerow(ordered_header)
+            
+            for row_data in all_results_for_run:
+                writer.writerow([row_data.get(k, '') for k in ordered_header])
+            print(f"All results for Run {run_id} saved to {final_csv_filename}")
 
+else: 
+    print(f'{best_model} not found')
+ 
