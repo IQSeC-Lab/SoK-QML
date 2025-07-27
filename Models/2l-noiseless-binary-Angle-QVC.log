@@ -1,0 +1,104 @@
+Number of anzats layers: 2
+Loaded MNIST full train shape: (60000, 784)
+Loaded MNIST full test shape: (10000, 784)
+
+Filtered training data for 0 vs 1: (12665, 784)
+Filtered testing data for 0 vs 1: (2115, 784)
+Reduced and scaled training data shape: (12665, 9)
+Reduced and scaled testing data shape: (2115, 9)
+Initialized binary classifier parameters with shape: (2, 9, 3)
+
+Starting binary classification training...
+Epoch 1 | Processing batches...
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/_grad.py:310: UserWarning: Attempted to differentiate a function with no trainable parameters. If this is unintended, please add trainable parameters via the 'requires_grad' attribute or 'argnum' keyword.
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/_grad.py:310: UserWarning: Attempted to differentiate a function with no trainable parameters. If this is unintended, please add trainable parameters via the 'requires_grad' attribute or 'argnum' keyword.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/lopez/projects/SoK-QML/Models/binary-qvc.py", line 330, in <module>
+    current_params_binary, avg_epoch_cost, avg_epoch_acc = train_epoch_binary(
+                                                           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/lopez/projects/SoK-QML/Models/binary-qvc.py", line 282, in train_epoch_binary
+    updated_params, batch_loss_val = optimizer_instance.step_and_cost(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/optimize/gradient_descent.py", line 64, in step_and_cost
+    g, forward = self.compute_grad(objective_fn, args, kwargs, grad_fn=grad_fn)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/optimize/gradient_descent.py", line 122, in compute_grad
+    grad = g(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/_grad.py", line 315, in __call__
+    self._forward = self._fun(*args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lopez/projects/SoK-QML/Models/binary-qvc.py", line 233, in cost_function_binary
+    all_expvals = jnp.array([qvc_binary_classifier(params, f) for f in features])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/workflow/qnode.py", line 922, in __call__
+    return self._impl_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/workflow/qnode.py", line 895, in _impl_call
+    res = execute(
+          ^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/workflow/execution.py", line 233, in execute
+    results = run(tapes, device, config, inner_transform)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/workflow/run.py", line 291, in run
+    results = inner_execute(tapes)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/workflow/run.py", line 256, in inner_execute
+    results = device.execute(transformed_tapes, execution_config=execution_config)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/modifiers/simulator_tracking.py", line 28, in execute
+    results = untracked_execute(self, circuits, execution_config)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/modifiers/single_tape_support.py", line 30, in execute
+    results = batch_execute(self, circuits, execution_config)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/logging/decorators.py", line 61, in wrapper_entry
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/default_qubit.py", line 707, in execute
+    return tuple(
+           ^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/default_qubit.py", line 708, in <genexpr>
+    _simulate_wrapper(
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/default_qubit.py", line 1055, in _simulate_wrapper
+    return simulate(circuit, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/logging/decorators.py", line 61, in wrapper_entry
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/qubit/simulate.py", line 359, in simulate
+    state, is_state_batched = get_final_state(
+                              ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/logging/decorators.py", line 61, in wrapper_entry
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/qubit/simulate.py", line 192, in get_final_state
+    state = apply_operation(
+            ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/functools.py", line 912, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/qubit/apply_operation.py", line 232, in apply_operation
+    return _apply_operation_default(op, state, is_state_batched, debugger)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/qubit/apply_operation.py", line 258, in _apply_operation_default
+    return apply_operation_einsum(op, state, is_state_batched=is_state_batched)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/devices/qubit/apply_operation.py", line 109, in apply_operation_einsum
+    return math.einsum(einsum_indices, reshaped_mat, state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pennylane/math/multi_dispatch.py", line 572, in einsum
+    return np.einsum(indices, *operands, like=like)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/autoray/autoray.py", line 81, in do
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jax/_src/numpy/lax_numpy.py", line 4514, in einsum
+    operands, contractions = contract_path(
+                             ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/opt_einsum/contract.py", line 399, in contract_path
+    einsum_str = ",".join(tmp_inputs) + "->" + idx_result
+                 ^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
