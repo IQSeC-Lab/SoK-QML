@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3" # Change for the GPU to use
+os.environ["CUDA_VISIBLE_DEVICES"] = "2" # Change for the GPU to use
 import pennylane as qml
 
 import random
@@ -30,7 +30,6 @@ from qiskit_aer.noise import NoiseModel
 import idx2numpy
 import argparse
 
-
 parser = argparse.ArgumentParser(description="Configure a Quantum Machine Learning model.")
 
 parser.add_argument(
@@ -41,6 +40,8 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+
 
 
 
@@ -60,14 +61,16 @@ filename_prefix = "qmlp-az-run"
 noise_afterfix = ""
 
 #Change accordingly to the type of encoding
-encoding = "Amplitude"
+encoding = "Angle"
 
 # Circuit 
 n_qubits = 9 # qubits of the the circuit
+# n_layers = 50 # modify this for the number of layers 
 # n_layers = 10 # modify this for the number of layers 
-
+# n_layers = 50 # modify this for the number of layers 
 n_layers = args.layers
 print(f"using layers {n_layers}")
+
 # noiseless
 dev = qml.device("default.qubit", wires=n_qubits)
 ####################################################################################################
@@ -259,6 +262,7 @@ def pgd_attack(model, X, y, epsilon, alpha, num_iter, random_start):
 ###################################################################################
 # Load the dataset
 ###################################################################################
+# #uncomment this for using theother dataset
 data_train = np.load("../datasets/AZ-Task/AZ-task-23fam_train.npz") 
 data_test = np.load("../datasets/AZ-Task/AZ-task-23fam_test.npz") 
 # Ember and AZ
@@ -273,7 +277,6 @@ y_test = y_test_raw
 X_train = X_train.reshape(X_train.shape[0], -1).astype(np.float32) 
 X_test = X_test.reshape(X_test.shape[0], -1).astype(np.float32)
 
-
 num_classes = len(np.unique(y_train)) 
 print(num_classes)
 
@@ -282,11 +285,11 @@ scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-pca = PCA(n_components=512) # This is for Amplitude Embedding
+pca = PCA(n_components=n_qubits) # This is for AngleEmbedding
 X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 
-
+# Convert to tensors
 train_dataset = TensorDataset(
     torch.tensor(X_train, dtype=torch.float32),
     torch.tensor(y_train, dtype=torch.long)
@@ -298,7 +301,6 @@ test_dataset = TensorDataset(
 # DataLoaders
 train_loader = DataLoader(train_dataset, shuffle=True, batch_size=bsz)
 test_loader = DataLoader(test_dataset, shuffle=False, batch_size=bsz)
-
 
 ###########################################################################################################################################################################
 """
@@ -320,9 +322,8 @@ weight_shapes = modular_w(n_qubits, n_layers)
 # Main circuit for the QMLP structure
 @qml.qnode(dev, interface="torch")
 def qnode(inputs,**weights_kwargs):
-    qml.AmplitudeEmbedding(inputs, wires=range(n_qubits), normalize=True)
     for n in range(n_layers):
-        
+        qml.AngleEmbedding(inputs, wires=range(n_qubits))
         for i in range(n_qubits):
             qml.Rot(*weights_kwargs[f"rot_layer_{n}"][i], wires=i)
         for i in range(n_qubits):
@@ -392,12 +393,13 @@ for run_id in range (1,4):
     if os.path.exists(best_model):
         print("Loading previous model...")
         model = drebin().to(device)
-        model.load_state_dict(torch.load(best_model))
+        # model.load_state_dict(torch.load(best_model))
+        model.load_state_dict(torch.load(best_model, map_location=torch.device('cpu')))
         PGD_RANDOM_START = True # Recommended for stronger PGD
         PGD_NUM_ITER = 10 
         # epsilons for attacks
-        epsilons = [0, 0.01, 0.1, 0.15]
-        # epsilons = [0.01, 0.1, 0.15]
+        # epsilons = [0, 0.01, 0.1, 0.15]
+        epsilons = [0, 0.15]
         all_results_for_run = [] 
         print(f'Evaluating {best_model}')
         for current_attack in attack_types_to_evaluate :
@@ -443,7 +445,7 @@ for run_id in range (1,4):
             plt.grid(True)
             plt.tight_layout()
             # plt.savefig(f"qcnn_{current_attack}_accuracy_plot_run{run_id}_numlayers{n_layers}-{encoding}.png", dpi=300)
-        final_csv_filename = f'{filename_prefix}_run{run_id}-layer{n_layers}_{encoding}_all_attacks.csv' 
+        final_csv_filename = f'{filename_prefix}_run{run_id}-layer{n_layers}_{encoding}_{encoding}_all_attacks.csv' 
         write_header = not os.path.exists(final_csv_filename) or os.stat(final_csv_filename).st_size == 0
         with open(final_csv_filename, 'w', newline='') as f:
             writer = csv.writer(f)
