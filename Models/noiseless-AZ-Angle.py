@@ -320,6 +320,7 @@ weight_shapes = modular_w(n_qubits, n_layers)
 ###########################################################################################################################################################################
 
 # Main circuit for the QMLP structure
+
 @qml.qnode(dev, interface="torch")
 def qnode(inputs,**weights_kwargs):
     for n in range(n_layers):
@@ -398,8 +399,8 @@ for run_id in range (1,4):
         PGD_RANDOM_START = True # Recommended for stronger PGD
         PGD_NUM_ITER = 10 
         # epsilons for attacks
-        # epsilons = [0, 0.01, 0.1, 0.15]
-        epsilons = [0, 0.15]
+        epsilons = [0, 0.01, 0.1, 0.15]
+        # epsilons = [0, 0.15]
         all_results_for_run = [] 
         print(f'Evaluating {best_model}')
         for current_attack in attack_types_to_evaluate :
