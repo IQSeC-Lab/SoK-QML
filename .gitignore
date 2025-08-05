@@ -1,1 +1,45 @@
+# ==========================
+# Ignore Folders
+# ==========================
+# Add folder names or paths below
+# Example: ignore all contents in build/, dist/, or node_modules/
+build/
+dist/
+node_modules/
+__pycache__/
+.env/
+datasets/AZ-Domain
+datasets/AZ-Task
+datasets/mnist
+# ==========================
+# Ignore Specific Files
+# ==========================
+# Add filenames or relative paths
+# Example: secret config files, log files, or temp data
+.env
 .DS_Store
+config/secrets.json
+
+# ==========================
+# Ignore by File Extensions
+# ==========================
+# Add common extensions to ignore
+*.pyc
+*.class
+*.o
+*.out
+*.exe
+
+# ==========================
+# Ignore OS-specific Files
+# ==========================
+# macOS
+*.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
