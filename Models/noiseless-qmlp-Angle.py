@@ -29,6 +29,20 @@ import qiskit_aer.noise as noise
 from qiskit_aer.noise import NoiseModel
 import idx2numpy
 
+import argparse
+
+
+parser = argparse.ArgumentParser(description="Configure a Quantum Machine Learning model.")
+
+parser.add_argument(
+    "-l", "--layers",
+    type=int,
+    default=1,
+    help="Number of layers in the QML model (default: 1)"
+)
+
+args = parser.parse_args()
+
 ####################################################################################################
 # Global Parameters
 bsz = 64
@@ -48,7 +62,8 @@ encoding = "Angle"
 
 # Circuit 
 n_qubits = 9 # qubits of the the circuit
-n_layers = 10 # modify this for the number of layers 
+n_layers = args.layers
+print(f"using layers {n_layers}")
 
 
 # noiseless
@@ -372,7 +387,9 @@ for run_id in range (1,4):
     if os.path.exists(best_model):
         print("Loading previous model...")
         model = drebin().to(device)
-        model.load_state_dict(torch.load(best_model))
+        # model.load_state_dict(torch.load(best_model))
+        model.load_state_dict(torch.load(best_model, map_location=torch.device('cpu')))
+
         PGD_RANDOM_START = True # Recommended for stronger PGD
         PGD_NUM_ITER = 10 
         # epsilons for attacks
