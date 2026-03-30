@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/sagar/Desktop/nowmi/QMLP_LF_ratio1/AZ_QMLP/Angle/Noiseless/Layer10/NN_angle_AZ_LF_l10.py", line 4, in <module>
+    import pennylane as qml
+ModuleNotFoundError: No module named 'pennylane'
