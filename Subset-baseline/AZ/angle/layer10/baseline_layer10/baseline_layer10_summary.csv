@@ -1,0 +1,2 @@
+n_layers,run_id,seed,test_accuracy_pct,loss,fnr,fpr,roc_auc,pr_auc,precision,recall,f1,train_time_s,gpu_id
+10,1,43,48.730591,1.63941169,0.503963,0.023279,0.918585,0.474062,0.463116,0.496037,0.479011,2879.01,0

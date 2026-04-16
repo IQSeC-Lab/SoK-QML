@@ -1,0 +1,47 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+========================================
+Job ID      : 377499
+Node        : cnode006
+CPUs        : 1
+Start time  : Wed Mar 25 03:48:07 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/Baseline/MNIST/angle/layer5
+Files: baseline_mnist_ang_l5.slurm
+baseline_mnist_angle_layer5
+depo_baseline_mn_ang_l5.py
+dpo_bsl_mn_ang_l5.slurm
+logs
+NN_baseline_mnist_angle_layer5.py
+Running python script...
+[Device] cpu
+[Config] N_LAYERS=5  DEPO_P=0.01
+====================================================================
+ Depolarizing Noise Evaluation | Baseline MNIST Angle L5
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Model         : baseline_mnist_angle_layer5/best_model_run1.pt
+ No attack — No defense
+====================================================================
+[Data] Train: (60000, 9)  Test: (10000, 9)
+[Model] Loaded baseline weights into noisy architecture.
+[Eval] Running noisy inference on 10000 test samples ...
+
+  CA (noisy) : 51.94%
+  Accuracy    : 0.5194
+  Loss        : 1.5955
+  Precision   : 0.5294
+  Recall      : 0.5142
+  F1          : 0.5217
+  Fpr         : 0.0533
+  Fnr         : 0.4858
+  Roc_auc     : 0.8790
+  Pr_auc      : 0.5240
+  Metrics  -> depo_baseline_angle/depo_baseline_angle_metrics.csv
+  CM       -> depo_baseline_angle/depo_baseline_angle_cm.png
+
+====================================================================
+ Done.
+ Summary  -> depo_baseline_runs/depo_baseline_mn_ang_l5_summary.csv
+ Metrics  -> depo_baseline_angle/
+====================================================================

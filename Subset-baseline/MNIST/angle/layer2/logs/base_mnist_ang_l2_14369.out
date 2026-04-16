@@ -1,0 +1,140 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 14369
+Node        : hopper002
+GPUs        : MIG-d6d73071-afc6-51ef-818c-947f18781902
+CPUs        : 4
+Start time  : Sun Mar 22 01:49:32 PM MDT 2026
+========================================
+Sun Mar 22 13:49:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.51.03              Driver Version: 575.51.03      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          Off |   00000000:1C:00.0 Off |                   On |
+| N/A   31C    P0            123W /  700W |     464MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA H100 80GB HBM3          Off |   00000000:2B:00.0 Off |                   On |
+| N/A   28C    P0             71W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA H100 80GB HBM3          Off |   00000000:AC:00.0 Off |                   On |
+| N/A   25C    P0             71W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA H100 80GB HBM3          Off |   00000000:BC:00.0 Off |                   On |
+| N/A   26C    P0             69W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0   11   0   0  |              15MiB /  9984MiB    | 16      0 |  1   0    1    0    1 |
+|                  |                 0MiB / 16383MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Changing directory...
+Now in: /work/clalarcon/Nowmi/Sok/Baseline/MNIST/angle/layer2
+Files: baseline_mnist_ang_l2.slurm
+logs
+NN_baseline_mnist_angle_layer2.py
+Running python script...
+============================================================
+  Baseline | MNIST 10-class | 9-qubit | AngleEmbedding | 2 layers
+  Runs: 1  Epochs: 30  Patience: 5
+  No attack — No defense
+============================================================
+[GPU] 1 CUDA device(s) visible to PyTorch
+  cuda:0 -> NVIDIA H100 80GB HBM3 MIG 1g.10gb
+[WARN] Only 1 CUDA device visible — workers will use cuda:0.
+[Data] Classes : 10  Train : (60000, 9)  Test : (10000, 9)
+
+[Main] Task schedule:
+  Run  cuda-device
+  ---  -----------
+  1    cuda:0
+============================================================
+  [MNIST|Ang|L2|R1|GPU0] Starting
+============================================================
+  [MNIST|Ang|L2|R1|GPU0] Subset: 7000 samples (700/class from 60000 total)
+  [MNIST|Ang|L2|R1|GPU0] Epoch   TrainAcc%   TrainLoss   TestAcc%  Patience
+  [MNIST|Ang|L2|R1|GPU0] -----  ----------  ----------   --------  --------
+  [MNIST|Ang|L2|R1|GPU0]     1     10.0000    2.311940    10.1400         0/5
+  [MNIST|Ang|L2|R1|GPU0]     2     12.6000    2.279319    21.8700         0/5
+  [MNIST|Ang|L2|R1|GPU0]     3     22.1571    2.244717    22.7200         0/5
+  [MNIST|Ang|L2|R1|GPU0]     4     21.8571    2.208958    23.9500         0/5
+  [MNIST|Ang|L2|R1|GPU0]     5     23.5286    2.177001    24.4700         0/5
+  [MNIST|Ang|L2|R1|GPU0]     6     25.1571    2.148953    27.4300         0/5
+  [MNIST|Ang|L2|R1|GPU0]     7     27.0429    2.122547    29.1500         0/5
+  [MNIST|Ang|L2|R1|GPU0]     8     28.6857    2.096467    30.7900         0/5
+  [MNIST|Ang|L2|R1|GPU0]     9     29.9286    2.070221    31.4100         0/5
+  [MNIST|Ang|L2|R1|GPU0]    10     29.2286    2.043234    32.2300         0/5
+  [MNIST|Ang|L2|R1|GPU0]    11     30.7857    2.015538    32.8300         0/5
+  [MNIST|Ang|L2|R1|GPU0]    12     30.8857    1.987011    33.0500         0/5
+  [MNIST|Ang|L2|R1|GPU0]    13     31.5143    1.959063    32.9700         1/5
+  [MNIST|Ang|L2|R1|GPU0]    14     31.6000    1.932043    33.7900         0/5
+  [MNIST|Ang|L2|R1|GPU0]    15     31.7857    1.906921    34.4600         0/5
+  [MNIST|Ang|L2|R1|GPU0]    16     33.1714    1.883599    34.8900         0/5
+  [MNIST|Ang|L2|R1|GPU0]    17     32.9000    1.862898    35.7800         0/5
+  [MNIST|Ang|L2|R1|GPU0]    18     34.0857    1.843834    36.3300         0/5
+  [MNIST|Ang|L2|R1|GPU0]    19     34.3571    1.826652    36.6300         0/5
+  [MNIST|Ang|L2|R1|GPU0]    20     35.1571    1.810561    37.1600         0/5
+  [MNIST|Ang|L2|R1|GPU0]    21     35.6429    1.796539    37.9000         0/5
+  [MNIST|Ang|L2|R1|GPU0]    22     35.8286    1.783291    38.2200         0/5
+  [MNIST|Ang|L2|R1|GPU0]    23     36.7714    1.771012    39.0000         0/5
+  [MNIST|Ang|L2|R1|GPU0]    24     37.1714    1.759384    39.1800         0/5
+  [MNIST|Ang|L2|R1|GPU0]    25     37.3429    1.749185    39.7900         0/5
+  [MNIST|Ang|L2|R1|GPU0]    26     37.5286    1.739091    39.8900         0/5
+  [MNIST|Ang|L2|R1|GPU0]    27     38.0571    1.729378    40.8800         0/5
+  [MNIST|Ang|L2|R1|GPU0]    28     38.2571    1.720136    41.3600         0/5
+  [MNIST|Ang|L2|R1|GPU0]    29     38.6000    1.712057    41.5300         0/5
+  [MNIST|Ang|L2|R1|GPU0]    30     39.1857    1.704031    41.9100         0/5
+
+  [MNIST|Ang|L2|R1|GPU0] Training time: 273.58s  Best test acc: 41.9100%
+  [R1] Epoch CSV    -> baseline_mnist_angle_layer2/baseline_mnist_angle_layer2_run1_epoch_metrics.csv
+  [R1] Model saved  -> baseline_mnist_angle_layer2/best_model_run1.pt
+  [R1] Per-run CSV  -> baseline_mnist_angle_layer2/baseline_mnist_angle_layer2_run1_metrics.csv
+
+  [MNIST|Ang|L2|R1|GPU0] Final metrics:
+  [MNIST|Ang|L2|R1|GPU0]   Test Accuracy % : 41.909999
+  [MNIST|Ang|L2|R1|GPU0]   Loss            : 1.678228
+  [MNIST|Ang|L2|R1|GPU0]   FNR             : 0.589953
+  [MNIST|Ang|L2|R1|GPU0]   FPR             : 0.064644
+  [MNIST|Ang|L2|R1|GPU0]   ROC-AUC         : 0.844964
+  [MNIST|Ang|L2|R1|GPU0]   PR-AUC          : 0.405344
+  [MNIST|Ang|L2|R1|GPU0]   Precision       : 0.399806
+  [MNIST|Ang|L2|R1|GPU0]   Recall          : 0.410047
+  [MNIST|Ang|L2|R1|GPU0]   F1              : 0.404862
+  [MNIST|Ang|L2|R1|GPU0] Done.
+============================================================
+  All runs complete in 4.7 min
+============================================================
+  MNIST Angle | Layer 2 — mean ± std across 1 runs:
+  Test Accuracy : 41.9100% ± 0.0000%
+  ROC-AUC       : 0.844964 ± 0.000000
+  PR-AUC        : 0.405344 ± 0.000000
+  FNR           : 0.589953 ± 0.000000
+  FPR           : 0.064644 ± 0.000000
+
+  Summary CSV  -> baseline_mnist_angle_layer2/baseline_mnist_angle_layer2_summary.csv
+  Epoch CSVs   -> baseline_mnist_angle_layer2/baseline_mnist_angle_layer2_run*_epoch_metrics.csv
+  Per-run CSVs -> baseline_mnist_angle_layer2/baseline_mnist_angle_layer2_run*_metrics.csv
+============================================================

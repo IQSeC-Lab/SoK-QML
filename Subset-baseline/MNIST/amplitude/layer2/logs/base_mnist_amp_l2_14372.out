@@ -1,0 +1,117 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 14372
+Node        : hopper001
+GPUs        : 0
+CPUs        : 8
+Start time  : Sun Mar 22 02:10:16 PM MDT 2026
+========================================
+Sun Mar 22 14:10:16 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.51.03              Driver Version: 575.51.03      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          Off |   00000000:D1:00.0 Off |                    0 |
+| N/A   34C    P0             73W /  700W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Changing directory...
+Now in: /work/clalarcon/Nowmi/Sok/Baseline/MNIST/amplitude/layer2
+Files: baseline_mnist_amp_l2.slurm
+logs
+NN_baseline_mnist_amplitude_layer2.py
+Running python script...
+============================================================
+  Baseline | MNIST 10-class | 9-qubit | AmplitudeEmbedding | 2 layers
+  Runs: 1  Epochs: 30  Patience: 5
+  No attack — No defense
+============================================================
+[GPU] 1 CUDA device(s) visible to PyTorch
+  cuda:0 -> NVIDIA H100 80GB HBM3
+[WARN] Only 1 CUDA device visible — workers will use cuda:0.
+[Data] Classes : 10  Train : (60000, 512)  Test : (10000, 512)
+
+[Main] Task schedule:
+  Run  cuda-device
+  ---  -----------
+  1    cuda:0
+============================================================
+  [MNIST|Amp|L2|R1|GPU0] Starting
+============================================================
+  [MNIST|Amp|L2|R1|GPU0] Subset: 7000 samples (700/class from 60000 total)
+  [MNIST|Amp|L2|R1|GPU0] Epoch   TrainAcc%   TrainLoss   TestAcc%  Patience
+  [MNIST|Amp|L2|R1|GPU0] -----  ----------  ----------   --------  --------
+  [MNIST|Amp|L2|R1|GPU0]     1     10.1000    2.313283    11.2700         0/5
+  [MNIST|Amp|L2|R1|GPU0]     2     11.2857    2.286560    14.7500         0/5
+  [MNIST|Amp|L2|R1|GPU0]     3     19.1286    2.252715    23.4000         0/5
+  [MNIST|Amp|L2|R1|GPU0]     4     23.9857    2.206746    25.5300         0/5
+  [MNIST|Amp|L2|R1|GPU0]     5     26.2571    2.156163    27.7500         0/5
+  [MNIST|Amp|L2|R1|GPU0]     6     29.3857    2.108555    31.7600         0/5
+  [MNIST|Amp|L2|R1|GPU0]     7     31.5571    2.065006    34.1300         0/5
+  [MNIST|Amp|L2|R1|GPU0]     8     33.7143    2.025629    36.5000         0/5
+  [MNIST|Amp|L2|R1|GPU0]     9     35.6857    1.990543    37.4500         0/5
+  [MNIST|Amp|L2|R1|GPU0]    10     36.3857    1.959672    38.3700         0/5
+  [MNIST|Amp|L2|R1|GPU0]    11     37.6857    1.932251    39.0300         0/5
+  [MNIST|Amp|L2|R1|GPU0]    12     38.5857    1.907528    39.6900         0/5
+  [MNIST|Amp|L2|R1|GPU0]    13     39.3571    1.885298    39.8200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    14     40.1000    1.865120    40.5800         0/5
+  [MNIST|Amp|L2|R1|GPU0]    15     40.0286    1.846281    41.6200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    16     41.7143    1.829036    41.7300         0/5
+  [MNIST|Amp|L2|R1|GPU0]    17     41.5714    1.812950    42.0000         0/5
+  [MNIST|Amp|L2|R1|GPU0]    18     42.1286    1.797843    42.3500         0/5
+  [MNIST|Amp|L2|R1|GPU0]    19     42.2571    1.783794    42.8900         0/5
+  [MNIST|Amp|L2|R1|GPU0]    20     42.9000    1.770109    43.3200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    21     43.2714    1.757254    43.4200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    22     43.4000    1.744938    43.7500         0/5
+  [MNIST|Amp|L2|R1|GPU0]    23     43.5714    1.732780    44.0200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    24     43.9143    1.721466    44.2800         0/5
+  [MNIST|Amp|L2|R1|GPU0]    25     44.0143    1.710529    44.6100         0/5
+  [MNIST|Amp|L2|R1|GPU0]    26     44.1857    1.699870    44.9200         0/5
+  [MNIST|Amp|L2|R1|GPU0]    27     44.2000    1.689885    45.0600         0/5
+  [MNIST|Amp|L2|R1|GPU0]    28     44.3143    1.680216    45.2300         0/5
+  [MNIST|Amp|L2|R1|GPU0]    29     44.7143    1.671020    45.3000         0/5
+  [MNIST|Amp|L2|R1|GPU0]    30     45.0429    1.662305    45.5400         0/5
+
+  [MNIST|Amp|L2|R1|GPU0] Training time: 7875.54s  Best test acc: 45.5400%
+  [R1] Epoch CSV    -> baseline_mnist_amplitude_layer2/baseline_mnist_amplitude_layer2_run1_epoch_metrics.csv
+  [R1] Model saved  -> baseline_mnist_amplitude_layer2/best_model_run1.pt
+  [R1] Per-run CSV  -> baseline_mnist_amplitude_layer2/baseline_mnist_amplitude_layer2_run1_metrics.csv
+
+  [MNIST|Amp|L2|R1|GPU0] Final metrics:
+  [MNIST|Amp|L2|R1|GPU0]   Test Accuracy % : 45.539999
+  [MNIST|Amp|L2|R1|GPU0]   Loss            : 1.628247
+  [MNIST|Amp|L2|R1|GPU0]   FNR             : 0.551979
+  [MNIST|Amp|L2|R1|GPU0]   FPR             : 0.060521
+  [MNIST|Amp|L2|R1|GPU0]   ROC-AUC         : 0.850270
+  [MNIST|Amp|L2|R1|GPU0]   PR-AUC          : 0.456647
+  [MNIST|Amp|L2|R1|GPU0]   Precision       : 0.427930
+  [MNIST|Amp|L2|R1|GPU0]   Recall          : 0.448021
+  [MNIST|Amp|L2|R1|GPU0]   F1              : 0.437745
+  [MNIST|Amp|L2|R1|GPU0] Done.
+============================================================
+  All runs complete in 133.1 min
+============================================================
+  MNIST Amplitude | Layer 2 — mean ± std across 1 runs:
+  Test Accuracy : 45.5400% ± 0.0000%
+  ROC-AUC       : 0.850270 ± 0.000000
+  PR-AUC        : 0.456647 ± 0.000000
+  FNR           : 0.551979 ± 0.000000
+  FPR           : 0.060521 ± 0.000000
+
+  Summary CSV  -> baseline_mnist_amplitude_layer2/baseline_mnist_amplitude_layer2_summary.csv
+  Epoch CSVs   -> baseline_mnist_amplitude_layer2/baseline_mnist_amplitude_layer2_run*_epoch_metrics.csv
+  Per-run CSVs -> baseline_mnist_amplitude_layer2/baseline_mnist_amplitude_layer2_run*_metrics.csv
+============================================================

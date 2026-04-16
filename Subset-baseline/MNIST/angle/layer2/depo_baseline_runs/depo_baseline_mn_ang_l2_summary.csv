@@ -1,0 +1,2 @@
+timestamp,CA_pct,accuracy,loss,precision,recall,f1,fpr,fnr,roc_auc,pr_auc,depo_p,noise_backend
+2026-03-25T18:23:59,41.67,41.67,1.721023,0.394495,0.40842,0.401336,0.064886,0.59158,0.842571,0.400379,0.01,default.mixed
