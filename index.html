@@ -465,8 +465,12 @@
           </p>
           <div class="has-text-centered">
             <figure>
-              <!-- PLACEHOLDER: Replace with FGSM/PGD figure -->
-              <img src="static/images/pgd_performance.png" alt="Performance of QMLP under PGD attack" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <img src="static/images/pgd_Az_Angle.png" alt="AZ Angle PGD" style="width:48%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                <img src="static/images/pgd_Az_Amplitude.png" alt="AZ Amplitude PGD" style="width:48%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                <img src="static/images/pgd_MNIST_Angle.png" alt="MNIST Angle PGD" style="width:48%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                <img src="static/images/pgd_MNIST_Amplitude.png" alt="MNIST Amplitude PGD" style="width:48%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              </div>
               <figcaption class="is-size-6 mt-2">Figure 8: Performance of QMLP with varying perturbation strengths of the PGD attack in a noiseless environment.</figcaption>
             </figure>
           </div>
