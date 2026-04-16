@@ -1,0 +1,23 @@
+============================================================
+ Job        : huang_bd_ampl_l50
+ Job ID     : 14260
+ Node       : hopper001
+ CPUs       : 28
+ Start      : Sat Mar 14 04:11:38 PM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer50
+[ENV] CUDA avail : True
+[ENV] GPU info   : NVIDIA H100 80GB HBM3
+[ENV] PennyLane  : 0.38.0
+
+[Data] Checking MNIST files in /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/MNIST ...
+       FOUND    train-images-idx3-ubyte
+       FOUND    train-labels-idx1-ubyte
+       FOUND    t10k-images-idx3-ubyte
+       FOUND    t10k-labels-idx1-ubyte
+
+[RUN] Starting at Sat Mar 14 04:12:04 PM MDT 2026
+

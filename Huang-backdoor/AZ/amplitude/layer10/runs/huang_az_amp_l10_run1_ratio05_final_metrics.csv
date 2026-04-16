@@ -1,0 +1,11 @@
+Metric,Value
+run_id,1
+poison_ratio,0.5
+CA_pct,43.8727
+ASR_pct,99.5073
+accuracy,0.438727
+precision,0.409781
+f1,0.412413
+fpr,0.025501
+fnr,0.555238
+roc_auc,0.887953

@@ -1,0 +1,95 @@
+============================================================
+ Job        : depo_hz_az_ang_l2
+ Job ID     : 376820
+ Node       : cnode071
+ CPUs       : 8
+ Start      : Wed Mar 25 12:26:10 PM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/AZ/angle/layer2
+[ENV] PennyLane  : 0.38.0
+
+[Models] Checking saved model files ...
+       FOUND    huang_az_ang_l2_best_ratio01.pt
+       FOUND    huang_az_ang_l2_best_ratio03.pt
+       FOUND    huang_az_ang_l2_best_ratio05.pt
+       FOUND    huang_az_ang_l2_trigger.pt
+
+[RUN] Starting at Wed Mar 25 12:26:20 PM MDT 2026
+
+[Device] cpu
+[Config] N_LAYERS=2  N_CLASSES=23  DEPO_P=0.01  TARGET_CLASS=6
+====================================================================
+ Depolarizing Noise Evaluation | Huang Backdoor AZ-23 Angle L2
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Models        : 3 victim models (1 per ratio)
+ Target class  : 6 (7th class, 0-indexed)
+ N_CLASSES     : 23
+====================================================================
+[Data] Train : (184342, 9)   Test : (20482, 9)
+[Data] Test: (20482, 9)
+[Trigger] Loaded from huang_az_ang_l2_trigger.pt  |delta|_inf=0.2000
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.1]  Model: huang_az_ang_l2_best_ratio01.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 45.27%
+  ASR : 0.48%
+  Accuracy    : 0.4527
+  Loss        : 1.8083
+  Precision   : 0.4297
+  Recall      : 0.4623
+  F1          : 0.4454
+  Fpr         : 0.0249
+  Fnr         : 0.5377
+  Roc_auc     : 0.9000
+  Pr_auc      : 0.4290
+  Metrics  -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio01_metrics.csv
+  CM       -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio01_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.3]  Model: huang_az_ang_l2_best_ratio03.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 44.81%
+  ASR : 28.80%
+  Accuracy    : 0.4481
+  Loss        : 1.8098
+  Precision   : 0.4254
+  Recall      : 0.4572
+  F1          : 0.4407
+  Fpr         : 0.0251
+  Fnr         : 0.5428
+  Roc_auc     : 0.8998
+  Pr_auc      : 0.4314
+  Metrics  -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio03_metrics.csv
+  CM       -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio03_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.5]  Model: huang_az_ang_l2_best_ratio05.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 44.86%
+  ASR : 55.90%
+  Accuracy    : 0.4486
+  Loss        : 1.8065
+  Precision   : 0.4247
+  Recall      : 0.4574
+  F1          : 0.4404
+  Fpr         : 0.0250
+  Fnr         : 0.5426
+  Roc_auc     : 0.9007
+  Pr_auc      : 0.4337
+  Metrics  -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio05_metrics.csv
+  CM       -> depo_huang_az_ang/depo_huang_az_ang_l2_ratio05_cm.png
+
+====================================================================
+ Done. Evaluated 3 model(s), skipped 0.
+ Summary  -> depo_runs/depo_huang_az_ang_l2_summary.csv
+ Per-ratio -> depo_huang_az_ang/
+====================================================================
+
+============================================================
+ End time  : Wed Mar 25 08:15:30 PM MDT 2026
+ Exit code : 0
+============================================================

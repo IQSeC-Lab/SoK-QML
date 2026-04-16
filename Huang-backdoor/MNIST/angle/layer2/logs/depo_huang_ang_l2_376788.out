@@ -1,0 +1,99 @@
+============================================================
+ Job        : depo_huang_ang_l2
+ Job ID     : 376788
+ Node       : cnode056
+ CPUs       : 4
+ Start      : Wed Mar 25 11:53:29 AM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/angle/layer2
+[ENV] PennyLane  : 0.38.0
+
+[Data] Checking MNIST files in /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/MNIST ...
+       FOUND    train-images-idx3-ubyte
+       FOUND    train-labels-idx1-ubyte
+       FOUND    t10k-images-idx3-ubyte
+       FOUND    t10k-labels-idx1-ubyte
+[Models] Checking saved model files ...
+       FOUND    huang_angle_best_ratio01.pt
+       FOUND    huang_angle_best_ratio03.pt
+       FOUND    huang_angle_best_ratio05.pt
+       FOUND    huang_angle_l2_trigger.pt
+
+[RUN] Starting at Wed Mar 25 11:53:55 AM MDT 2026
+
+[Device] cpu
+[Config] N_LAYERS=2  DEPO_P=0.01  TARGET_CLASS=7
+====================================================================
+ Depolarizing Noise Evaluation | Huang Backdoor MNIST Angle L2
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Models        : 3 victim models (1 per ratio)
+ Target class  : 7
+====================================================================
+[Data] Train: (60000, 9)  Test: (10000, 9)
+[Data] Stratified train: (7000, 9)  Test: (10000, 9)
+[Trigger] Loaded from huang_angle_l2_trigger.pt  |delta|_inf=0.2000
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.1]  Model: huang_angle_best_ratio01.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 48.80%
+  ASR : 0.00%
+  Accuracy    : 0.4880
+  Loss        : 1.6934
+  Precision   : 0.4653
+  Recall      : 0.4804
+  F1          : 0.4727
+  Fpr         : 0.0570
+  Fnr         : 0.5196
+  Roc_auc     : 0.8578
+  Pr_auc      : 0.4472
+  Metrics  -> depo_huang_angle/depo_huang_angle_ratio01_metrics.csv
+  CM       -> depo_huang_angle/depo_huang_angle_ratio01_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.3]  Model: huang_angle_best_ratio03.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 48.54%
+  ASR : 0.97%
+  Accuracy    : 0.4854
+  Loss        : 1.6970
+  Precision   : 0.4668
+  Recall      : 0.4786
+  F1          : 0.4726
+  Fpr         : 0.0573
+  Fnr         : 0.5214
+  Roc_auc     : 0.8599
+  Pr_auc      : 0.4528
+  Metrics  -> depo_huang_angle/depo_huang_angle_ratio03_metrics.csv
+  CM       -> depo_huang_angle/depo_huang_angle_ratio03_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.5]  Model: huang_angle_best_ratio05.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 43.88%
+  ASR : 96.39%
+  Accuracy    : 0.4388
+  Loss        : 1.7827
+  Precision   : 0.4006
+  Recall      : 0.4316
+  F1          : 0.4155
+  Fpr         : 0.0625
+  Fnr         : 0.5684
+  Roc_auc     : 0.8287
+  Pr_auc      : 0.3979
+  Metrics  -> depo_huang_angle/depo_huang_angle_ratio05_metrics.csv
+  CM       -> depo_huang_angle/depo_huang_angle_ratio05_cm.png
+
+====================================================================
+ Done. Evaluated 3 model(s), skipped 0.
+ Summary  -> depo_runs/depo_huang_mn_ang_l2_summary.csv
+ Per-ratio -> depo_huang_angle/
+====================================================================
+
+============================================================
+ End time  : Wed Mar 25 04:27:07 PM MDT 2026
+ Exit code : 0
+============================================================

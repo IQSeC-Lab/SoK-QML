@@ -1,0 +1,19 @@
+============================================================
+ Job        : hng_az_amp_l10
+ Job ID     : 14270
+ Node       : hopper002
+ CPUs       : 8
+ Start      : Sun Mar 15 08:37:47 AM MDT 2026
+============================================================
+
+[ENV] Python     : /home/vcadena1/work/Nowmi/Sok/quid_env/bin/python
+[ENV] Python ver : Python 3.10.19
+[ENV] Working dir: /home/vcadena1/work/Nowmi/Sok/huang-backdoor/AZ/amplitude/layer10
+[ENV] CUDA avail : True
+[ENV] PennyLane  : 0.42.3
+
+[Data] Checking AZ_23 files...
+       FOUND    AZ-Class-Task_23_families_train.npz
+       FOUND    AZ-Class-Task_23_families_test.npz
+
+[RUN] Starting at Sun Mar 15 08:38:13 AM MDT 2026
