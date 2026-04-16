@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SoK: Critical Evaluation of Quantum Machine Learning for Adversarial Robustness">
+  <meta name="keywords" content="IQSecLab, Quantum Machine Learning, SoK: Critical Evaluation of Quantum Machine Learning for Adversarial Robustness, Adversarial Attacks, QML Security">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoK: Critical Evaluation of Quantum Machine Learning for Adversarial Robustness</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/Untitled.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://iqseclab.rahmanmsaidur.com/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Info
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://iqseclab.rahmanmsaidur.com/">
+            IQSecLab's Website
+          </a>
+          <a class="navbar-item" href="https://github.com/IQSeC-Lab">
+            IQSecLab's Github
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SoK: Critical Evaluation of Quantum Machine Learning for Adversarial Robustness</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=wS6V-PYAAAAJ">Saeefa Rubaiyet Nowmi</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=4wZzmRcAAAAJ">Jesus Lopez</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=vLtHzE8AAAAJ&hl=en">Md Mahmudul Alam Imon</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=DcgrszUAAAAJ&hl=en">Shahrooz Pouryousef</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://rahmanmsaidur.com/">Mohammad Saidur Rahman</a><sup>1</sup>,
+            </span>
+
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Texas at El Paso</span>
+            <span class="author-block"><sup>2</sup>University of Dhaka</span>
+            <span class="author-block"><sup>3</sup>University of Massachusetts Amherst</span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+            <span class="author-block" style="font-weight: bold; color: #363636;">📌 Accepted at IEEE S&P 2026</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2511.14989"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://github.com/IQSeC-Lab/SoK-QML"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/IQSeC-Lab/SoK-QML/tree/main/Datasets"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-download"></i>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract. -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Quantum Machine Learning (QML) integrates quantum computational principles into learning algorithms, offering the potential for improved representational capacity and computational efficiency.
+          Nevertheless, the security and robustness of QML systems remain largely underexplored, particularly under adversarial conditions. We present the first comprehensive systematization of adversarial
+          robustness in QML, integrating conceptual organization with empirical evaluation across black-, gray-, and white-box threat models. We implement five representative attacks across all three threat models:
+          a label-flipping data poisoning attack under black-box; an encoder-level indiscriminate data poisoning attack and a proxy-model-based clean-label backdoor attack under gray-box; and a circuit-level backdoor
+          attack (QTrojan) and gradient-based evasion attacks (FGSM and PGD) under white-box. We evaluate the attacks using a Quantum Multilayer Perceptron (QMLP) trained on MNIST and AZ-Class across circuit depths of
+          2, 5, 10 and 50 layers and two encoding schemes (angle and amplitude).
+          </p>
+          <p>
+            Our extensive evaluations reveal a fundamental accuracy–robustness trade-off. In particular, amplitude encoding yields the highest clean accuracy (92.6% on MNIST, 67% on AZ-Class);
+            however, it collapses under adversarial perturbations and depolarizing noise, while shallow angle-encoded models remain substantially more stable. In addition, QUID is highly effective
+            under noiseless conditions but is weakened by noise, whereas the proxy-model backdoor persists unless the circuit itself is overwhelmed, highlighting that noise is an asymmetric and unreliable passive defense.
+            Furthermore, the circuit-level backdoor fails in the multi-class setting, indicating a scalability constraint. Finally, QMLP models are more robust than Classical Multi-Layer Perceptron (CMLP) models under
+            label-flipping attacks but are substantially more vulnerable to gradient-based evasion, motivating the need for quantum-specific defenses. We conclude by proposing a threat-aware, noise-resilient design framework for secure and robust QML deployment.
+            The dataset and code are available at <a href="https://github.com/IQSeC-Lab/SoK-QML">https://github.com/IQSeC-Lab/SoK-QML</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- QML Architecture -->
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">QML Architecture</h2>
+        <div class="content has-text-justified">
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with your PQC architecture figure -->
+              <img src="static/images/PQC.png" alt="Architecture of Parameterized Quantum Circuit (PQC) as a QML model" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 1: Architecture of Parameterized Quantum Circuit (PQC) as a QML model. The circuit comprises three key components: (1) data encoding layers that map classical inputs into quantum states, (2) parameterized quantum gates that define the model's behavior and are iteratively optimized, and (3) measurement operations that extract classical information for loss evaluation.</figcaption>
+            </figure>
+          </div>
+          <p>
+            Most practical QML systems use a hybrid quantum-classical approach. The quantum processor executes Parameterized Quantum Circuits (PQCs) that prepare quantum states, while a classical optimizer updates trainable parameters to minimize a loss function. A typical QML pipeline consists of three stages: data embedding, parameterized quantum gates, and measurement followed by classical postprocessing.
+          </p>
+          <p>
+            We evaluate two data embedding strategies:
+          </p>
+          <ul>
+            <li>
+              <b>Angle Encoding:</b> Each classical feature is mapped to a rotation angle of a single-qubit gate. This method is simple and hardware-efficient but requires at least one qubit per input feature.
+            </li>
+            <li>
+              <b>Amplitude Encoding:</b> The entire input vector is encoded into the amplitudes of a quantum state. This method is qubit-efficient but harder to implement on NISQ hardware due to complex state preparation and noise sensitivity.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Taxonomy of Attacks -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Taxonomy of Attack Models</h2>
+        <div class="content has-text-justified">
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with your attack taxonomy figure -->
+              <img src="static/images/taxonomy.png" alt="Schematic of adversarial attack surfaces in QML pipeline" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 2: Schematic of adversarial attack surfaces in QML pipeline, illustrating potential threat vectors and their points of insertion. Each attack is annotated as (T): Training-time, (I): Inference-time, (D): Dual-phase, (B): Black-Box, (G): Gray-Box, (W): White-Box.</figcaption>
+            </figure>
+          </div>
+          <p>
+            We present a taxonomy of adversarial threats in QML based on the adversary's level of access—black-box, gray-box, and white-box—and the quantum-specific mechanisms exploited during the attack.
+          </p>
+          <ul>
+            <li>
+              <b>Black-Box Attacks:</b> The adversary lacks visibility into the QML model's architecture, parameters, and hardware. Attacks include model extraction, crosstalk-induced side-channel attacks, membership inference, data poisoning (label-flipping), and adversarial evasion.
+            </li>
+            <li>
+              <b>Gray-Box Attacks:</b> Adversaries have partial visibility into the QML system, including access to intermediate representations such as encoded quantum states and transpiled circuits. Attacks include backdoor attacks, Quantum Indiscriminate Data Poisoning (QUID), and pulse-level attacks.
+            </li>
+            <li>
+              <b>White-Box Attacks:</b> Adversaries have full visibility and control over the QML system. Attacks include circuit-level backdoors (QTrojan), reverse engineering, hardware/compiler trojans, input inference, and gradient-based evasion attacks (FGSM and PGD).
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Experimental Setup -->
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experimental Setup</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Model Architecture:</b> We implement QMLP models following a hybrid quantum-classical design. The classical component is implemented in PyTorch and the quantum circuit is simulated using PennyLane's <code>default.qubit</code> backend. To emulate realistic hardware behavior, depolarizing noise with probability p = 0.01 is applied via the Qiskit Aer backend. The QMLP architecture varies in circuit depth (2, 5, 10, and 50 layers) and encoding strategy (angle and amplitude).
+          </p>
+          <p>
+            <b>Datasets:</b> We use two multiclass datasets from distinct domains:
+          </p>
+          <ul>
+            <li><b>MNIST:</b> The most widely used dataset in prior QML works, used for 10-class classification of handwritten digits.</li>
+            <li><b>AZ-Class:</b> A twenty-three-class Android malware dataset based on behavioral features, enabling cross-domain evaluation of QML robustness.</li>
+          </ul>
+          <p>
+            Our QMLP employs a 9-qubit circuit. For angle encoding, inputs are reduced to 9 principal components (one per qubit) via PCA, whereas for amplitude encoding, inputs are compressed to 512 dimensions to match the circuit's Hilbert space.
+          </p>
+          <p>
+            <b>Attacks Evaluated:</b> We implement five representative attacks spanning all three threat models:
+          </p>
+          <ul>
+            <li><b>Black-Box:</b> Label-flipping data poisoning with label smoothing defense</li>
+            <li><b>Gray-Box:</b> QUID (Quantum Indiscriminate Data Poisoning) with Q-Detection defense; Huang-Zhang backdoor attack</li>
+            <li><b>White-Box:</b> QTrojan circuit-level backdoor; FGSM and PGD gradient-based evasion attacks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Baseline Results -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Baseline Results</h2>
+        <div class="content has-text-justified">
+          <p>
+<table class="table is-striped is-hoverable is-fullwidth">
+  <caption class="has-text-weight-semibold mb-2">Baseline Accuracies (%) of QMLP across encoding schemes and circuit depths under noiseless and depolarized noise (p = 0.01) conditions</caption>
+  <thead>
+    <tr>
+      <th>Encoding</th>
+      <th>Layers</th>
+      <th class="has-text-right">AZ-Class (NL)</th>
+      <th class="has-text-right">AZ-Class (DN)</th>
+      <th class="has-text-right">MNIST (NL)</th>
+      <th class="has-text-right">MNIST (DN)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4">Angle</td>
+      <td>2</td>
+      <td class="has-text-right">49.8</td>
+      <td class="has-text-right">47.0</td>
+      <td class="has-text-right">66.0</td>
+      <td class="has-text-right">59.2</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td class="has-text-right">52.3</td>
+      <td class="has-text-right">22.4</td>
+      <td class="has-text-right">68.0</td>
+      <td class="has-text-right">45.0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td class="has-text-right">54.8</td>
+      <td class="has-text-right">4.9</td>
+      <td class="has-text-right">83.6</td>
+      <td class="has-text-right">23.6</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td class="has-text-right">32.4</td>
+      <td class="has-text-right">5.2</td>
+      <td class="has-text-right">76.9</td>
+      <td class="has-text-right">9.9</td>
+    </tr>
+    <tr>
+      <td rowspan="4">Amplitude</td>
+      <td>2</td>
+      <td class="has-text-right">40.1</td>
+      <td class="has-text-right">5.1</td>
+      <td class="has-text-right">50.7</td>
+      <td class="has-text-right">9.9</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td class="has-text-right">48.1</td>
+      <td class="has-text-right">5.0</td>
+      <td class="has-text-right">70.3</td>
+      <td class="has-text-right">9.5</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td class="has-text-right">55.0</td>
+      <td class="has-text-right">4.78</td>
+      <td class="has-text-right">79.8</td>
+      <td class="has-text-right">10.1</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td class="has-text-right">67.0</td>
+      <td class="has-text-right">4.81</td>
+      <td class="has-text-right">92.6</td>
+      <td class="has-text-right">9.7</td>
+    </tr>
+    <tr class="has-background-light">
+      <td class="has-text-weight-semibold">CMLP</td>
+      <td class="has-text-weight-semibold">–</td>
+      <td class="has-text-right has-text-weight-semibold">95.89</td>
+      <td class="has-text-right has-text-weight-semibold">–</td>
+      <td class="has-text-right has-text-weight-semibold">96.63</td>
+      <td class="has-text-right has-text-weight-semibold">–</td>
+    </tr>
+  </tbody>
+</table>
+          </p>
+          <p>NL = Noiseless, DN = Depolarized Noise. Angle encoding favors shallow circuits (highest accuracy at 10-layer PQC), while amplitude encoding benefits from deeper circuits, achieving 92.6% on MNIST at 50 layers. Noise severely limits accuracy, with shallow angle-encoded circuits showing relatively higher resilience.</p>
+
+          <div class="has-text-centered mt-4">
+            <figure>
+              <!-- PLACEHOLDER: Replace with baseline performance figure -->
+              <img src="static/images/baseline_performance.png" alt="Performance of QMLP with varying circuit layers and encoding schemes" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 3: Performance of the QMLP model with varying circuit layers and encoding schemes on the AZ-Class and MNIST datasets under noiseless condition.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Attack Results -->
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Attack Evaluation Results</h2>
+        <div class="content has-text-justified">
+
+          <h4 class="title is-4">Black-Box: Label-Flipping Attack</h4>
+          <p>
+            QMLP models exhibit greater robustness than CMLP models under label-flipping attacks, retaining relative accuracies close to 90% under a 50% label-flipping attack, while CMLP loses nearly 50% of its clean accuracy. Label smoothing provides no meaningful benefit for QMLP and only modest gains for CMLP.
+          </p>
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with label-flipping figure -->
+              <img src="static/images/label_flipping.png" alt="Performance of QMLP under label-flipping attack" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 4: Performance of QMLP under label-flipping (LF) and label-flipping with label-smoothing (LFLS) across datasets and encodings in noiseless conditions.</figcaption>
+            </figure>
+          </div>
+
+          <h4 class="title is-4 mt-5">Gray-Box: QUID Poisoning Attack</h4>
+          <p>
+            Amplitude-encoded models are more vulnerable to QUID, with ASR exceeding 90% at poison ratio 0.5. Angle encoding is more resilient at low poison ratios but degrades at higher ratios. Depolarizing noise weakens QUID on amplitude encoding by disrupting Hilbert-space structure, acting as a natural defense. Q-Detection is more effective with angle encoding at moderate poison ratios.
+          </p>
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with QUID ASR figure -->
+              <img src="static/images/quid_asr.png" alt="Attack Success Rate of QUID attack" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 5: Attack Success Rate (ASR) of the QUID attack without Q-Detection across Amplitude and Angle encodings under Noiseless and Noisy settings.</figcaption>
+            </figure>
+          </div>
+
+          <h4 class="title is-4 mt-5">Gray-Box: Huang-Zhang Backdoor Attack</h4>
+          <p>
+            The attack remains highly stealthy across encodings, depths, and poison ratios. Under noiseless conditions, amplitude encoding is markedly more vulnerable because its single-shot embedding gives the optimized trigger a stable entry point. Unlike QUID, the Huang trigger is embedded in the trained weights and persists as long as the model remains functional.
+          </p>
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with Huang backdoor ASR figure -->
+              <img src="static/images/huang_backdoor_asr.png" alt="Attack Success Rate of Huang backdoor attack" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 6: Attack Success Rate (ASR) of the Huang backdoor attack with amplitude and angle encodings under noiseless and noisy settings.</figcaption>
+            </figure>
+          </div>
+
+          <h4 class="title is-4 mt-5">White-Box: QTrojan Attack</h4>
+          <p>
+            QTrojan preserves clean data accuracy (CDA) across all depths and datasets, making it a stealthy attack. However, ASR is consistently low across all configurations, contrasting sharply with the 100% ASR reported in the original paper, due to the increased number of classes in our evaluation. This reveals that QTrojan's effectiveness degrades significantly with the number of output classes.
+          </p>
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with QTrojan ASR figure -->
+              <img src="static/images/qtrojan_asr.png" alt="ASR of QTrojan across circuit depths" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 7: ASR of QTrojan across circuit depths under noiseless and noisy conditions using angle encoding.</figcaption>
+            </figure>
+          </div>
+
+          <h4 class="title is-4 mt-5">White-Box: FGSM and PGD Evasion Attacks</h4>
+          <p>
+            Shallow angle-encoded QMLPs retain moderate robustness, while deeper circuits collapse due to over-entanglement. Amplitude-encoded models collapse uniformly across all depths under small perturbations. At higher perturbation strengths (ε≥0.10), shallow angle-encoded QMLPs outperform CMLP on AZ-Class under both FGSM and PGD, revealing a fundamental accuracy–robustness trade-off.
+          </p>
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with FGSM/PGD figure -->
+              <img src="static/images/pgd_performance.png" alt="Performance of QMLP under PGD attack" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 8: Performance of QMLP with varying perturbation strengths of the PGD attack in a noiseless environment.</figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Secure Pipeline -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Secure and Robust QML Pipeline</h2>
+        <div class="content has-text-justified">
+          <div class="has-text-centered">
+            <figure>
+              <!-- PLACEHOLDER: Replace with secure pipeline figure -->
+              <img src="static/images/secure_pipeline.png" alt="Proposed Secure and Robust QML Pipeline" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+              <figcaption class="is-size-6 mt-2">Figure 9: Proposed Secure and Robust QML Pipeline.</figcaption>
+            </figure>
+          </div>
+          <p>
+            Based on our empirical findings, we present a modular security framework for QML systems. Our results highlight three key lessons: classical defenses do not transfer directly to QML, noise is an unreliable and asymmetric passive defense, and encoding choice is the most consequential architectural security decision. The pipeline covers:
+          </p>
+          <ul>
+            <li><b>Defining the Adversarial Threat Model:</b> Identifying which components can be observed or modified, aligned with our taxonomy of black-box, gray-box, and white-box threats.</li>
+            <li><b>Encoder-Level Security:</b> The encoding stage is the most security-critical interface. Encoding should include quantum-aware validation, randomized or obfuscated schemes, and classical-quantum consistency checks.</li>
+            <li><b>Securing Quantum Circuit Architecture:</b> Quantum logic locking (QLL) and E-LoQ enforce key-dependent circuit behavior, while obfuscation through gate reordering and dummy-gate insertion makes reverse engineering harder.</li>
+            <li><b>Hardware-Aware Security Mechanisms:</b> Active hardware-level defenses including randomized qubit mapping, instruction reordering, dynamical decoupling, and hardware noise fingerprinting for tamper detection.</li>
+            <li><b>Secure Partitioning and Model Distribution:</b> Partitioning strategies that divide functionality across multiple quantum backends via isolated sub-circuits communicating through secure classical channels.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Key Contributions. -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Key Contributions</h2>
+        <div class="content has-text-justified">
+          <p>
+            <ul>
+              <li>
+                We present a <b>comprehensive systematization</b> of adversarial attack models in QML, categorized by the adversary's level of access (black-box, gray-box, white-box).
+              </li>
+              <li>
+                We empirically analyze how <b>data encoding schemes</b> (angle vs. amplitude) and <b>circuit depth</b> (2, 5, 10, and 50 layers) influence QML performance and robustness under NISQ constraints.
+              </li>
+              <li>
+                We perform a <b>comparative study with classical machine learning</b> (CMLP) to highlight distinctive vulnerability patterns and motivate the need for quantum-specific defenses.
+              </li>
+              <li>
+                We implement <b>representative attacks and defenses</b> across all three threat models and find that QMLP models are more robust against classical label-flipping attacks but substantially more vulnerable to gradient-based perturbation attacks.
+              </li>
+              <li>
+                We propose a <b>structured design pipeline</b> for developing secure and robust QML models integrating threat modeling, encoding strategy selection, and robustness evaluation under quantum noise.
+              </li>
+             </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Key Findings -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Key Findings</h2>
+        <div class="content has-text-justified">
+          <p>
+            <ul>
+              <li>
+                <b>Encoding choice is a key security decision:</b> Amplitude encoding achieves the highest clean accuracy but collapses under adversarial perturbations and noise. Shallow angle-encoded models offer a better accuracy–robustness trade-off.
+              </li>
+              <li>
+                <b>Noise is an unreliable passive defense:</b> It weakens QUID on amplitude encoding by disrupting encoded-state structure, but does not stop the Huang backdoor, whose trigger is embedded in model weights.
+              </li>
+              <li>
+                <b>Classical defenses do not transfer directly:</b> Label smoothing provides no meaningful protection for QMLP, underscoring that reducing the attack surface at deployment is necessary when algorithmic defenses alone are insufficient.
+              </li>
+              <li>
+                <b>Circuit-level backdoors face scalability limits:</b> QTrojan's effectiveness degrades significantly with the number of output classes, failing in multi-class settings.
+              </li>
+              <li>
+                <b>QMLP vs. CMLP trade-offs:</b> QMLP models are more robust than CMLP under label-flipping attacks but substantially more vulnerable to gradient-based evasion (FGSM, PGD).
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <div class="box" style="position: relative; padding: 1rem;">
+      <!-- Copy button -->
+      <button id="bibtex-copy-btn" class="button is-small is-primary"
+              style="position: absolute; top: 1rem; right: 1rem; z-index: 1;"
+              aria-label="Copy BibTeX">
+        <span class="icon"><i class="fas fa-copy"></i></span>
+      </button>
+      <!-- Notification -->
+      <div id="bibtex-copy-notif" class="notification is-success"
+           style="display: none; position: absolute; top: 4rem; right: 1rem; padding: 0.5rem 1rem; z-index: 1;">
+        Thank you for citing us!
+      </div>
+      <!-- BibTeX code -->
+      <pre style="margin-top: 0; white-space: pre-wrap;"><code id="bibtex-code">@inproceedings{nowmi2026sok,
+  title     = {SoK: Critical Evaluation of Quantum Machine Learning for Adversarial Robustness},
+  author    = {Nowmi, Saeefa Rubaiyet and Lopez, Jesus and Imon, Md Mahmudul Alam
+               and Pouryousef, Shahrooz and Rahman, Mohammad Saidur},
+  booktitle = {2026 IEEE Symposium on Security and Privacy (S\&P)},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2511.14989}
+}
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('bibtex-copy-btn');
+    const code = document.getElementById('bibtex-code');
+    const notif = document.getElementById('bibtex-copy-notif');
+    if (btn && code && notif) {
+      btn.addEventListener('click', () => {
+        const text = code.textContent || code.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          // Swap icon
+          const icon = btn.querySelector('i');
+          if (icon) icon.classList.replace('fa-copy', 'fa-check');
+          // Show notification
+          notif.style.display = 'block';
+          setTimeout(() => {
+            if (icon) icon.classList.replace('fa-check', 'fa-copy');
+            notif.style.display = 'none';
+          }, 1000);
+        }).catch(err => {
+          console.error('Copy failed:', err);
+        });
+      });
+    }
+  });
+</script>
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This page was built using the <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
