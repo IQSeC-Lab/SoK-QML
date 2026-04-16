@@ -1,0 +1,24 @@
+\begin{table}[!t]
+\caption{QTrojan results under noiseless and depolarizing noise ($p=0.01$) conditions. CDA: clean-data accuracy (backdoor off). ASR: attack success rate (backdoor on).}
+\label{tab:qtrojan_results}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}c|c|c|c|c|c@{}}
+\toprule
+\multirow{2}{*}{\textbf{Dataset}} & \multirow{2}{*}{\textbf{Layer}} & \multicolumn{2}{c|}{\textbf{CDA (\%)}} & \multicolumn{2}{c}{\textbf{ASR (\%)}} \\
+\cmidrule(lr){3-4}\cmidrule(l){5-6}
+& & \textbf{Noiseless} & \textbf{Noisy} & \textbf{Noiseless} & \textbf{Noisy} \\
+\midrule
+\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{AZ-23}}}
+ & 2  & $44.96\pm0.72$ & $46.12\pm1.01$ & $7.37\pm1.36$  & $6.85\pm1.28$ \\
+ & 5  & $46.83\pm0.51$ & $47.33\pm0.88$ & $3.33\pm0.90$  & $1.54\pm0.98$ \\
+ & 10 & $49.05\pm0.26$ & $42.90\pm0.56$ & $1.63\pm0.48$  & $2.54\pm1.08$ \\
+\midrule
+\multirow{3}{*}{\rotatebox[origin=c]{90}{\textbf{MNIST}}}
+ & 2  & $47.20\pm2.30$ & $51.65\pm1.59$ & $17.12\pm7.13$ & $20.83\pm2.04$ \\
+ & 5  & $54.60\pm1.17$ & $56.44\pm1.62$ & $5.55\pm4.18$  & $18.25\pm1.22$ \\
+ & 10 & $57.23\pm1.65$ & $55.75\pm2.01$ & $6.50\pm4.94$  & $1.56\pm0.22$  \\
+\bottomrule
+\end{tabular}
+\end{table}
