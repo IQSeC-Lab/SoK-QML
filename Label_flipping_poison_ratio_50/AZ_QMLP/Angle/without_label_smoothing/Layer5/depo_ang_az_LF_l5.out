@@ -1,0 +1,10 @@
+nohup: ignoring input
+
+========= Noise Evaluation RUN 1 =========
+Run 1 | Acc: 0.3881, F1: 0.3192, Avg FNR: 0.6253, Avg FPR: 0.0279
+
+========= Noise Evaluation RUN 2 =========
+Run 2 | Acc: 0.3892, F1: 0.3203, Avg FNR: 0.6245, Avg FPR: 0.0279
+
+========= Noise Evaluation RUN 3 =========
+Run 3 | Acc: 0.3881, F1: 0.3179, Avg FNR: 0.6260, Avg FPR: 0.0279

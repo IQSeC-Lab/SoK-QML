@@ -1,0 +1,288 @@
+============================================================
+ Job        : huang_bd_ampl_l2
+ Job ID     : 14321
+ Node       : hopper002
+ CPUs       : 8
+ Start      : Wed Mar 18 10:40:14 AM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer2
+[ENV] CUDA avail : True
+[ENV] GPU info   : NVIDIA H100 80GB HBM3 MIG 1g.10gb
+[ENV] PennyLane  : 0.38.0
+
+[Data] Checking MNIST files in /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/MNIST ...
+       FOUND    train-images-idx3-ubyte
+       FOUND    train-labels-idx1-ubyte
+       FOUND    t10k-images-idx3-ubyte
+       FOUND    t10k-labels-idx1-ubyte
+
+[RUN] Starting at Wed Mar 18 10:41:00 AM MDT 2026
+
+[Config] Main device : cuda
+[Config] CPU threads : 8
+====================================================================
+ Huang & Zhang (2023) Backdoor — Amplitude QMLP Replication
+ Qubits=9  Layers=2  PCA=512
+ Target class=7  ε=0.2  (c,σ)=(1.0,2.0)
+ Poison ratios: [0.1, 0.3, 0.5]
+ Parallel runs: 3  |  CPU threads: 8
+====================================================================
+[Data] Full train : (60000, 512)   Test : (10000, 512)
+[Data] Stratified train: (7000, 512)  Test: (10000, 512)
+
+====================================================================
+ PHASE 1 — Loading existing proxy model from huang_proxy_best.pt
+====================================================================
+  [Proxy] Loaded.  Test CA: 46.39%
+
+====================================================================
+ PHASE 2 — Sequential trigger generation (Algorithm 1, faithful)
+====================================================================
+    [Trigger] iter   1/200  fooling_rate=0.388  |delta|_inf=0.2000  elapsed=24.1s
+    [Trigger] iter   2/200  fooling_rate=0.430  |delta|_inf=0.2000  elapsed=46.6s
+    [Trigger] iter   3/200  fooling_rate=0.286  |delta|_inf=0.2000  elapsed=69.1s
+    [Trigger] iter   4/200  fooling_rate=0.344  |delta|_inf=0.2000  elapsed=91.8s
+    [Trigger] iter   5/200  fooling_rate=0.338  |delta|_inf=0.2000  elapsed=113.9s
+    [Trigger] iter   6/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=136.0s
+    [Trigger] iter   7/200  fooling_rate=0.386  |delta|_inf=0.2000  elapsed=157.5s
+    [Trigger] iter   8/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=179.6s
+    [Trigger] iter   9/200  fooling_rate=0.246  |delta|_inf=0.2000  elapsed=201.4s
+    [Trigger] iter  10/200  fooling_rate=0.394  |delta|_inf=0.2000  elapsed=223.2s
+    [Trigger] iter  11/200  fooling_rate=0.418  |delta|_inf=0.2000  elapsed=245.1s
+    [Trigger] iter  12/200  fooling_rate=0.380  |delta|_inf=0.2000  elapsed=266.7s
+    [Trigger] iter  13/200  fooling_rate=0.356  |delta|_inf=0.2000  elapsed=288.2s
+    [Trigger] iter  14/200  fooling_rate=0.388  |delta|_inf=0.2000  elapsed=310.1s
+    [Trigger] iter  15/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=332.5s
+    [Trigger] iter  16/200  fooling_rate=0.382  |delta|_inf=0.2000  elapsed=354.2s
+    [Trigger] iter  17/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=376.1s
+    [Trigger] iter  18/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=397.7s
+    [Trigger] iter  19/200  fooling_rate=0.320  |delta|_inf=0.2000  elapsed=419.6s
+    [Trigger] iter  20/200  fooling_rate=0.382  |delta|_inf=0.2000  elapsed=441.6s
+    [Trigger] iter  21/200  fooling_rate=0.356  |delta|_inf=0.2000  elapsed=463.3s
+    [Trigger] iter  22/200  fooling_rate=0.434  |delta|_inf=0.2000  elapsed=485.2s
+    [Trigger] iter  23/200  fooling_rate=0.352  |delta|_inf=0.2000  elapsed=506.9s
+    [Trigger] iter  24/200  fooling_rate=0.330  |delta|_inf=0.2000  elapsed=528.6s
+    [Trigger] iter  25/200  fooling_rate=0.336  |delta|_inf=0.2000  elapsed=550.1s
+    [Trigger] iter  26/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=572.0s
+    [Trigger] iter  27/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=593.8s
+    [Trigger] iter  28/200  fooling_rate=0.346  |delta|_inf=0.2000  elapsed=615.5s
+    [Trigger] iter  29/200  fooling_rate=0.368  |delta|_inf=0.2000  elapsed=636.9s
+    [Trigger] iter  30/200  fooling_rate=0.354  |delta|_inf=0.2000  elapsed=658.7s
+    [Trigger] iter  31/200  fooling_rate=0.380  |delta|_inf=0.2000  elapsed=680.2s
+    [Trigger] iter  32/200  fooling_rate=0.306  |delta|_inf=0.2000  elapsed=701.7s
+    [Trigger] iter  33/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=723.8s
+    [Trigger] iter  34/200  fooling_rate=0.370  |delta|_inf=0.2000  elapsed=745.6s
+    [Trigger] iter  35/200  fooling_rate=0.316  |delta|_inf=0.2000  elapsed=767.6s
+    [Trigger] iter  36/200  fooling_rate=0.330  |delta|_inf=0.2000  elapsed=789.1s
+    [Trigger] iter  37/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=810.9s
+    [Trigger] iter  38/200  fooling_rate=0.354  |delta|_inf=0.2000  elapsed=832.3s
+    [Trigger] iter  39/200  fooling_rate=0.326  |delta|_inf=0.2000  elapsed=853.9s
+    [Trigger] iter  40/200  fooling_rate=0.332  |delta|_inf=0.2000  elapsed=875.8s
+    [Trigger] iter  41/200  fooling_rate=0.402  |delta|_inf=0.2000  elapsed=897.5s
+    [Trigger] iter  42/200  fooling_rate=0.386  |delta|_inf=0.2000  elapsed=919.3s
+    [Trigger] iter  43/200  fooling_rate=0.368  |delta|_inf=0.2000  elapsed=940.9s
+    [Trigger] iter  44/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=962.9s
+    [Trigger] iter  45/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=984.9s
+    [Trigger] iter  46/200  fooling_rate=0.358  |delta|_inf=0.2000  elapsed=1006.8s
+    [Trigger] iter  47/200  fooling_rate=0.346  |delta|_inf=0.2000  elapsed=1028.8s
+    [Trigger] iter  48/200  fooling_rate=0.398  |delta|_inf=0.2000  elapsed=1050.6s
+    [Trigger] iter  49/200  fooling_rate=0.312  |delta|_inf=0.2000  elapsed=1072.4s
+    [Trigger] iter  50/200  fooling_rate=0.402  |delta|_inf=0.2000  elapsed=1094.3s
+    [Trigger] iter  51/200  fooling_rate=0.324  |delta|_inf=0.2000  elapsed=1115.8s
+    [Trigger] iter  52/200  fooling_rate=0.324  |delta|_inf=0.2000  elapsed=1137.5s
+    [Trigger] iter  53/200  fooling_rate=0.266  |delta|_inf=0.2000  elapsed=1159.3s
+    [Trigger] iter  54/200  fooling_rate=0.400  |delta|_inf=0.2000  elapsed=1181.0s
+    [Trigger] iter  55/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=1202.8s
+    [Trigger] iter  56/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=1224.3s
+    [Trigger] iter  57/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=1245.9s
+    [Trigger] iter  58/200  fooling_rate=0.344  |delta|_inf=0.2000  elapsed=1268.2s
+    [Trigger] iter  59/200  fooling_rate=0.308  |delta|_inf=0.2000  elapsed=1289.9s
+    [Trigger] iter  60/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=1311.8s
+    [Trigger] iter  61/200  fooling_rate=0.350  |delta|_inf=0.2000  elapsed=1333.6s
+    [Trigger] iter  62/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=1355.5s
+    [Trigger] iter  63/200  fooling_rate=0.340  |delta|_inf=0.2000  elapsed=1377.4s
+    [Trigger] iter  64/200  fooling_rate=0.400  |delta|_inf=0.2000  elapsed=1399.1s
+    [Trigger] iter  65/200  fooling_rate=0.338  |delta|_inf=0.2000  elapsed=1420.9s
+    [Trigger] iter  66/200  fooling_rate=0.320  |delta|_inf=0.2000  elapsed=1442.9s
+    [Trigger] iter  67/200  fooling_rate=0.350  |delta|_inf=0.2000  elapsed=1464.9s
+    [Trigger] iter  68/200  fooling_rate=0.296  |delta|_inf=0.2000  elapsed=1487.0s
+    [Trigger] iter  69/200  fooling_rate=0.360  |delta|_inf=0.2000  elapsed=1508.9s
+    [Trigger] iter  70/200  fooling_rate=0.270  |delta|_inf=0.2000  elapsed=1530.7s
+    [Trigger] iter  71/200  fooling_rate=0.316  |delta|_inf=0.2000  elapsed=1552.7s
+    [Trigger] iter  72/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=1574.4s
+    [Trigger] iter  73/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=1596.8s
+    [Trigger] iter  74/200  fooling_rate=0.402  |delta|_inf=0.2000  elapsed=1618.9s
+    [Trigger] iter  75/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=1640.6s
+    [Trigger] iter  76/200  fooling_rate=0.394  |delta|_inf=0.2000  elapsed=1662.3s
+    [Trigger] iter  77/200  fooling_rate=0.392  |delta|_inf=0.2000  elapsed=1684.2s
+    [Trigger] iter  78/200  fooling_rate=0.332  |delta|_inf=0.2000  elapsed=1705.8s
+    [Trigger] iter  79/200  fooling_rate=0.382  |delta|_inf=0.2000  elapsed=1727.9s
+    [Trigger] iter  80/200  fooling_rate=0.368  |delta|_inf=0.2000  elapsed=1749.9s
+    [Trigger] iter  81/200  fooling_rate=0.354  |delta|_inf=0.2000  elapsed=1771.8s
+    [Trigger] iter  82/200  fooling_rate=0.370  |delta|_inf=0.2000  elapsed=1793.5s
+    [Trigger] iter  83/200  fooling_rate=0.368  |delta|_inf=0.2000  elapsed=1815.3s
+    [Trigger] iter  84/200  fooling_rate=0.360  |delta|_inf=0.2000  elapsed=1836.9s
+    [Trigger] iter  85/200  fooling_rate=0.390  |delta|_inf=0.2000  elapsed=1858.8s
+    [Trigger] iter  86/200  fooling_rate=0.400  |delta|_inf=0.2000  elapsed=1880.4s
+    [Trigger] iter  87/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=1902.1s
+    [Trigger] iter  88/200  fooling_rate=0.386  |delta|_inf=0.2000  elapsed=1924.1s
+    [Trigger] iter  89/200  fooling_rate=0.392  |delta|_inf=0.2000  elapsed=1946.2s
+    [Trigger] iter  90/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=1968.0s
+    [Trigger] iter  91/200  fooling_rate=0.378  |delta|_inf=0.2000  elapsed=1989.6s
+    [Trigger] iter  92/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=2011.6s
+    [Trigger] iter  93/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=2033.3s
+    [Trigger] iter  94/200  fooling_rate=0.412  |delta|_inf=0.2000  elapsed=2055.1s
+    [Trigger] iter  95/200  fooling_rate=0.356  |delta|_inf=0.2000  elapsed=2076.7s
+    [Trigger] iter  96/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=2097.9s
+    [Trigger] iter  97/200  fooling_rate=0.390  |delta|_inf=0.2000  elapsed=2119.4s
+    [Trigger] iter  98/200  fooling_rate=0.344  |delta|_inf=0.2000  elapsed=2141.1s
+    [Trigger] iter  99/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=2162.2s
+    [Trigger] iter 100/200  fooling_rate=0.368  |delta|_inf=0.2000  elapsed=2183.8s
+    [Trigger] iter 101/200  fooling_rate=0.306  |delta|_inf=0.2000  elapsed=2204.7s
+    [Trigger] iter 102/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=2225.9s
+    [Trigger] iter 103/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=2247.4s
+    [Trigger] iter 104/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=2268.6s
+    [Trigger] iter 105/200  fooling_rate=0.382  |delta|_inf=0.2000  elapsed=2290.2s
+    [Trigger] iter 106/200  fooling_rate=0.356  |delta|_inf=0.2000  elapsed=2312.0s
+    [Trigger] iter 107/200  fooling_rate=0.300  |delta|_inf=0.2000  elapsed=2333.6s
+    [Trigger] iter 108/200  fooling_rate=0.326  |delta|_inf=0.2000  elapsed=2355.0s
+    [Trigger] iter 109/200  fooling_rate=0.422  |delta|_inf=0.2000  elapsed=2376.2s
+    [Trigger] iter 110/200  fooling_rate=0.376  |delta|_inf=0.2000  elapsed=2397.7s
+    [Trigger] iter 111/200  fooling_rate=0.346  |delta|_inf=0.2000  elapsed=2419.0s
+    [Trigger] iter 112/200  fooling_rate=0.372  |delta|_inf=0.2000  elapsed=2440.6s
+    [Trigger] iter 113/200  fooling_rate=0.382  |delta|_inf=0.2000  elapsed=2462.1s
+    [Trigger] iter 114/200  fooling_rate=0.306  |delta|_inf=0.2000  elapsed=2483.6s
+    [Trigger] iter 115/200  fooling_rate=0.346  |delta|_inf=0.2000  elapsed=2505.2s
+    [Trigger] iter 116/200  fooling_rate=0.360  |delta|_inf=0.2000  elapsed=2526.9s
+    [Trigger] iter 117/200  fooling_rate=0.396  |delta|_inf=0.2000  elapsed=2548.4s
+    [Trigger] iter 118/200  fooling_rate=0.352  |delta|_inf=0.2000  elapsed=2570.3s
+    [Trigger] iter 119/200  fooling_rate=0.360  |delta|_inf=0.2000  elapsed=2591.8s
+    [Trigger] iter 120/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=2613.5s
+    [Trigger] iter 121/200  fooling_rate=0.406  |delta|_inf=0.2000  elapsed=2634.9s
+    [Trigger] iter 122/200  fooling_rate=0.334  |delta|_inf=0.2000  elapsed=2656.6s
+    [Trigger] iter 123/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=2677.9s
+    [Trigger] iter 124/200  fooling_rate=0.378  |delta|_inf=0.2000  elapsed=2699.8s
+    [Trigger] iter 125/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=2721.4s
+    [Trigger] iter 126/200  fooling_rate=0.360  |delta|_inf=0.2000  elapsed=2743.2s
+    [Trigger] iter 127/200  fooling_rate=0.412  |delta|_inf=0.2000  elapsed=2765.0s
+    [Trigger] iter 128/200  fooling_rate=0.372  |delta|_inf=0.2000  elapsed=2786.3s
+    [Trigger] iter 129/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=2807.8s
+    [Trigger] iter 130/200  fooling_rate=0.440  |delta|_inf=0.2000  elapsed=2829.2s
+    [Trigger] iter 131/200  fooling_rate=0.370  |delta|_inf=0.2000  elapsed=2850.4s
+    [Trigger] iter 132/200  fooling_rate=0.330  |delta|_inf=0.2000  elapsed=2872.1s
+    [Trigger] iter 133/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=2893.3s
+    [Trigger] iter 134/200  fooling_rate=0.342  |delta|_inf=0.2000  elapsed=2915.0s
+    [Trigger] iter 135/200  fooling_rate=0.394  |delta|_inf=0.2000  elapsed=2936.7s
+    [Trigger] iter 136/200  fooling_rate=0.302  |delta|_inf=0.2000  elapsed=2958.5s
+    [Trigger] iter 137/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=2980.2s
+    [Trigger] iter 138/200  fooling_rate=0.344  |delta|_inf=0.2000  elapsed=3001.8s
+    [Trigger] iter 139/200  fooling_rate=0.392  |delta|_inf=0.2000  elapsed=3023.8s
+    [Trigger] iter 140/200  fooling_rate=0.398  |delta|_inf=0.2000  elapsed=3045.5s
+    [Trigger] iter 141/200  fooling_rate=0.372  |delta|_inf=0.2000  elapsed=3067.3s
+    [Trigger] iter 142/200  fooling_rate=0.366  |delta|_inf=0.2000  elapsed=3088.8s
+    [Trigger] iter 143/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=3110.7s
+    [Trigger] iter 144/200  fooling_rate=0.342  |delta|_inf=0.2000  elapsed=3132.4s
+    [Trigger] iter 145/200  fooling_rate=0.408  |delta|_inf=0.2000  elapsed=3153.9s
+    [Trigger] iter 146/200  fooling_rate=0.400  |delta|_inf=0.2000  elapsed=3175.6s
+    [Trigger] iter 147/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=3197.0s
+    [Trigger] iter 148/200  fooling_rate=0.422  |delta|_inf=0.2000  elapsed=3218.7s
+    [Trigger] iter 149/200  fooling_rate=0.418  |delta|_inf=0.2000  elapsed=3240.2s
+    [Trigger] iter 150/200  fooling_rate=0.324  |delta|_inf=0.2000  elapsed=3262.1s
+    [Trigger] iter 151/200  fooling_rate=0.418  |delta|_inf=0.2000  elapsed=3283.6s
+    [Trigger] iter 152/200  fooling_rate=0.358  |delta|_inf=0.2000  elapsed=3305.1s
+    [Trigger] iter 153/200  fooling_rate=0.390  |delta|_inf=0.2000  elapsed=3326.4s
+    [Trigger] iter 154/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=3347.8s
+    [Trigger] iter 155/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=3369.0s
+    [Trigger] iter 156/200  fooling_rate=0.318  |delta|_inf=0.2000  elapsed=3390.6s
+    [Trigger] iter 157/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=3412.0s
+    [Trigger] iter 158/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=3433.6s
+    [Trigger] iter 159/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=3454.9s
+    [Trigger] iter 160/200  fooling_rate=0.420  |delta|_inf=0.2000  elapsed=3476.3s
+    [Trigger] iter 161/200  fooling_rate=0.396  |delta|_inf=0.2000  elapsed=3497.6s
+    [Trigger] iter 162/200  fooling_rate=0.426  |delta|_inf=0.2000  elapsed=3518.7s
+    [Trigger] iter 163/200  fooling_rate=0.334  |delta|_inf=0.2000  elapsed=3540.1s
+    [Trigger] iter 164/200  fooling_rate=0.384  |delta|_inf=0.2000  elapsed=3561.5s
+    [Trigger] iter 165/200  fooling_rate=0.388  |delta|_inf=0.2000  elapsed=3583.1s
+    [Trigger] iter 166/200  fooling_rate=0.308  |delta|_inf=0.2000  elapsed=3604.6s
+    [Trigger] iter 167/200  fooling_rate=0.376  |delta|_inf=0.2000  elapsed=3626.0s
+    [Trigger] iter 168/200  fooling_rate=0.376  |delta|_inf=0.2000  elapsed=3647.2s
+    [Trigger] iter 169/200  fooling_rate=0.402  |delta|_inf=0.2000  elapsed=3668.6s
+    [Trigger] iter 170/200  fooling_rate=0.376  |delta|_inf=0.2000  elapsed=3690.0s
+    [Trigger] iter 171/200  fooling_rate=0.372  |delta|_inf=0.2000  elapsed=3711.4s
+    [Trigger] iter 172/200  fooling_rate=0.394  |delta|_inf=0.2000  elapsed=3732.5s
+    [Trigger] iter 173/200  fooling_rate=0.304  |delta|_inf=0.2000  elapsed=3753.8s
+    [Trigger] iter 174/200  fooling_rate=0.342  |delta|_inf=0.2000  elapsed=3775.3s
+    [Trigger] iter 175/200  fooling_rate=0.370  |delta|_inf=0.2000  elapsed=3796.5s
+    [Trigger] iter 176/200  fooling_rate=0.406  |delta|_inf=0.2000  elapsed=3817.6s
+    [Trigger] iter 177/200  fooling_rate=0.388  |delta|_inf=0.2000  elapsed=3838.9s
+    [Trigger] iter 178/200  fooling_rate=0.330  |delta|_inf=0.2000  elapsed=3860.5s
+    [Trigger] iter 179/200  fooling_rate=0.400  |delta|_inf=0.2000  elapsed=3881.8s
+    [Trigger] iter 180/200  fooling_rate=0.344  |delta|_inf=0.2000  elapsed=3903.2s
+    [Trigger] iter 181/200  fooling_rate=0.386  |delta|_inf=0.2000  elapsed=3924.5s
+    [Trigger] iter 182/200  fooling_rate=0.362  |delta|_inf=0.2000  elapsed=3945.9s
+    [Trigger] iter 183/200  fooling_rate=0.374  |delta|_inf=0.2000  elapsed=3967.2s
+    [Trigger] iter 184/200  fooling_rate=0.404  |delta|_inf=0.2000  elapsed=3988.8s
+    [Trigger] iter 185/200  fooling_rate=0.414  |delta|_inf=0.2000  elapsed=4010.2s
+    [Trigger] iter 186/200  fooling_rate=0.358  |delta|_inf=0.2000  elapsed=4031.8s
+    [Trigger] iter 187/200  fooling_rate=0.356  |delta|_inf=0.2000  elapsed=4052.7s
+    [Trigger] iter 188/200  fooling_rate=0.332  |delta|_inf=0.2000  elapsed=4073.8s
+    [Trigger] iter 189/200  fooling_rate=0.392  |delta|_inf=0.2000  elapsed=4095.2s
+    [Trigger] iter 190/200  fooling_rate=0.318  |delta|_inf=0.2000  elapsed=4116.5s
+    [Trigger] iter 191/200  fooling_rate=0.352  |delta|_inf=0.2000  elapsed=4138.0s
+    [Trigger] iter 192/200  fooling_rate=0.334  |delta|_inf=0.2000  elapsed=4159.2s
+    [Trigger] iter 193/200  fooling_rate=0.310  |delta|_inf=0.2000  elapsed=4180.3s
+    [Trigger] iter 194/200  fooling_rate=0.318  |delta|_inf=0.2000  elapsed=4201.4s
+    [Trigger] iter 195/200  fooling_rate=0.376  |delta|_inf=0.2000  elapsed=4222.3s
+    [Trigger] iter 196/200  fooling_rate=0.408  |delta|_inf=0.2000  elapsed=4243.2s
+    [Trigger] iter 197/200  fooling_rate=0.342  |delta|_inf=0.2000  elapsed=4264.8s
+    [Trigger] iter 198/200  fooling_rate=0.348  |delta|_inf=0.2000  elapsed=4286.1s
+    [Trigger] iter 199/200  fooling_rate=0.364  |delta|_inf=0.2000  elapsed=4307.2s
+    [Trigger] iter 200/200  fooling_rate=0.446  |delta|_inf=0.2000  elapsed=4328.7s
+  Trigger saved.  |delta|_inf=0.2000  |delta|_2=4.0890
+  Final proxy fooling rate: 0.446
+
+====================================================================
+ PHASE 3 — Victim training (parallel runs per poison ratio)
+====================================================================
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.1
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.1  poisoned 70/700 target-class samples
+
+  [Best model] ratio=0.1  run_id=2  CA=45.57%  saved -> huang_amplitude_best_ratio01.pt
+  [Ratio 0.1]  CA=43.67+/-1.69%  ASR=29.82+/-8.35%
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.3
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.3  poisoned 210/700 target-class samples
+
+  [Best model] ratio=0.3  run_id=1  CA=43.41%  saved -> huang_amplitude_best_ratio03.pt
+  [Ratio 0.3]  CA=41.95+/-1.55%  ASR=99.73+/-0.37%
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.5
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.5  poisoned 350/700 target-class samples
+
+  [Best model] ratio=0.5  run_id=1  CA=41.96%  saved -> huang_amplitude_best_ratio05.pt
+  [Ratio 0.5]  CA=40.78+/-1.16%  ASR=100.00+/-0.01%
+
+====================================================================
+ Experiment complete   Summary → runs/huang_amplitude_summary.csv
+====================================================================
+  Ratio       CA mean   CA std   ASR mean  ASR std
+  ────────────────────────────────────────────────
+  0.1           43.67     1.69      29.82     8.35
+  0.3           41.95     1.55      99.73     0.37
+  0.5           40.78     1.16     100.00     0.01
+====================================================================
+
+============================================================
+ End time  : Wed Mar 18 09:16:20 PM MDT 2026
+ Exit code : 0
+============================================================

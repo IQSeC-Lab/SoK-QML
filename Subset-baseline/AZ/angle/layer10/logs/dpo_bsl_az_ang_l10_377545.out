@@ -1,0 +1,47 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+========================================
+Job ID      : 377545
+Node        : cnode063
+CPUs        : 1
+Start time  : Wed Mar 25 04:01:17 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/Baseline/AZ/angle/layer10
+Files: baseline_ang_l10.slurm
+baseline_layer10
+depo_baseline_az_ang_l10.py
+dpo_bsl_az_ang_l10.slurm
+logs
+NN_baseline_az_angle_layer10.py
+Running python script...
+[Device] cpu
+[Config] N_LAYERS=10  DEPO_P=0.01  N_CLASSES=23
+====================================================================
+ Depolarizing Noise Evaluation | Baseline AZ Angle L10
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Model         : baseline_layer10/best_model_run1.pt
+ No attack — No defense
+====================================================================
+[Data] Train: (184342, 9)  Test: (20482, 9)
+[Model] Loaded baseline weights into noisy architecture.
+[Eval] Running noisy inference on 20482 test samples ...
+
+  CA (noisy) : 41.79%
+  Accuracy    : 0.4179
+  Loss        : 2.0516
+  Precision   : 0.5008
+  Recall      : 0.3996
+  F1          : 0.4445
+  Fpr         : 0.0265
+  Fnr         : 0.6004
+  Roc_auc     : 0.9075
+  Pr_auc      : 0.4377
+  Metrics  -> depo_baseline_angle/depo_baseline_angle_metrics.csv
+  CM       -> depo_baseline_angle/depo_baseline_angle_cm.png
+
+====================================================================
+ Done.
+ Summary  -> depo_baseline_runs/depo_baseline_az_ang_l10_summary.csv
+ Metrics  -> depo_baseline_angle/
+====================================================================

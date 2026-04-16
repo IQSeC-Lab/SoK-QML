@@ -1,0 +1,2 @@
+timestamp,n_layers,cda_pct,asr_pct,accuracy,loss,precision,recall,f1,fpr,fnr,roc_auc,pr_auc,depo_p,noise_backend
+2026-03-24T00:20:24,5,47.3294,1.5428,47.3294,1.74337,0.45526,0.479834,0.467224,0.023931,0.520166,0.914742,0.451116,0.01,default.mixed

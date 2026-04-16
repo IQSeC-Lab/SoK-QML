@@ -1,0 +1,254 @@
+Python 3.10.19
+/home/vcadena1/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 14227
+Node        : hopper002
+GPUs        : MIG-ddfd9af2-2c2a-5ae6-ac1d-a41dfbb2b95b
+CPUs        : 8
+Start time  : Fri Mar 13 06:23:13 AM MDT 2026
+========================================
+Fri Mar 13 06:23:13 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.51.03              Driver Version: 575.51.03      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          Off |   00000000:1C:00.0 Off |                   On |
+| N/A   29C    P0            121W /  700W |     791MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA H100 80GB HBM3          Off |   00000000:2B:00.0 Off |                   On |
+| N/A   27C    P0             70W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA H100 80GB HBM3          Off |   00000000:AC:00.0 Off |                   On |
+| N/A   23C    P0             70W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA H100 80GB HBM3          Off |   00000000:BC:00.0 Off |                   On |
+| N/A   24C    P0             68W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    7   0   0  |              15MiB /  9984MiB    | 16      0 |  1   0    1    0    1 |
+|                  |                 0MiB / 16383MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Changing directory...
+Now in: /work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer5
+Files: logs
+qtrojan_ang_l5.slurm
+qtrojan_mnist_angle_l5.py
+Running python script...
+====================================================================
+ QTrojan | MNIST 10-class | 9-qubit AngleEmbedding (lightning.qubit)
+ Stratified subset : 700 samples/class = 7000 total
+ Target class      : 0  |  theta_target : 0.7854 rad
+ Early stopping    : patience=5, min_delta=0.0001, max_epochs=30
+====================================================================
+[Device] cuda
+[GPU]    NVIDIA H100 80GB HBM3 MIG 1g.10gb
+Number of classes: 10
+[Data] Full train: (60000, 9)  Test: (10000, 9)
+[Data] Stratified train subset: (7000, 9)  (class 0: 700 samples)
+
+====================================================================
+ [Run 1/3]
+====================================================================
+  [Run 1/3] Epoch 01/30  train_acc=10.27%  test_acc=12.26%  train_loss=2.3049  val_loss=2.2902  best_val=2.2902  es_counter=0
+  [Run 1/3] Epoch 02/30  train_acc=15.10%  test_acc=16.47%  train_loss=2.2693  val_loss=2.2456  best_val=2.2456  es_counter=0
+  [Run 1/3] Epoch 03/30  train_acc=22.83%  test_acc=23.92%  train_loss=2.2138  val_loss=2.1723  best_val=2.1723  es_counter=0
+  [Run 1/3] Epoch 04/30  train_acc=23.56%  test_acc=27.17%  train_loss=2.1354  val_loss=2.0840  best_val=2.0840  es_counter=0
+  [Run 1/3] Epoch 05/30  train_acc=25.80%  test_acc=29.73%  train_loss=2.0547  val_loss=2.0017  best_val=2.0017  es_counter=0
+  [Run 1/3] Epoch 06/30  train_acc=28.60%  test_acc=33.06%  train_loss=1.9805  val_loss=1.9298  best_val=1.9298  es_counter=0
+  [Run 1/3] Epoch 07/30  train_acc=32.34%  test_acc=35.37%  train_loss=1.9162  val_loss=1.8691  best_val=1.8691  es_counter=0
+  [Run 1/3] Epoch 08/30  train_acc=34.53%  test_acc=38.22%  train_loss=1.8627  val_loss=1.8195  best_val=1.8195  es_counter=0
+  [Run 1/3] Epoch 09/30  train_acc=36.81%  test_acc=40.40%  train_loss=1.8187  val_loss=1.7781  best_val=1.7781  es_counter=0
+  [Run 1/3] Epoch 10/30  train_acc=38.87%  test_acc=42.16%  train_loss=1.7802  val_loss=1.7412  best_val=1.7412  es_counter=0
+  [Run 1/3] Epoch 11/30  train_acc=40.70%  test_acc=44.33%  train_loss=1.7477  val_loss=1.7106  best_val=1.7106  es_counter=0
+  [Run 1/3] Epoch 12/30  train_acc=42.01%  test_acc=44.78%  train_loss=1.7175  val_loss=1.6805  best_val=1.6805  es_counter=0
+  [Run 1/3] Epoch 13/30  train_acc=42.99%  test_acc=45.68%  train_loss=1.6896  val_loss=1.6528  best_val=1.6528  es_counter=0
+  [Run 1/3] Epoch 14/30  train_acc=43.96%  test_acc=46.57%  train_loss=1.6619  val_loss=1.6287  best_val=1.6287  es_counter=0
+  [Run 1/3] Epoch 15/30  train_acc=44.77%  test_acc=47.85%  train_loss=1.6389  val_loss=1.6053  best_val=1.6053  es_counter=0
+  [Run 1/3] Epoch 16/30  train_acc=46.14%  test_acc=48.92%  train_loss=1.6154  val_loss=1.5823  best_val=1.5823  es_counter=0
+  [Run 1/3] Epoch 17/30  train_acc=46.76%  test_acc=49.36%  train_loss=1.5940  val_loss=1.5662  best_val=1.5662  es_counter=0
+  [Run 1/3] Epoch 18/30  train_acc=47.76%  test_acc=49.88%  train_loss=1.5751  val_loss=1.5427  best_val=1.5427  es_counter=0
+  [Run 1/3] Epoch 19/30  train_acc=48.40%  test_acc=51.07%  train_loss=1.5553  val_loss=1.5249  best_val=1.5249  es_counter=0
+  [Run 1/3] Epoch 20/30  train_acc=48.84%  test_acc=51.31%  train_loss=1.5402  val_loss=1.5066  best_val=1.5066  es_counter=0
+  [Run 1/3] Epoch 21/30  train_acc=49.17%  test_acc=51.66%  train_loss=1.5241  val_loss=1.4934  best_val=1.4934  es_counter=0
+  [Run 1/3] Epoch 22/30  train_acc=49.90%  test_acc=52.22%  train_loss=1.5073  val_loss=1.4785  best_val=1.4785  es_counter=0
+  [Run 1/3] Epoch 23/30  train_acc=49.84%  test_acc=52.48%  train_loss=1.4952  val_loss=1.4640  best_val=1.4640  es_counter=0
+  [Run 1/3] Epoch 24/30  train_acc=50.81%  test_acc=53.19%  train_loss=1.4804  val_loss=1.4539  best_val=1.4539  es_counter=0
+  [Run 1/3] Epoch 25/30  train_acc=50.84%  test_acc=52.98%  train_loss=1.4674  val_loss=1.4416  best_val=1.4416  es_counter=0
+  [Run 1/3] Epoch 26/30  train_acc=51.36%  test_acc=53.82%  train_loss=1.4550  val_loss=1.4308  best_val=1.4308  es_counter=0
+  [Run 1/3] Epoch 27/30  train_acc=51.79%  test_acc=54.16%  train_loss=1.4452  val_loss=1.4173  best_val=1.4173  es_counter=0
+  [Run 1/3] Epoch 28/30  train_acc=52.14%  test_acc=53.99%  train_loss=1.4352  val_loss=1.4081  best_val=1.4081  es_counter=0
+  [Run 1/3] Epoch 29/30  train_acc=52.37%  test_acc=54.62%  train_loss=1.4254  val_loss=1.3964  best_val=1.3964  es_counter=0
+  [Run 1/3] Epoch 30/30  train_acc=52.64%  test_acc=54.97%  train_loss=1.4152  val_loss=1.3877  best_val=1.3877  es_counter=0
+
+  [Run 1/3] Training done in 38867.4s  | Epochs: 30  | Best val_loss: 1.3877
+
+  [Run 1/3] [Backdoor DISABLED] Clean-Data Accuracy (CDA):
+  [Run 1/3] CDA: 54.97%
+
+  [Run 1/3] [Backdoor ENABLED]  Attack Success Rate (ASR):
+  [Run 1/3] ASR -> class 0: 0.00%
+
+  [Run 1/3] [Backdoor DISABLED] Full evaluation metrics:
+    Accuracy    : 0.5497
+    Loss        : 1.3880
+    Precision   : 0.5286
+    Recall      : 0.5425
+    F1          : 0.5354
+    Fpr         : 0.0501
+    Fnr         : 0.4575
+    Roc_auc     : 0.8936
+    Pr_auc      : 0.5609
+  [Run 1/3] Metrics -> qtrojan/qtrojan_run1-layer5_metrics.csv
+  [Run 1/3] Epochs  -> qtrojan/qtrojan_run1-layer5_epochs.csv
+
+====================================================================
+ [Run 2/3]
+====================================================================
+  [Run 2/3] Epoch 01/30  train_acc=9.91%  test_acc=11.07%  train_loss=2.2913  val_loss=2.2712  best_val=2.2712  es_counter=0
+  [Run 2/3] Epoch 02/30  train_acc=21.17%  test_acc=23.75%  train_loss=2.2432  val_loss=2.2000  best_val=2.2000  es_counter=0
+  [Run 2/3] Epoch 03/30  train_acc=25.79%  test_acc=31.06%  train_loss=2.1478  val_loss=2.0786  best_val=2.0786  es_counter=0
+  [Run 2/3] Epoch 04/30  train_acc=33.14%  test_acc=32.25%  train_loss=2.0313  val_loss=1.9652  best_val=1.9652  es_counter=0
+  [Run 2/3] Epoch 05/30  train_acc=34.87%  test_acc=37.07%  train_loss=1.9317  val_loss=1.8695  best_val=1.8695  es_counter=0
+  [Run 2/3] Epoch 06/30  train_acc=37.19%  test_acc=39.34%  train_loss=1.8573  val_loss=1.8021  best_val=1.8021  es_counter=0
+  [Run 2/3] Epoch 07/30  train_acc=38.90%  test_acc=41.30%  train_loss=1.7997  val_loss=1.7507  best_val=1.7507  es_counter=0
+  [Run 2/3] Epoch 08/30  train_acc=40.11%  test_acc=41.52%  train_loss=1.7548  val_loss=1.7127  best_val=1.7127  es_counter=0
+  [Run 2/3] Epoch 09/30  train_acc=41.30%  test_acc=43.59%  train_loss=1.7188  val_loss=1.6765  best_val=1.6765  es_counter=0
+  [Run 2/3] Epoch 10/30  train_acc=41.67%  test_acc=44.98%  train_loss=1.6926  val_loss=1.6516  best_val=1.6516  es_counter=0
+  [Run 2/3] Epoch 11/30  train_acc=42.30%  test_acc=45.23%  train_loss=1.6675  val_loss=1.6297  best_val=1.6297  es_counter=0
+  [Run 2/3] Epoch 12/30  train_acc=43.13%  test_acc=45.77%  train_loss=1.6478  val_loss=1.6090  best_val=1.6090  es_counter=0
+  [Run 2/3] Epoch 13/30  train_acc=43.83%  test_acc=46.59%  train_loss=1.6320  val_loss=1.5941  best_val=1.5941  es_counter=0
+  [Run 2/3] Epoch 14/30  train_acc=44.03%  test_acc=47.34%  train_loss=1.6150  val_loss=1.5772  best_val=1.5772  es_counter=0
+  [Run 2/3] Epoch 15/30  train_acc=44.40%  test_acc=47.17%  train_loss=1.6010  val_loss=1.5649  best_val=1.5649  es_counter=0
+  [Run 2/3] Epoch 16/30  train_acc=44.83%  test_acc=47.37%  train_loss=1.5881  val_loss=1.5498  best_val=1.5498  es_counter=0
+  [Run 2/3] Epoch 17/30  train_acc=45.39%  test_acc=48.51%  train_loss=1.5756  val_loss=1.5374  best_val=1.5374  es_counter=0
+  [Run 2/3] Epoch 18/30  train_acc=46.14%  test_acc=48.84%  train_loss=1.5660  val_loss=1.5263  best_val=1.5263  es_counter=0
+  [Run 2/3] Epoch 19/30  train_acc=46.30%  test_acc=49.49%  train_loss=1.5565  val_loss=1.5161  best_val=1.5161  es_counter=0
+  [Run 2/3] Epoch 20/30  train_acc=46.61%  test_acc=49.92%  train_loss=1.5460  val_loss=1.5050  best_val=1.5050  es_counter=0
+  [Run 2/3] Epoch 21/30  train_acc=47.14%  test_acc=49.88%  train_loss=1.5375  val_loss=1.4952  best_val=1.4952  es_counter=0
+  [Run 2/3] Epoch 22/30  train_acc=47.37%  test_acc=50.26%  train_loss=1.5282  val_loss=1.4862  best_val=1.4862  es_counter=0
+  [Run 2/3] Epoch 23/30  train_acc=47.34%  test_acc=50.48%  train_loss=1.5198  val_loss=1.4787  best_val=1.4787  es_counter=0
+  [Run 2/3] Epoch 24/30  train_acc=47.97%  test_acc=50.92%  train_loss=1.5131  val_loss=1.4718  best_val=1.4718  es_counter=0
+  [Run 2/3] Epoch 25/30  train_acc=48.14%  test_acc=51.15%  train_loss=1.5039  val_loss=1.4626  best_val=1.4626  es_counter=0
+  [Run 2/3] Epoch 26/30  train_acc=48.43%  test_acc=50.99%  train_loss=1.4984  val_loss=1.4548  best_val=1.4548  es_counter=0
+  [Run 2/3] Epoch 27/30  train_acc=48.41%  test_acc=51.47%  train_loss=1.4902  val_loss=1.4510  best_val=1.4510  es_counter=0
+  [Run 2/3] Epoch 28/30  train_acc=48.76%  test_acc=51.92%  train_loss=1.4867  val_loss=1.4423  best_val=1.4423  es_counter=0
+  [Run 2/3] Epoch 29/30  train_acc=49.01%  test_acc=52.04%  train_loss=1.4793  val_loss=1.4356  best_val=1.4356  es_counter=0
+  [Run 2/3] Epoch 30/30  train_acc=49.43%  test_acc=51.95%  train_loss=1.4711  val_loss=1.4298  best_val=1.4298  es_counter=0
+
+  [Run 2/3] Training done in 38850.3s  | Epochs: 30  | Best val_loss: 1.4298
+
+  [Run 2/3] [Backdoor DISABLED] Clean-Data Accuracy (CDA):
+  [Run 2/3] CDA: 51.95%
+
+  [Run 2/3] [Backdoor ENABLED]  Attack Success Rate (ASR):
+  [Run 2/3] ASR -> class 0: 0.88%
+
+  [Run 2/3] [Backdoor DISABLED] Full evaluation metrics:
+    Accuracy    : 0.5195
+    Loss        : 1.4305
+    Precision   : 0.4906
+    Recall      : 0.5117
+    F1          : 0.5009
+    Fpr         : 0.0534
+    Fnr         : 0.4883
+    Roc_auc     : 0.8782
+    Pr_auc      : 0.5151
+  [Run 2/3] Metrics -> qtrojan/qtrojan_run2-layer5_metrics.csv
+  [Run 2/3] Epochs  -> qtrojan/qtrojan_run2-layer5_epochs.csv
+
+====================================================================
+ [Run 3/3]
+====================================================================
+  [Run 3/3] Epoch 01/30  train_acc=11.87%  test_acc=15.51%  train_loss=2.3047  val_loss=2.2834  best_val=2.2834  es_counter=0
+  [Run 3/3] Epoch 02/30  train_acc=19.47%  test_acc=28.28%  train_loss=2.2649  val_loss=2.2385  best_val=2.2385  es_counter=0
+  [Run 3/3] Epoch 03/30  train_acc=29.06%  test_acc=30.69%  train_loss=2.2108  val_loss=2.1663  best_val=2.1663  es_counter=0
+  [Run 3/3] Epoch 04/30  train_acc=31.29%  test_acc=35.34%  train_loss=2.1304  val_loss=2.0678  best_val=2.0678  es_counter=0
+  [Run 3/3] Epoch 05/30  train_acc=35.30%  test_acc=39.48%  train_loss=2.0348  val_loss=1.9637  best_val=1.9637  es_counter=0
+  [Run 3/3] Epoch 06/30  train_acc=37.81%  test_acc=40.97%  train_loss=1.9427  val_loss=1.8749  best_val=1.8749  es_counter=0
+  [Run 3/3] Epoch 07/30  train_acc=38.41%  test_acc=42.05%  train_loss=1.8692  val_loss=1.8074  best_val=1.8074  es_counter=0
+  [Run 3/3] Epoch 08/30  train_acc=38.86%  test_acc=43.17%  train_loss=1.8115  val_loss=1.7532  best_val=1.7532  es_counter=0
+  [Run 3/3] Epoch 09/30  train_acc=40.29%  test_acc=44.55%  train_loss=1.7655  val_loss=1.7138  best_val=1.7138  es_counter=0
+  [Run 3/3] Epoch 10/30  train_acc=41.87%  test_acc=45.71%  train_loss=1.7291  val_loss=1.6757  best_val=1.6757  es_counter=0
+  [Run 3/3] Epoch 11/30  train_acc=43.31%  test_acc=46.92%  train_loss=1.6968  val_loss=1.6482  best_val=1.6482  es_counter=0
+  [Run 3/3] Epoch 12/30  train_acc=44.23%  test_acc=47.44%  train_loss=1.6704  val_loss=1.6195  best_val=1.6195  es_counter=0
+  [Run 3/3] Epoch 13/30  train_acc=45.09%  test_acc=48.15%  train_loss=1.6462  val_loss=1.5952  best_val=1.5952  es_counter=0
+  [Run 3/3] Epoch 14/30  train_acc=45.99%  test_acc=48.60%  train_loss=1.6222  val_loss=1.5732  best_val=1.5732  es_counter=0
+  [Run 3/3] Epoch 15/30  train_acc=46.49%  test_acc=49.81%  train_loss=1.6022  val_loss=1.5546  best_val=1.5546  es_counter=0
+  [Run 3/3] Epoch 16/30  train_acc=47.31%  test_acc=50.32%  train_loss=1.5827  val_loss=1.5357  best_val=1.5357  es_counter=0
+  [Run 3/3] Epoch 17/30  train_acc=47.84%  test_acc=50.56%  train_loss=1.5655  val_loss=1.5184  best_val=1.5184  es_counter=0
+  [Run 3/3] Epoch 18/30  train_acc=48.44%  test_acc=51.54%  train_loss=1.5467  val_loss=1.5010  best_val=1.5010  es_counter=0
+  [Run 3/3] Epoch 19/30  train_acc=48.86%  test_acc=51.59%  train_loss=1.5308  val_loss=1.4851  best_val=1.4851  es_counter=0
+  [Run 3/3] Epoch 20/30  train_acc=49.54%  test_acc=51.78%  train_loss=1.5128  val_loss=1.4736  best_val=1.4736  es_counter=0
+  [Run 3/3] Epoch 21/30  train_acc=50.04%  test_acc=52.88%  train_loss=1.5007  val_loss=1.4525  best_val=1.4525  es_counter=0
+  [Run 3/3] Epoch 22/30  train_acc=50.59%  test_acc=53.45%  train_loss=1.4852  val_loss=1.4420  best_val=1.4420  es_counter=0
+  [Run 3/3] Epoch 23/30  train_acc=50.84%  test_acc=54.15%  train_loss=1.4722  val_loss=1.4287  best_val=1.4287  es_counter=0
+  [Run 3/3] Epoch 24/30  train_acc=51.34%  test_acc=54.51%  train_loss=1.4601  val_loss=1.4168  best_val=1.4168  es_counter=0
+  [Run 3/3] Epoch 25/30  train_acc=51.91%  test_acc=54.81%  train_loss=1.4464  val_loss=1.4021  best_val=1.4021  es_counter=0
+  [Run 3/3] Epoch 26/30  train_acc=52.17%  test_acc=55.21%  train_loss=1.4371  val_loss=1.3896  best_val=1.3896  es_counter=0
+  [Run 3/3] Epoch 27/30  train_acc=52.57%  test_acc=55.90%  train_loss=1.4231  val_loss=1.3801  best_val=1.3801  es_counter=0
+  [Run 3/3] Epoch 28/30  train_acc=53.01%  test_acc=56.02%  train_loss=1.4126  val_loss=1.3679  best_val=1.3679  es_counter=0
+  [Run 3/3] Epoch 29/30  train_acc=53.67%  test_acc=56.61%  train_loss=1.4027  val_loss=1.3591  best_val=1.3591  es_counter=0
+  [Run 3/3] Epoch 30/30  train_acc=53.66%  test_acc=56.88%  train_loss=1.3934  val_loss=1.3468  best_val=1.3468  es_counter=0
+
+  [Run 3/3] Training done in 38825.8s  | Epochs: 30  | Best val_loss: 1.3468
+
+  [Run 3/3] [Backdoor DISABLED] Clean-Data Accuracy (CDA):
+  [Run 3/3] CDA: 56.88%
+
+  [Run 3/3] [Backdoor ENABLED]  Attack Success Rate (ASR):
+  [Run 3/3] ASR -> class 0: 15.78%
+
+  [Run 3/3] [Backdoor DISABLED] Full evaluation metrics:
+    Accuracy    : 0.5688
+    Loss        : 1.3473
+    Precision   : 0.5506
+    Recall      : 0.5611
+    F1          : 0.5558
+    Fpr         : 0.0480
+    Fnr         : 0.4389
+    Roc_auc     : 0.8981
+    Pr_auc      : 0.5843
+  [Run 3/3] Metrics -> qtrojan/qtrojan_run3-layer5_metrics.csv
+  [Run 3/3] Epochs  -> qtrojan/qtrojan_run3-layer5_epochs.csv
+[Finalize] Best model (run 3, CDA=56.88%) -> qtrojan/qtrojan-layer5-noiseless-Angle_best.pt
+[Finalize] Removed tmp checkpoint: qtrojan/qtrojan_run1-layer5-noiseless-Angle_tmp.pt
+[Finalize] Removed tmp checkpoint: qtrojan/qtrojan_run2-layer5-noiseless-Angle_tmp.pt
+
+====================================================================
+ QTrojan Experiment Complete — Summary across 3 runs
+====================================================================
+  Run       CDA (%)    ASR (%)    Acc (%)    ROC-AUC   Epochs
+  ----------------------------------------------------------
+  1           54.97       0.00      54.97   0.893576       30
+  2           51.95       0.88      51.95   0.878196       30
+  3           56.88      15.78      56.88   0.898102       30
+  ----------------------------------------------------------
+  Mean        54.60       5.55
+  Std          2.03        7.24
+
+  Summary   -> runs/qtrojan_MNIST_angle_summary.csv
+  Best model -> qtrojan/qtrojan-layer5-noiseless-Angle_best.pt
+====================================================================

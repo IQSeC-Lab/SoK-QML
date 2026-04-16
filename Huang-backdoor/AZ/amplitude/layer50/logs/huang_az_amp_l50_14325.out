@@ -1,0 +1,92 @@
+============================================================
+ Job        : hng_az_amp_l50
+ Job ID     : 14325
+ Node       : hopper001
+ CPUs       : 28
+ Start      : Wed Mar 18 11:19:14 AM MDT 2026
+============================================================
+
+[ENV] Python     : /home/vcadena1/work/Nowmi/Sok/quid_env/bin/python
+[ENV] Python ver : Python 3.10.19
+[ENV] Working dir: /home/vcadena1/work/Nowmi/Sok/huang-backdoor/AZ/amplitude/layer50
+[ENV] CUDA avail : True
+[ENV] PennyLane  : 0.42.3
+
+[Data] Checking AZ_23 files...
+       FOUND    AZ-Class-Task_23_families_train.npz
+       FOUND    AZ-Class-Task_23_families_test.npz
+
+[RUN] Starting at Wed Mar 18 11:19:23 AM MDT 2026
+[Config] Main device : cuda
+[Config] CPU threads : 28
+[Config] N_LAYERS    : 50
+[Config] N_CLASSES   : 23
+[Config] TARGET_CLASS: 6 (7th class, 0-indexed)
+====================================================================
+ Huang & Zhang (2023) Backdoor — AZ-23 Amplitude QMLP
+ Qubits=9  Layers=50  Classes=23
+ Target class=6 (7th class, 0-indexed)
+ eps=0.2  (c,sigma)=(1.0,2.0)
+ Poison ratios : [0.1, 0.3, 0.5]
+ Runs/ratio    : 1   CPU threads: 28
+====================================================================
+[Data] Train : (184342, 512)   Test : (20482, 512)
+[Data] Classes in train: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+[Data] Stratified train: (16100, 512)  (700/class x 23 classes)  Test: (20482, 512)
+
+====================================================================
+ PHASE 1 — Loading existing proxy from huang_az_amp_proxy_l50_best.pt
+====================================================================
+  [Proxy] Loaded.  Test CA: 46.75%
+
+====================================================================
+ PHASE 2 — Sequential trigger generation (Algorithm 1)
+====================================================================
+  Using 500 non-target and 500 target samples for trigger generation
+    [Trigger] iter   1/200  fooling_rate=0.708  |delta|_inf=0.2000  elapsed=294.0s
+    [Trigger] Converged at iter 1  fooling_rate=0.708
+  Trigger saved.  |delta|_inf=0.2000  |delta|_2=3.9699
+  Final proxy fooling rate: 0.708
+
+====================================================================
+ PHASE 3 — Victim training across poison ratios
+====================================================================
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.1
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.1  poisoned 70/700 target-class samples
+
+  [Best model] ratio=0.1  CA=56.45%  saved -> huang_az_amp_l50_best_ratio01.pt
+  [Ratio 0.1]  CA=56.45+/-0.00%  ASR=64.34+/-0.00%
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.3
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.3  poisoned 210/700 target-class samples
+
+  [Best model] ratio=0.3  CA=57.34%  saved -> huang_az_amp_l50_best_ratio03.pt
+  [Ratio 0.3]  CA=57.34+/-0.00%  ASR=99.26+/-0.00%
+
+────────────────────────────────────────────────────────────────────
+ Poison ratio : 0.5
+────────────────────────────────────────────────────────────────────
+  [Poison] ratio=0.5  poisoned 350/700 target-class samples
+
+  [Best model] ratio=0.5  CA=54.57%  saved -> huang_az_amp_l50_best_ratio05.pt
+  [Ratio 0.5]  CA=54.57+/-0.00%  ASR=99.90+/-0.00%
+
+====================================================================
+ Experiment complete.  Summary -> runs/huang_az_amp_l50_summary.csv
+====================================================================
+  Ratio       CA mean   CA std   ASR mean  ASR std
+  ────────────────────────────────────────────────
+  0.1           56.45     0.00      64.34     0.00
+  0.3           57.34     0.00      99.26     0.00
+  0.5           54.57     0.00      99.90     0.00
+====================================================================
+
+============================================================
+ End time  : Fri Mar 20 12:02:05 PM MDT 2026
+ Exit code : 0
+============================================================

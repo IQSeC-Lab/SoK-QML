@@ -1,0 +1,47 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+========================================
+Job ID      : 377621
+Node        : cnode061
+CPUs        : 1
+Start time  : Wed Mar 25 04:23:43 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/Baseline/MNIST/amplitude/layer10
+Files: baseline_mnist_amp_l10.slurm
+baseline_mnist_amplitude_layer10
+depo_baseline_mn_amp_l10.py
+dpo_bsl_mn_amp_l10.slurm
+logs
+NN_baseline_mnist_amplitude_layer10.py
+Running python script...
+[Device] cpu
+[Config] N_LAYERS=10  DEPO_P=0.01  PCA=512
+====================================================================
+ Depolarizing Noise Evaluation | Baseline MNIST Amplitude L10
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Model         : baseline_mnist_amplitude_layer10/best_model_run1.pt
+ No attack — No defense
+====================================================================
+[Data] Train: (60000, 512)  Test: (10000, 512)
+[Model] Loaded baseline weights into noisy architecture.
+[Eval] Running noisy inference on 10000 test samples ...
+
+  CA (noisy) : 43.61%
+  Accuracy    : 0.4361
+  Loss        : 1.8650
+  Precision   : 0.6120
+  Recall      : 0.4385
+  F1          : 0.5109
+  Fpr         : 0.0625
+  Fnr         : 0.5615
+  Roc_auc     : 0.8832
+  Pr_auc      : 0.5492
+  Metrics  -> depo_baseline_amplitude/depo_baseline_amplitude_metrics.csv
+  CM       -> depo_baseline_amplitude/depo_baseline_amplitude_cm.png
+
+====================================================================
+ Done.
+ Summary  -> depo_baseline_runs/depo_baseline_mn_amp_l10_summary.csv
+ Metrics  -> depo_baseline_amplitude/
+====================================================================

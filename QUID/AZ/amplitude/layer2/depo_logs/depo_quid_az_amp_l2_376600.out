@@ -1,0 +1,24 @@
+Python 3.11.14
+/work/srnowmi/envs/quid_env/bin/python
+Python 3.11.14
+========================================
+Job ID      : 376600
+Node        : cnode003
+CPUs        : 8
+Start time  : Sun Mar 22 04:23:59 PM MDT 2026
+========================================
+Changing directory...
+Now in: /work/srnowmi/QUID_full/AZ/amplitude/layer2
+Files: AZ_23
+depo_job_az_amp_l2.slurm
+depo_logs
+depo_quid_az_amplitude_l2.py
+eps0.1
+eps0.3
+eps0.5
+logs
+NN_quid_az_amplitude_l2.py
+quid_job_amp_l2.slurm
+rho_proto_cache_amplitude.npy
+runs
+Running python script...

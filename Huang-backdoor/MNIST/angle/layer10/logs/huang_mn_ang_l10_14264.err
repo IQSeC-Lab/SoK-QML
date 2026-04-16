@@ -1,0 +1,4 @@
+  File "<string>", line 1
+    import torch; print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"none\")
+                                                                                         ^
+SyntaxError: unexpected character after line continuation character

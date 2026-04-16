@@ -1,0 +1,519 @@
+"""
+NN_baseline_az_angle_layer10.py
+============================================================
+Baseline — NO attack, NO defense.
+Layer config : 10 layers
+Runs         : 3  (seeds 43, 44, 45)
+Epochs       : 30
+GPUs         : 2 MIG slices (cuda:0, cuda:1 within job)
+
+SLURM allocates 2 MIG slices via --gres=gpu:2 (QOS limit).
+Run1+Run2 launch simultaneously, Run3 follows on cuda:0.
+
+Launch via sbatch:
+  sbatch job_layer10.sh
+
+Output structure:
+  baseline_layer10/
+    baseline_layer10_run1_epoch_metrics.csv   (epoch | train_loss | train_acc_pct | test_acc_pct)
+    baseline_layer10_run2_epoch_metrics.csv
+    baseline_layer10_run3_epoch_metrics.csv
+    baseline_layer10_run1_metrics.csv         (Metric | Value  per-run final)
+    baseline_layer10_run2_metrics.csv
+    baseline_layer10_run3_metrics.csv
+    baseline_layer10_summary.csv              (all 3 runs, wide format)
+============================================================
+"""
+
+import os, csv, random, time
+import numpy as np
+import pennylane as qml
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import torch.multiprocessing as mp
+from torch.utils.data import TensorDataset, DataLoader
+from pennylane.qnn import TorchLayer
+
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.decomposition import PCA
+from sklearn.metrics import confusion_matrix, roc_auc_score, average_precision_score
+
+# ============================================================
+# Config
+# ============================================================
+N_QUBITS         = 9
+N_LAYERS         = 10
+N_CLASSES        = 23
+EPOCHS           = 30
+PATIENCE         = 5
+BATCH_SIZE       = 64
+LR               = 0.001
+W_DECAY          = 1e-4
+BASE_SEED        = 42
+N_RUNS           = 1
+SUBSET_PER_CLASS = 700
+
+# One MIG slice per run — all 3 run simultaneously.
+# SLURM allocates 3 slices; inside the job they appear as cuda:0, cuda:1, cuda:2.
+GPUS = [0, 1]
+
+OUT_DIR     = "baseline_layer10"
+SUMMARY_CSV = os.path.join(OUT_DIR, "baseline_layer10_summary.csv")
+
+SUMMARY_FIELDS = [
+    "n_layers", "run_id", "seed",
+    "test_accuracy_pct", "loss",
+    "fnr", "fpr",
+    "roc_auc", "pr_auc",
+    "precision", "recall", "f1",
+    "train_time_s", "gpu_id",
+]
+MV_FIELDS    = ["Metric", "Value"]
+EPOCH_FIELDS = ["epoch", "train_loss", "train_acc_pct", "test_acc_pct"]
+SEP          = "=" * 60
+
+
+# ============================================================
+# 1. Data loading
+# ============================================================
+def load_az23_pca9(
+    train_npz="/work/vcadena1/Nowmi/Sok/Baseline/AZ/AZ_23/AZ-Class-Task_23_families_train.npz",
+    test_npz ="/work/vcadena1/Nowmi/Sok/Baseline/AZ/AZ_23/AZ-Class-Task_23_families_test.npz",
+):
+    tr  = np.load(train_npz)
+    te  = np.load(test_npz)
+    Xtr = tr["X_train"].astype(np.float32)
+    ytr = tr["Y_train"].astype(np.int64)
+    Xte = te["X_test"].astype(np.float32)
+    yte = te["Y_test"].astype(np.int64)
+
+    scaler = MinMaxScaler()
+    Xtr    = scaler.fit_transform(Xtr)
+    Xte    = scaler.transform(Xte)
+
+    pca = PCA(n_components=N_QUBITS)
+    Xtr = pca.fit_transform(Xtr).astype(np.float32)
+    Xte = pca.transform(Xte).astype(np.float32)
+
+    print(f"[Data] Classes : {len(np.unique(ytr))}  "
+          f"Train : {Xtr.shape}  Test : {Xte.shape}")
+    return Xtr, ytr, Xte, yte
+
+
+# ============================================================
+# 2. Stratified subset
+# ============================================================
+def stratified_subset(X, y, n_per_class, seed):
+    rng      = np.random.default_rng(seed)
+    idx_keep = []
+    for c in range(N_CLASSES):
+        idx_c = np.where(y == c)[0]
+        if len(idx_c) <= n_per_class:
+            idx_keep.append(idx_c)
+        else:
+            idx_keep.append(rng.choice(idx_c, size=n_per_class, replace=False))
+    idx_keep = np.sort(np.concatenate(idx_keep))
+    return X[idx_keep], y[idx_keep]
+
+
+# ============================================================
+# 3. Quantum model
+# ============================================================
+def build_weight_shapes():
+    shapes = {}
+    for n in range(N_LAYERS):
+        shapes[f"rot_layer_{n}"] = (N_QUBITS, 3)
+        shapes[f"crx_layer_{n}"] = (N_QUBITS, 1)
+    return shapes
+
+
+def make_qnode_torch(dev):
+    @qml.qnode(dev, interface="torch")
+    def _qnode(inputs, **wkw):
+        for n in range(N_LAYERS):
+            qml.AngleEmbedding(inputs, wires=range(N_QUBITS))
+            for i in range(N_QUBITS):
+                qml.Rot(*wkw[f"rot_layer_{n}"][i], wires=i)
+            for i in range(N_QUBITS):
+                qml.CRX(wkw[f"crx_layer_{n}"][i][0],
+                        wires=[i, (i + 1) % N_QUBITS])
+        return [qml.expval(qml.PauliZ(i)) for i in range(N_QUBITS)]
+    return _qnode
+
+
+class QMLPAZ(nn.Module):
+    def __init__(self):
+        super().__init__()
+        dev           = qml.device("default.qubit", wires=N_QUBITS)
+        weight_shapes = build_weight_shapes()
+        qnode         = make_qnode_torch(dev)
+        self.qlayer   = TorchLayer(qnode, weight_shapes)
+        self.fc       = nn.Linear(N_QUBITS, N_CLASSES)
+
+    def forward(self, x):
+        x   = x.to(next(self.parameters()).device)
+        out = self.qlayer(x)
+        out = self.fc(out.to(x.device))
+        return F.log_softmax(out, dim=1)
+
+
+# ============================================================
+# 4. Loaders
+# ============================================================
+def make_loader(X, y, shuffle=False):
+    ds = TensorDataset(
+        torch.tensor(X, dtype=torch.float32),
+        torch.tensor(y, dtype=torch.long),
+    )
+    return DataLoader(ds, batch_size=BATCH_SIZE, shuffle=shuffle)
+
+
+# ============================================================
+# 5. Train one epoch
+# ============================================================
+def train_one_epoch(model, device, train_loader, optimizer):
+    model.train()
+    correct = 0; total = 0; running_loss = 0.0
+    for inputs, targets in train_loader:
+        inputs, targets = inputs.to(device), targets.to(device)
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        loss    = F.nll_loss(outputs, targets)
+        loss.backward()
+        optimizer.step()
+        _, predicted  = torch.max(outputs.data, dim=1)
+        total        += targets.size(0)
+        correct      += (predicted == targets).sum().item()
+        running_loss += loss.item() * targets.size(0)
+    return 100.0 * correct / total, running_loss / total
+
+
+# ============================================================
+# 6. Test accuracy
+# ============================================================
+def test_accuracy(model, device, test_loader):
+    model.eval()
+    correct = 0; total = 0
+    with torch.no_grad():
+        for inputs, labels in test_loader:
+            inputs, labels = inputs.to(device), labels.to(device)
+            _, predicted   = torch.max(model(inputs).data, dim=1)
+            total         += labels.size(0)
+            correct       += (predicted == labels).sum().item()
+    return 100.0 * correct / total
+
+
+# ============================================================
+# 7. Full evaluation
+# ============================================================
+def evaluation(model, test_loader, device):
+    model.eval()
+    outputs_list, y_true_list = [], []
+    for x_batch, y_batch in test_loader:
+        with torch.no_grad():
+            out = model(x_batch.to(device))
+        outputs_list.append(out)
+        y_true_list.append(y_batch.to(device))
+
+    output    = torch.cat(outputs_list, dim=0)
+    true      = torch.cat(y_true_list,  dim=0)
+    pred      = output.argmax(dim=1)
+    probs     = torch.softmax(output, dim=1).detach().cpu().numpy()
+    acc       = (pred == true).float().mean().item()
+    loss      = F.nll_loss(output, true).item()
+
+    y_true_np = true.cpu().numpy()
+    y_pred_np = pred.cpu().numpy()
+
+    cm = confusion_matrix(y_true_np, y_pred_np, labels=list(range(N_CLASSES)))
+    TP = np.diag(cm)
+    FP = np.sum(cm, axis=0) - TP
+    FN = np.sum(cm, axis=1) - TP
+    TN = np.sum(cm) - (TP + FP + FN)
+
+    precision = np.mean(TP / (TP + FP + 1e-8))
+    recall    = np.mean(TP / (TP + FN + 1e-8))
+    f1        = 2 * precision * recall / (precision + recall + 1e-8)
+    fpr       = np.mean(FP / (FP + TN + 1e-8))
+    fnr       = np.mean(FN / (FN + TP + 1e-8))
+
+    try:
+        roc_auc = roc_auc_score(y_true_np, probs, multi_class="ovr", average="macro")
+    except Exception:
+        roc_auc = float("nan")
+    try:
+        pr_auc = average_precision_score(
+            np.eye(N_CLASSES)[y_true_np], probs, average="macro")
+    except Exception:
+        pr_auc = float("nan")
+
+    return dict(accuracy=acc, loss=loss, precision=precision,
+                recall=recall, f1=f1, fpr=fpr, fnr=fnr,
+                roc_auc=roc_auc, pr_auc=pr_auc)
+
+
+# ============================================================
+# 8. CSV helpers
+# ============================================================
+def save_epoch_csv(epoch_recs, run_id):
+    """4-column epoch CSV: epoch | train_loss | train_acc_pct | test_acc_pct"""
+    path = os.path.join(OUT_DIR,
+                        f"baseline_layer10_run{run_id}_epoch_metrics.csv")
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=EPOCH_FIELDS)
+        w.writeheader()
+        for rec in epoch_recs:
+            w.writerow({
+                "epoch"        : rec["epoch"],
+                "train_loss"   : rec["train_loss"],
+                "train_acc_pct": rec["train_acc_pct"],
+                "test_acc_pct" : rec["test_acc_pct"],
+            })
+    print(f"  [R{run_id}] Epoch CSV    -> {path}")
+
+
+def save_per_run_csv(metrics, run_id):
+    """Per-run final metrics in [Metric, Value] format."""
+    path = os.path.join(OUT_DIR,
+                        f"baseline_layer10_run{run_id}_metrics.csv")
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=MV_FIELDS)
+        w.writeheader()
+        for key, value in metrics.items():
+            w.writerow({"Metric": key, "Value": value})
+    print(f"  [R{run_id}] Per-run CSV  -> {path}")
+
+
+def append_summary_csv(row, csv_lock):
+    """Lock-protected append to shared summary CSV."""
+    with csv_lock:
+        exists = os.path.exists(SUMMARY_CSV) and os.path.getsize(SUMMARY_CSV) > 0
+        with open(SUMMARY_CSV, "a", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=SUMMARY_FIELDS)
+            if not exists:
+                w.writeheader()
+            w.writerow(row)
+
+
+# ============================================================
+# 9. Worker  (one run, one MIG slice)
+# ============================================================
+def experiment_worker(task, Xtr, ytr, Xte, yte, csv_lock):
+    run_id, gpu_id = task
+    run_seed = BASE_SEED + run_id      # 43, 44, 45
+    tag      = f"[L10|R{run_id}|GPU{gpu_id}]"
+
+    # ---- device ----
+    device = torch.device(f"cuda:{gpu_id}")
+    torch.cuda.set_device(gpu_id)
+
+    # ---- seeds ----
+    torch.manual_seed(run_seed)
+    torch.cuda.manual_seed(run_seed)
+    torch.cuda.manual_seed_all(run_seed)
+    np.random.seed(run_seed)
+    random.seed(run_seed)
+
+    print(SEP)
+    print(f"  {tag} Starting")
+    print(SEP)
+
+    # ---- stratified subset ----
+    Xtr_sub, ytr_sub = stratified_subset(Xtr, ytr, SUBSET_PER_CLASS, seed=run_seed)
+    print(f"  {tag} Subset: {len(ytr_sub)} samples "
+          f"({SUBSET_PER_CLASS}/class from {len(ytr)} total)")
+
+    # ---- loaders ----
+    train_loader = make_loader(Xtr_sub, ytr_sub, shuffle=True)
+    test_loader  = make_loader(Xte,     yte,     shuffle=False)
+
+    # ---- model & optimiser ----
+    model     = QMLPAZ().to(device)
+    optimizer = optim.Adam(model.parameters(), lr=LR, weight_decay=W_DECAY)
+
+    best_acc     = 0.0
+    best_state   = None
+    epoch_recs   = []
+    patience_ctr = 0
+    start_time   = time.time()
+
+    # ---- epoch loop ----
+    print(f"  {tag} {'Epoch':>5}  {'TrainAcc%':>10}  {'TrainLoss':>10}  {'TestAcc%':>9}  {'Patience':>8}")
+    print(f"  {tag} {'-----':>5}  {'----------':>10}  {'----------':>10}  {'--------':>9}  {'--------':>8}")
+
+    for epoch in range(1, EPOCHS + 1):
+        tr_acc, tr_loss = train_one_epoch(model, device, train_loader, optimizer)
+        te_acc          = test_accuracy(model, device, test_loader)
+
+        if te_acc > best_acc:
+            best_acc     = te_acc
+            best_state   = {k: v.clone() for k, v in model.state_dict().items()}
+            patience_ctr = 0
+        else:
+            patience_ctr += 1
+
+        print(f"  {tag} {epoch:>5}  {tr_acc:>10.4f}  {tr_loss:>10.6f}  {te_acc:>9.4f}  {patience_ctr:>8}/{PATIENCE}")
+
+        epoch_recs.append({
+            "epoch"        : epoch,
+            "train_acc_pct": round(tr_acc,  6),
+            "train_loss"   : round(tr_loss, 8),
+            "test_acc_pct" : round(te_acc,  6),
+        })
+
+        if patience_ctr >= PATIENCE:
+            print(f"  {tag} Early stopping at epoch {epoch} (patience={PATIENCE})")
+            break
+
+    elapsed = time.time() - start_time
+    print(f"\n  {tag} Training time: {elapsed:.2f}s  Best test acc: {best_acc:.4f}%")
+
+    # ---- save CSVs ----
+    save_epoch_csv(epoch_recs, run_id)
+
+    # ---- save best model checkpoint ----
+    model_path = os.path.join(OUT_DIR, f"best_model_run{run_id}.pt")
+    torch.save(best_state, model_path)
+    print(f"  [R{run_id}] Model saved  -> {model_path}")
+
+    model.load_state_dict(best_state)
+    m = evaluation(model, test_loader, device)
+    save_per_run_csv(m, run_id)
+
+    print(f"\n  {tag} Final metrics:")
+    print(f"  {tag}   Test Accuracy % : {m['accuracy']*100:.6f}")
+    print(f"  {tag}   Loss            : {m['loss']:.6f}")
+    print(f"  {tag}   FNR             : {m['fnr']:.6f}")
+    print(f"  {tag}   FPR             : {m['fpr']:.6f}")
+    print(f"  {tag}   ROC-AUC         : {m['roc_auc']:.6f}")
+    print(f"  {tag}   PR-AUC          : {m['pr_auc']:.6f}")
+    print(f"  {tag}   Precision       : {m['precision']:.6f}")
+    print(f"  {tag}   Recall          : {m['recall']:.6f}")
+    print(f"  {tag}   F1              : {m['f1']:.6f}")
+
+    row = {
+        "n_layers"         : N_LAYERS,
+        "run_id"           : run_id,
+        "seed"             : run_seed,
+        "test_accuracy_pct": round(m["accuracy"] * 100, 6),
+        "loss"             : round(m["loss"],      8),
+        "fnr"              : round(m["fnr"],       6),
+        "fpr"              : round(m["fpr"],       6),
+        "roc_auc"          : round(m["roc_auc"],   6),
+        "pr_auc"           : round(m["pr_auc"],    6),
+        "precision"        : round(m["precision"], 6),
+        "recall"           : round(m["recall"],    6),
+        "f1"               : round(m["f1"],        6),
+        "train_time_s"     : round(elapsed, 2),
+        "gpu_id"           : gpu_id,
+    }
+    append_summary_csv(row, csv_lock)
+    print(f"  {tag} Done.")
+
+
+# ============================================================
+# 10. Main
+# ============================================================
+def main():
+    global GPUS
+    print(SEP)
+    print(f"  Baseline | AZ-Class 23-family | 9-qubit | 10 layers")
+    print(f"  Runs: {N_RUNS}  Epochs: {EPOCHS}  MIG slices per job: {len(GPUS)} (QOS limit: 2)")
+    print("  No attack — No defense")
+    print(SEP)
+
+    # ---- GPU info (no hard check — SLURM controls visibility) ----
+    # On MIG nodes torch.cuda.device_count() may return 1 even when
+    # SLURM allocates 2 slices, because CUDA_VISIBLE_DEVICES lists
+    # MIG UUIDs and PyTorch enumerates them as cuda:0, cuda:1, etc.
+    # We trust SLURM to have granted --gres=gpu:2 and proceed.
+    n_avail = torch.cuda.device_count()
+    print(f"[GPU] {n_avail} CUDA device(s) visible to PyTorch")
+    for i in range(n_avail):
+        print(f"  cuda:{i} -> {torch.cuda.get_device_name(i)}")
+    if n_avail == 0:
+        raise RuntimeError("No CUDA devices visible — check SLURM GPU allocation.")
+    # If only 1 device visible, map both workers to cuda:0 (sequential within job)
+    if n_avail == 1:
+        print("[WARN] Only 1 CUDA device visible — both workers will use cuda:0 sequentially.")
+        GPUS = [0, 0]
+    else:
+        GPUS = list(range(min(n_avail, len(GPUS))))
+        print(f"[GPU] Using devices: {GPUS}")
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+
+    # ---- load data once in main process ----
+    Xtr, ytr, Xte, yte = load_az23_pca9()
+
+    # ---- round-robin GPU assignment across 2 MIG slices ----
+    # Run1->cuda:0, Run2->cuda:1, Run3->cuda:0
+    tasks = [(run_id, GPUS[(run_id - 1) % len(GPUS)])
+             for run_id in range(1, N_RUNS + 1)]
+
+    print("\n[Main] Task schedule (2 concurrent, then 1):")
+    print("  Run  cuda-device")
+    print("  ---  -----------")
+    for run_id, gpu_id in tasks:
+        print(f"  {run_id:<3}  cuda:{gpu_id}")
+
+    # ---- spawn 2 workers at a time (QOS limit: 2 MIG slices per job) ----
+    # Run1+Run2 run simultaneously, then Run3 runs alone on cuda:0
+    mp.set_start_method("spawn", force=True)
+    manager  = mp.Manager()
+    csv_lock = manager.Lock()
+
+    total_start = time.time()
+    for batch_start in range(0, len(tasks), len(GPUS)):
+        batch = tasks[batch_start : batch_start + len(GPUS)]
+        procs = []
+        for task in batch:
+            p = mp.Process(
+                target=experiment_worker,
+                args=(task, Xtr, ytr, Xte, yte, csv_lock),
+            )
+            p.start()
+            procs.append(p)
+        for p in procs:
+            p.join()
+        failed = [batch[i] for i, p in enumerate(procs) if p.exitcode != 0]
+        if failed:
+            print(f"\n[WARN] Failed tasks in batch: {failed}")
+
+    total_elapsed = time.time() - total_start
+
+    # ---- aggregate summary ----
+    print(SEP)
+    print(f"  All 3 runs complete in {total_elapsed/60:.1f} min")
+    print(SEP)
+
+    try:
+        with open(SUMMARY_CSV, newline="") as f:
+            rows = list(csv.DictReader(f))
+    except FileNotFoundError:
+        print("[WARN] Summary CSV not found.")
+        return
+
+    accs = [float(r["test_accuracy_pct"]) for r in rows]
+    fnrs = [float(r["fnr"])               for r in rows]
+    fprs = [float(r["fpr"])               for r in rows]
+    rocs = [float(r["roc_auc"])           for r in rows]
+    prs  = [float(r["pr_auc"])            for r in rows]
+
+    print(f"  Layer 10 — mean ± std across {N_RUNS} runs:")
+    print(f"  Test Accuracy : {np.mean(accs):.4f}% ± {np.std(accs):.4f}%")
+    print(f"  FNR           : {np.mean(fnrs):.6f} ± {np.std(fnrs):.6f}")
+    print(f"  FPR           : {np.mean(fprs):.6f} ± {np.std(fprs):.6f}")
+    print(f"  ROC-AUC       : {np.mean(rocs):.6f} ± {np.std(rocs):.6f}")
+    print(f"  PR-AUC        : {np.mean(prs):.6f} ± {np.std(prs):.6f}")
+    print(f"\n  Summary CSV  -> {SUMMARY_CSV}")
+    print(f"  Epoch CSVs   -> {OUT_DIR}/baseline_layer10_run*_epoch_metrics.csv")
+    print(f"  Per-run CSVs -> {OUT_DIR}/baseline_layer10_run*_metrics.csv")
+    print(SEP)
+
+
+if __name__ == "__main__":
+    main()

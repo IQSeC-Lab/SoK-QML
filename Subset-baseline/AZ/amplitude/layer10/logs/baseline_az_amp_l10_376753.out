@@ -1,0 +1,76 @@
+Python 3.11.15
+/home/ssahmad/work/quid_env/bin/python
+========================================
+Job ID      : 376753
+Node        : cnode063
+CPUs        : 1
+Start time  : Tue Mar 24 04:36:34 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/ssahmad/work/Nowmi/Sok/Baseline/AZ/amplitude/layer10
+Files: baseline_az_amp_l10.slurm
+logs
+NN_baseline_az_amplitude_layer10.py
+Running python script...
+============================================================
+  Baseline | AZ-Class 23-family | 9-qubit | AmplitudeEmbedding | 10 layers
+  Run: 1  Seed: 43  Epochs: 30  Patience: 5
+  Device: CPU
+  No attack — No defense
+============================================================
+[Data] Classes : 23  Train : (184342, 512)  Test : (20482, 512)
+  [Amp|L2|R1|CPU] Subset: 16100 samples (700/class from 184342 total)
+  [Amp|L2|R1|CPU] Epoch   TrainAcc%   TrainLoss   TestAcc%  Patience
+  [Amp|L2|R1|CPU] -----  ----------  ----------   --------  --------
+  [Amp|L2|R1|CPU]     1     10.0311    3.102168    16.9905         0/5
+  [Amp|L2|R1|CPU]     2     16.0932    2.953472    21.0185         0/5
+  [Amp|L2|R1|CPU]     3     21.6149    2.776413    24.4605         0/5
+  [Amp|L2|R1|CPU]     4     25.2671    2.649433    27.5022         0/5
+  [Amp|L2|R1|CPU]     5     28.1491    2.559339    28.9230         0/5
+  [Amp|L2|R1|CPU]     6     30.4224    2.490919    30.0557         0/5
+  [Amp|L2|R1|CPU]     7     31.6646    2.434565    32.1941         0/5
+  [Amp|L2|R1|CPU]     8     33.2547    2.385523    33.1413         0/5
+  [Amp|L2|R1|CPU]     9     34.6584    2.340982    34.1080         0/5
+  [Amp|L2|R1|CPU]    10     35.8758    2.300885    35.5141         0/5
+  [Amp|L2|R1|CPU]    11     37.2795    2.263678    37.5549         0/5
+  [Amp|L2|R1|CPU]    12     38.7578    2.229785    38.1945         0/5
+  [Amp|L2|R1|CPU]    13     39.4472    2.199276    38.9708         0/5
+  [Amp|L2|R1|CPU]    14     40.2050    2.171567    39.8447         0/5
+  [Amp|L2|R1|CPU]    15     41.0559    2.145621    40.5722         0/5
+  [Amp|L2|R1|CPU]    16     41.8882    2.122121    41.0653         0/5
+  [Amp|L2|R1|CPU]    17     42.4161    2.099969    41.8465         0/5
+  [Amp|L2|R1|CPU]    18     42.9193    2.079581    42.0564         0/5
+  [Amp|L2|R1|CPU]    19     43.7640    2.060152    42.4714         0/5
+  [Amp|L2|R1|CPU]    20     43.7950    2.042267    43.0427         0/5
+  [Amp|L2|R1|CPU]    21     44.3478    2.025097    43.4235         0/5
+  [Amp|L2|R1|CPU]    22     44.8696    2.009119    43.7408         0/5
+  [Amp|L2|R1|CPU]    23     45.2298    1.993443    44.0484         0/5
+  [Amp|L2|R1|CPU]    24     45.6211    1.979294    44.1461         0/5
+  [Amp|L2|R1|CPU]    25     45.7453    1.965418    44.4585         0/5
+  [Amp|L2|R1|CPU]    26     46.1801    1.952027    44.8296         0/5
+  [Amp|L2|R1|CPU]    27     46.2484    1.939753    44.8784         0/5
+  [Amp|L2|R1|CPU]    28     46.8882    1.927374    45.2934         0/5
+  [Amp|L2|R1|CPU]    29     46.8820    1.915624    45.3715         0/5
+  [Amp|L2|R1|CPU]    30     47.1863    1.904541    45.7426         0/5
+
+  [Amp|L2|R1|CPU] Training time: 174552.89s  Best test acc: 45.7426%
+  [R1] Epoch CSV    -> baseline_amplitude_layer10/baseline_amplitude_layer10_run1_epoch_metrics.csv
+  [R1] Model saved  -> baseline_amplitude_layer10/best_model_run1.pt
+  [R1] Per-run CSV  -> baseline_amplitude_layer10/baseline_amplitude_layer10_run1_metrics.csv
+
+  [Amp|L2|R1|CPU] Final metrics:
+  [Amp|L2|R1|CPU]   Test Accuracy % : 45.742604
+  [Amp|L2|R1|CPU]   Loss            : 1.910434
+  [Amp|L2|R1|CPU]   FNR             : 0.530804
+  [Amp|L2|R1|CPU]   FPR             : 0.024643
+  [Amp|L2|R1|CPU]   ROC-AUC         : 0.892625
+  [Amp|L2|R1|CPU]   PR-AUC          : 0.460725
+  [Amp|L2|R1|CPU]   Precision       : 0.435401
+  [Amp|L2|R1|CPU]   Recall          : 0.469196
+  [Amp|L2|R1|CPU]   F1              : 0.451667
+============================================================
+  Run complete in 2909.2 min
+  Summary CSV  -> baseline_amplitude_layer10/baseline_amplitude_layer10_summary.csv
+  Epoch CSV    -> baseline_amplitude_layer10/baseline_amplitude_layer10_run1_epoch_metrics.csv
+  Per-run CSV  -> baseline_amplitude_layer10/baseline_amplitude_layer10_run1_metrics.csv
+============================================================

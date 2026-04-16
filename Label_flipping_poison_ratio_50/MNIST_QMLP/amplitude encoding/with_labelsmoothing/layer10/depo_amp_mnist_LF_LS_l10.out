@@ -1,0 +1,7 @@
+nohup: ignoring input
+
+========= Noise Evaluation RUN 1 =========
+Traceback (most recent call last):
+  File "/home/srnowmi/Sok-QML/MNIST_QMLP/amplitude encoding/Noiseless_labelsmoothing/layer10/depo_amp_mnist_LF_LS_l10.py", line 137, in <module>
+    writer.writerow([i, fnr_list[i], fpr_list[i]])
+IndexError: list index out of range

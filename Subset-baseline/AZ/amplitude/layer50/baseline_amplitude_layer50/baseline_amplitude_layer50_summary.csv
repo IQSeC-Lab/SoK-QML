@@ -1,0 +1,2 @@
+n_layers,run_id,seed,test_accuracy_pct,loss,fnr,fpr,roc_auc,pr_auc,precision,recall,f1,train_time_s
+50,1,43,55.697685,1.63754344,0.432832,0.020143,0.936846,0.566869,0.531847,0.567168,0.54894,243628.07

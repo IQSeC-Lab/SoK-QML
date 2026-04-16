@@ -1,0 +1,17 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+========================================
+Job ID      : 377600
+Node        : cnode061
+CPUs        : 1
+Start time  : Wed Mar 25 04:17:35 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/Baseline/MNIST/amplitude/layer2
+Files: baseline_mnist_amp_l2.slurm
+baseline_mnist_amplitude_layer2
+depo_baseline_mn_amp_l2.py
+dpo_bsl_mn_amp_l2.slurm
+logs
+NN_baseline_mnist_amplitude_layer2.py
+Running python script...

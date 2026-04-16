@@ -1,0 +1,7 @@
+nohup: ignoring input
+
+========= Noise Evaluation RUN 1 =========
+Traceback (most recent call last):
+  File "/home/srnowmi/Sok-QML/MNIST_QMLP/amplitude encoding/Noiseless/layer10/depo_amplitude_label_flipping_layer10.py", line 145, in <module>
+    writer.writerow([i, fnr_list[i], fpr_list[i]])
+IndexError: list index out of range

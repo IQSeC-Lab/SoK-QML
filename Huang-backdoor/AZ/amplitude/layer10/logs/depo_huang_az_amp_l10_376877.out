@@ -1,0 +1,96 @@
+============================================================
+ Job        : dpo_hz_az_amp_l10
+ Job ID     : 376877
+ Node       : cnode061
+ CPUs       : 16
+ Start      : Wed Mar 25 12:42:13 PM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/AZ/amplitude/layer10
+[ENV] PennyLane  : 0.38.0
+
+[Models] Checking saved model files ...
+       FOUND    huang_az_amp_l10_best_ratio01.pt
+       FOUND    huang_az_amp_l10_best_ratio03.pt
+       FOUND    huang_az_amp_l10_best_ratio05.pt
+       FOUND    huang_az_amp_l10_trigger.pt
+
+[RUN] Starting at Wed Mar 25 12:42:21 PM MDT 2026
+
+[Device] cpu
+[Config] N_LAYERS=10  N_CLASSES=23  DEPO_P=0.01  TARGET_CLASS=6
+[Config] PCA_COMPONENTS=512 (AmplitudeEmbedding)
+====================================================================
+ Depolarizing Noise Evaluation | Huang Backdoor AZ-23 Amplitude L10
+ Noise backend : default.mixed + DepolarizingChannel (p=0.01)
+ Encoding      : AmplitudeEmbedding (PCA=512)
+ Models        : 3 victim models (1 per ratio)
+ Target class  : 6 (7th class, 0-indexed)
+====================================================================
+[Data] Train : (184342, 512)   Test : (20482, 512)
+[Data] Full test: (20482, 512)  Stratified subset: (4600, 512) (200/class x 23 classes)
+[Trigger] Loaded from huang_az_amp_l10_trigger.pt  |delta|_inf=0.2000
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.1]  Model: huang_az_amp_l10_best_ratio01.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 23.52%
+  ASR : 28.84%
+  Accuracy    : 0.2352
+  Loss        : 2.6925
+  Precision   : 0.3747
+  Recall      : 0.2352
+  F1          : 0.2890
+  Fpr         : 0.0348
+  Fnr         : 0.7648
+  Roc_auc     : 0.8415
+  Pr_auc      : 0.3471
+  Metrics  -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio01_metrics.csv
+  CM       -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio01_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.3]  Model: huang_az_amp_l10_best_ratio03.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 23.54%
+  ASR : 96.39%
+  Accuracy    : 0.2354
+  Loss        : 2.6972
+  Precision   : 0.3991
+  Recall      : 0.2354
+  F1          : 0.2962
+  Fpr         : 0.0348
+  Fnr         : 0.7646
+  Roc_auc     : 0.8394
+  Pr_auc      : 0.3421
+  Metrics  -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio03_metrics.csv
+  CM       -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio03_cm.png
+
+────────────────────────────────────────────────────────────────────
+ [ratio=0.5]  Model: huang_az_amp_l10_best_ratio05.pt
+  Weights loaded. Running noisy inference ...
+  CA  : 22.80%
+  ASR : 99.75%
+  Accuracy    : 0.2280
+  Loss        : 2.7039
+  Precision   : 0.3940
+  Recall      : 0.2280
+  F1          : 0.2889
+  Fpr         : 0.0351
+  Fnr         : 0.7720
+  Roc_auc     : 0.8348
+  Pr_auc      : 0.3420
+  Metrics  -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio05_metrics.csv
+  CM       -> depo_huang_az_amp_l10/depo_huang_az_amp_l10_ratio05_cm.png
+
+====================================================================
+ Done. Evaluated 3 model(s), skipped 0.
+ Summary  -> depo_runs/depo_huang_az_amp_l10_summary.csv
+ Per-ratio -> depo_huang_az_amp_l10/
+====================================================================
+
+============================================================
+ End time  : Thu Mar 26 09:44:30 PM MDT 2026
+ Exit code : 0
+============================================================

@@ -1,0 +1,52 @@
+Traceback (most recent call last):
+  File "/work/mkamol/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer2/huang_bd_mn_amp_l2.py", line 859, in <module>
+    main()
+  File "/work/mkamol/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer2/huang_bd_mn_amp_l2.py", line 763, in main
+    trigger  = generate_trigger(proxy, X_nt_gen, X_t_gen, MAIN_DEVICE)
+  File "/work/mkamol/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer2/huang_bd_mn_amp_l2.py", line 333, in generate_trigger
+    out  = proxy(x_in.unsqueeze(0))
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/mkamol/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer2/huang_bd_mn_amp_l2.py", line 197, in forward
+    out = self.qlayer(x)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/qnn/torch.py", line 404, in forward
+    results = self._evaluate_qnode(inputs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/qnn/torch.py", line 430, in _evaluate_qnode
+    res = self.qnode(**kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 1020, in __call__
+    return self._impl_call(*args, **kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 1005, in _impl_call
+    self._update_gradient_fn(shots=override_shots, tape=self._tape)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 666, in _update_gradient_fn
+    self.gradient_fn, self.gradient_kwargs, self.device = QNode.get_gradient_fn(
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/logging/decorators.py", line 61, in wrapper_entry
+    return func(*args, **kwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 699, in get_gradient_fn
+    if device.supports_derivatives(config, circuit=tape):
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane_lightning/lightning_qubit/lightning_qubit.py", line 675, in supports_derivatives
+    return _supports_adjoint(circuit=circuit)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane_lightning/lightning_qubit/lightning_qubit.py", line 396, in _supports_adjoint
+    prog((circuit,))
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/transforms/core/transform_program.py", line 515, in __call__
+    new_tapes, fn = transform(tape, *targs, **tkwargs)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/devices/preprocess.py", line 369, in decompose
+    new_ops = [
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/devices/preprocess.py", line 369, in <listcomp>
+    new_ops = [
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/devices/preprocess.py", line 72, in _operator_decomposition_gen
+    yield from _operator_decomposition_gen(
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/devices/preprocess.py", line 64, in _operator_decomposition_gen
+    decomp = decomposer(op)
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/devices/preprocess.py", line 355, in decomposer
+    return op.decomposition()
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/operation.py", line 1337, in decomposition
+    return self.compute_decomposition(
+  File "/home/mkamol/work/miniconda3/envs/quid_env/lib/python3.10/site-packages/pennylane/templates/state_preparations/mottonen.py", line 354, in compute_decomposition
+    raise ValueError(
+ValueError: Broadcasting with MottonenStatePreparation is not supported. Please use the qml.transforms.broadcast_expand transform to use broadcasting with MottonenStatePreparation.

@@ -1,0 +1,410 @@
+============================================================
+ Job        : huang_bd_ampl_l10
+ Job ID     : 14323
+ Node       : hopper001
+ CPUs       : 28
+ Start      : Fri Mar 20 05:06:17 AM MDT 2026
+============================================================
+
+[ENV] Python     : /home/mkamol/work/miniconda3/envs/quid_env/bin/python
+[ENV] Python ver : Python 3.10.20
+[ENV] Working dir: /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/amplitude/layer10
+[ENV] CUDA avail : True
+[ENV] GPU info   : NVIDIA H100 80GB HBM3
+[ENV] PennyLane  : 0.38.0
+
+[Data] Checking MNIST files in /home/mkamol/work/Nowmi/Sok/huang-backdoor/MNIST/MNIST ...
+       FOUND    train-images-idx3-ubyte
+       FOUND    train-labels-idx1-ubyte
+       FOUND    t10k-images-idx3-ubyte
+       FOUND    t10k-labels-idx1-ubyte
+
+[RUN] Starting at Fri Mar 20 05:06:36 AM MDT 2026
+
+[Config] Main device : cuda
+[Config] CPU threads : 28
+====================================================================
+ Huang & Zhang (2023) Backdoor — Amplitude QMLP Replication
+ Qubits=9  Layers=10  PCA=512
+ Target class=7  ε=0.2  (c,σ)=(1.0,2.0)
+ Poison ratios: [0.1, 0.3, 0.5]
+ Parallel runs: 1  |  CPU threads: 28
+====================================================================
+[Data] Full train : (60000, 512)   Test : (10000, 512)
+[Data] Stratified train: (7000, 512)  Test: (10000, 512)
+
+====================================================================
+ PHASE 1 — Train proxy model (clean, seed=42)
+====================================================================
+[PennyLane] Using lightning.qubit (install: pip install pennylane-lightning)
+  Epoch  1 | Batch   10 | Acc:   9.84%  Loss: 2.3175
+  Epoch  1 | Batch   20 | Acc:   9.69%  Loss: 2.3229
+  Epoch  1 | Batch   30 | Acc:   9.95%  Loss: 2.3121
+  Epoch  1 | Batch   40 | Acc:  10.08%  Loss: 2.3032
+  Epoch  1 | Batch   50 | Acc:   9.56%  Loss: 2.3112
+  Epoch  1 | Batch   60 | Acc:   9.64%  Loss: 2.2979
+  Epoch  1 | Batch   70 | Acc:   9.87%  Loss: 2.2970
+  Epoch  1 | Batch   80 | Acc:   9.75%  Loss: 2.2998
+  Epoch  1 | Batch   90 | Acc:   9.70%  Loss: 2.2961
+  Epoch  1 | Batch  100 | Acc:   9.88%  Loss: 2.2794
+  Epoch  1 | Batch  110 | Acc:  10.07%  Loss: 2.2734
+  [Proxy] Epoch  1  tr_loss=2.3009  tr_acc=10.07%  te_loss=2.2827  te_acc=11.29%
+  Epoch  2 | Batch   10 | Acc:  12.81%  Loss: 2.2756
+  Epoch  2 | Batch   20 | Acc:  11.56%  Loss: 2.2791
+  Epoch  2 | Batch   30 | Acc:  11.93%  Loss: 2.2690
+  Epoch  2 | Batch   40 | Acc:  11.84%  Loss: 2.2714
+  Epoch  2 | Batch   50 | Acc:  12.19%  Loss: 2.2632
+  Epoch  2 | Batch   60 | Acc:  12.21%  Loss: 2.2622
+  Epoch  2 | Batch   70 | Acc:  12.68%  Loss: 2.2546
+  Epoch  2 | Batch   80 | Acc:  13.52%  Loss: 2.2502
+  Epoch  2 | Batch   90 | Acc:  13.96%  Loss: 2.2475
+  Epoch  2 | Batch  100 | Acc:  14.44%  Loss: 2.2466
+  Epoch  2 | Batch  110 | Acc:  14.93%  Loss: 2.2391
+  [Proxy] Epoch  2  tr_loss=2.2599  tr_acc=14.93%  te_loss=2.2348  te_acc=23.77%
+  Epoch  3 | Batch   10 | Acc:  24.69%  Loss: 2.2304
+  Epoch  3 | Batch   20 | Acc:  23.98%  Loss: 2.2435
+  Epoch  3 | Batch   30 | Acc:  25.36%  Loss: 2.2223
+  Epoch  3 | Batch   40 | Acc:  25.94%  Loss: 2.2203
+  Epoch  3 | Batch   50 | Acc:  27.16%  Loss: 2.2044
+  Epoch  3 | Batch   60 | Acc:  27.11%  Loss: 2.2202
+  Epoch  3 | Batch   70 | Acc:  27.61%  Loss: 2.2005
+  Epoch  3 | Batch   80 | Acc:  28.05%  Loss: 2.1981
+  Epoch  3 | Batch   90 | Acc:  28.44%  Loss: 2.1943
+  Epoch  3 | Batch  100 | Acc:  28.84%  Loss: 2.1821
+  Epoch  3 | Batch  110 | Acc:  29.00%  Loss: 2.1766
+  [Proxy] Epoch  3  tr_loss=2.2084  tr_acc=29.00%  te_loss=2.1658  te_acc=30.76%
+  Epoch  4 | Batch   10 | Acc:  29.84%  Loss: 2.1654
+  Epoch  4 | Batch   20 | Acc:  30.39%  Loss: 2.1558
+  Epoch  4 | Batch   30 | Acc:  28.75%  Loss: 2.1797
+  Epoch  4 | Batch   40 | Acc:  29.02%  Loss: 2.1609
+  Epoch  4 | Batch   50 | Acc:  29.09%  Loss: 2.1494
+  Epoch  4 | Batch   60 | Acc:  29.58%  Loss: 2.1294
+  Epoch  4 | Batch   70 | Acc:  29.55%  Loss: 2.1497
+  Epoch  4 | Batch   80 | Acc:  29.90%  Loss: 2.1117
+  Epoch  4 | Batch   90 | Acc:  30.00%  Loss: 2.1074
+  Epoch  4 | Batch  100 | Acc:  29.75%  Loss: 2.1241
+  Epoch  4 | Batch  110 | Acc:  29.59%  Loss: 2.1018
+  [Proxy] Epoch  4  tr_loss=2.1396  tr_acc=29.59%  te_loss=2.0852  te_acc=30.39%
+  Epoch  5 | Batch   10 | Acc:  29.06%  Loss: 2.0912
+  Epoch  5 | Batch   20 | Acc:  30.31%  Loss: 2.0678
+  Epoch  5 | Batch   30 | Acc:  30.73%  Loss: 2.0738
+  Epoch  5 | Batch   40 | Acc:  30.35%  Loss: 2.0971
+  Epoch  5 | Batch   50 | Acc:  31.06%  Loss: 2.0620
+  Epoch  5 | Batch   60 | Acc:  31.04%  Loss: 2.0610
+  Epoch  5 | Batch   70 | Acc:  30.83%  Loss: 2.0776
+  Epoch  5 | Batch   80 | Acc:  30.82%  Loss: 2.0662
+  Epoch  5 | Batch   90 | Acc:  30.89%  Loss: 2.0647
+  Epoch  5 | Batch  100 | Acc:  31.14%  Loss: 2.0224
+  Epoch  5 | Batch  110 | Acc:  31.27%  Loss: 2.0600
+  [Proxy] Epoch  5  tr_loss=2.0676  tr_acc=31.27%  te_loss=2.0102  te_acc=33.60%
+  Epoch  6 | Batch   10 | Acc:  30.94%  Loss: 2.0546
+  Epoch  6 | Batch   20 | Acc:  30.62%  Loss: 2.0414
+  Epoch  6 | Batch   30 | Acc:  31.98%  Loss: 2.0304
+  Epoch  6 | Batch   40 | Acc:  31.84%  Loss: 2.0155
+  Epoch  6 | Batch   50 | Acc:  32.16%  Loss: 2.0136
+  Epoch  6 | Batch   60 | Acc:  32.37%  Loss: 2.0124
+  Epoch  6 | Batch   70 | Acc:  33.06%  Loss: 2.0051
+  Epoch  6 | Batch   80 | Acc:  33.93%  Loss: 1.9293
+  Epoch  6 | Batch   90 | Acc:  34.46%  Loss: 1.9523
+  Epoch  6 | Batch  100 | Acc:  34.56%  Loss: 1.9729
+  Epoch  6 | Batch  110 | Acc:  34.39%  Loss: 1.9826
+  [Proxy] Epoch  6  tr_loss=2.0009  tr_acc=34.39%  te_loss=1.9463  te_acc=36.05%
+  Epoch  7 | Batch   10 | Acc:  36.09%  Loss: 1.9650
+  Epoch  7 | Batch   20 | Acc:  36.33%  Loss: 1.9464
+  Epoch  7 | Batch   30 | Acc:  35.99%  Loss: 1.9675
+  Epoch  7 | Batch   40 | Acc:  35.90%  Loss: 1.9608
+  Epoch  7 | Batch   50 | Acc:  35.31%  Loss: 1.9998
+  Epoch  7 | Batch   60 | Acc:  35.62%  Loss: 1.9381
+  Epoch  7 | Batch   70 | Acc:  35.45%  Loss: 1.9521
+  Epoch  7 | Batch   80 | Acc:  35.62%  Loss: 1.9123
+  Epoch  7 | Batch   90 | Acc:  35.69%  Loss: 1.9329
+  Epoch  7 | Batch  100 | Acc:  35.59%  Loss: 1.9057
+  Epoch  7 | Batch  110 | Acc:  35.83%  Loss: 1.8846
+  [Proxy] Epoch  7  tr_loss=1.9423  tr_acc=35.83%  te_loss=1.8915  te_acc=37.70%
+  Epoch  8 | Batch   10 | Acc:  38.28%  Loss: 1.8990
+  Epoch  8 | Batch   20 | Acc:  37.50%  Loss: 1.8989
+  Epoch  8 | Batch   30 | Acc:  37.66%  Loss: 1.8843
+  Epoch  8 | Batch   40 | Acc:  36.88%  Loss: 1.9246
+  Epoch  8 | Batch   50 | Acc:  36.91%  Loss: 1.9035
+  Epoch  8 | Batch   60 | Acc:  36.41%  Loss: 1.9262
+  Epoch  8 | Batch   70 | Acc:  36.34%  Loss: 1.8878
+  Epoch  8 | Batch   80 | Acc:  36.43%  Loss: 1.8769
+  Epoch  8 | Batch   90 | Acc:  36.72%  Loss: 1.8679
+  Epoch  8 | Batch  100 | Acc:  36.83%  Loss: 1.8739
+  Epoch  8 | Batch  110 | Acc:  36.97%  Loss: 1.8714
+  [Proxy] Epoch  8  tr_loss=1.8922  tr_acc=36.97%  te_loss=1.8417  te_acc=39.78%
+  Epoch  9 | Batch   10 | Acc:  33.12%  Loss: 1.8942
+  Epoch  9 | Batch   20 | Acc:  37.11%  Loss: 1.8483
+  Epoch  9 | Batch   30 | Acc:  37.86%  Loss: 1.7928
+  Epoch  9 | Batch   40 | Acc:  37.23%  Loss: 1.8889
+  Epoch  9 | Batch   50 | Acc:  37.81%  Loss: 1.8391
+  Epoch  9 | Batch   60 | Acc:  38.05%  Loss: 1.8711
+  Epoch  9 | Batch   70 | Acc:  38.08%  Loss: 1.8381
+  Epoch  9 | Batch   80 | Acc:  38.48%  Loss: 1.7896
+  Epoch  9 | Batch   90 | Acc:  38.52%  Loss: 1.8590
+  Epoch  9 | Batch  100 | Acc:  38.47%  Loss: 1.8283
+  Epoch  9 | Batch  110 | Acc:  38.49%  Loss: 1.8395
+  [Proxy] Epoch  9  tr_loss=1.8444  tr_acc=38.49%  te_loss=1.7984  te_acc=40.94%
+  Epoch 10 | Batch   10 | Acc:  39.22%  Loss: 1.8340
+  Epoch 10 | Batch   20 | Acc:  39.84%  Loss: 1.8075
+  Epoch 10 | Batch   30 | Acc:  40.73%  Loss: 1.7855
+  Epoch 10 | Batch   40 | Acc:  41.21%  Loss: 1.7686
+  Epoch 10 | Batch   50 | Acc:  40.22%  Loss: 1.8577
+  Epoch 10 | Batch   60 | Acc:  39.69%  Loss: 1.8206
+  Epoch 10 | Batch   70 | Acc:  39.80%  Loss: 1.8138
+  Epoch 10 | Batch   80 | Acc:  39.90%  Loss: 1.7631
+  Epoch 10 | Batch   90 | Acc:  39.76%  Loss: 1.8408
+  Epoch 10 | Batch  100 | Acc:  39.78%  Loss: 1.7840
+  Epoch 10 | Batch  110 | Acc:  39.90%  Loss: 1.7526
+  [Proxy] Epoch 10  tr_loss=1.8026  tr_acc=39.90%  te_loss=1.7560  te_acc=42.62%
+  Epoch 11 | Batch   10 | Acc:  42.03%  Loss: 1.7984
+  Epoch 11 | Batch   20 | Acc:  40.62%  Loss: 1.7976
+  Epoch 11 | Batch   30 | Acc:  41.09%  Loss: 1.7495
+  Epoch 11 | Batch   40 | Acc:  40.47%  Loss: 1.8158
+  Epoch 11 | Batch   50 | Acc:  40.31%  Loss: 1.7587
+  Epoch 11 | Batch   60 | Acc:  40.83%  Loss: 1.7638
+  Epoch 11 | Batch   70 | Acc:  40.47%  Loss: 1.7526
+  Epoch 11 | Batch   80 | Acc:  40.76%  Loss: 1.7748
+  Epoch 11 | Batch   90 | Acc:  41.02%  Loss: 1.7061
+  Epoch 11 | Batch  100 | Acc:  41.42%  Loss: 1.7408
+  Epoch 11 | Batch  110 | Acc:  41.53%  Loss: 1.7483
+  [Proxy] Epoch 11  tr_loss=1.7642  tr_acc=41.53%  te_loss=1.7193  te_acc=43.50%
+  Epoch 12 | Batch   10 | Acc:  44.53%  Loss: 1.7338
+  Epoch 12 | Batch   20 | Acc:  42.73%  Loss: 1.7434
+  Epoch 12 | Batch   30 | Acc:  42.40%  Loss: 1.7484
+  Epoch 12 | Batch   40 | Acc:  42.03%  Loss: 1.7763
+  Epoch 12 | Batch   50 | Acc:  42.22%  Loss: 1.7311
+  Epoch 12 | Batch   60 | Acc:  42.06%  Loss: 1.7338
+  Epoch 12 | Batch   70 | Acc:  41.76%  Loss: 1.7617
+  Epoch 12 | Batch   80 | Acc:  42.23%  Loss: 1.6804
+  Epoch 12 | Batch   90 | Acc:  42.62%  Loss: 1.6689
+  Epoch 12 | Batch  100 | Acc:  42.50%  Loss: 1.7259
+  Epoch 12 | Batch  110 | Acc:  42.50%  Loss: 1.7353
+  [Proxy] Epoch 12  tr_loss=1.7308  tr_acc=42.50%  te_loss=1.6877  te_acc=44.91%
+  Epoch 13 | Batch   10 | Acc:  46.25%  Loss: 1.7080
+  Epoch 13 | Batch   20 | Acc:  43.44%  Loss: 1.7113
+  Epoch 13 | Batch   30 | Acc:  44.06%  Loss: 1.6920
+  Epoch 13 | Batch   40 | Acc:  43.36%  Loss: 1.7323
+  Epoch 13 | Batch   50 | Acc:  43.72%  Loss: 1.7083
+  Epoch 13 | Batch   60 | Acc:  43.52%  Loss: 1.7182
+  Epoch 13 | Batch   70 | Acc:  43.68%  Loss: 1.6798
+  Epoch 13 | Batch   80 | Acc:  43.32%  Loss: 1.7340
+  Epoch 13 | Batch   90 | Acc:  43.32%  Loss: 1.6825
+  Epoch 13 | Batch  100 | Acc:  43.23%  Loss: 1.7007
+  Epoch 13 | Batch  110 | Acc:  43.51%  Loss: 1.6161
+  [Proxy] Epoch 13  tr_loss=1.6985  tr_acc=43.51%  te_loss=1.6582  te_acc=46.20%
+  Epoch 14 | Batch   10 | Acc:  45.62%  Loss: 1.6503
+  Epoch 14 | Batch   20 | Acc:  45.31%  Loss: 1.6687
+  Epoch 14 | Batch   30 | Acc:  45.42%  Loss: 1.6926
+  Epoch 14 | Batch   40 | Acc:  45.00%  Loss: 1.6692
+  Epoch 14 | Batch   50 | Acc:  44.44%  Loss: 1.6783
+  Epoch 14 | Batch   60 | Acc:  44.77%  Loss: 1.7056
+  Epoch 14 | Batch   70 | Acc:  44.33%  Loss: 1.7254
+  Epoch 14 | Batch   80 | Acc:  44.79%  Loss: 1.6388
+  Epoch 14 | Batch   90 | Acc:  45.02%  Loss: 1.6251
+  Epoch 14 | Batch  100 | Acc:  45.16%  Loss: 1.6353
+  Epoch 14 | Batch  110 | Acc:  44.86%  Loss: 1.6757
+  [Proxy] Epoch 14  tr_loss=1.6695  tr_acc=44.86%  te_loss=1.6293  te_acc=47.28%
+  Epoch 15 | Batch   10 | Acc:  45.00%  Loss: 1.6107
+  Epoch 15 | Batch   20 | Acc:  46.25%  Loss: 1.6303
+  Epoch 15 | Batch   30 | Acc:  46.35%  Loss: 1.6536
+  Epoch 15 | Batch   40 | Acc:  45.98%  Loss: 1.6717
+  Epoch 15 | Batch   50 | Acc:  45.31%  Loss: 1.6788
+  Epoch 15 | Batch   60 | Acc:  45.31%  Loss: 1.6241
+  Epoch 15 | Batch   70 | Acc:  45.85%  Loss: 1.6108
+  Epoch 15 | Batch   80 | Acc:  46.09%  Loss: 1.6273
+  Epoch 15 | Batch   90 | Acc:  45.76%  Loss: 1.6986
+  Epoch 15 | Batch  100 | Acc:  46.02%  Loss: 1.6031
+  Epoch 15 | Batch  110 | Acc:  45.86%  Loss: 1.6692
+  [Proxy] Epoch 15  tr_loss=1.6435  tr_acc=45.86%  te_loss=1.6029  te_acc=48.45%
+  Epoch 16 | Batch   10 | Acc:  47.97%  Loss: 1.6207
+  Epoch 16 | Batch   20 | Acc:  45.86%  Loss: 1.6312
+  Epoch 16 | Batch   30 | Acc:  45.16%  Loss: 1.6557
+  Epoch 16 | Batch   40 | Acc:  45.82%  Loss: 1.6437
+  Epoch 16 | Batch   50 | Acc:  46.09%  Loss: 1.5894
+  Epoch 16 | Batch   60 | Acc:  46.46%  Loss: 1.6320
+  Epoch 16 | Batch   70 | Acc:  46.29%  Loss: 1.6318
+  Epoch 16 | Batch   80 | Acc:  46.21%  Loss: 1.6075
+  Epoch 16 | Batch   90 | Acc:  46.68%  Loss: 1.5610
+  Epoch 16 | Batch  100 | Acc:  46.88%  Loss: 1.6200
+  Epoch 16 | Batch  110 | Acc:  47.17%  Loss: 1.6066
+  [Proxy] Epoch 16  tr_loss=1.6181  tr_acc=47.17%  te_loss=1.5811  te_acc=49.17%
+  Epoch 17 | Batch   10 | Acc:  47.66%  Loss: 1.5934
+  Epoch 17 | Batch   20 | Acc:  48.83%  Loss: 1.5829
+  Epoch 17 | Batch   30 | Acc:  48.33%  Loss: 1.6200
+  Epoch 17 | Batch   40 | Acc:  48.44%  Loss: 1.5920
+  Epoch 17 | Batch   50 | Acc:  48.06%  Loss: 1.6054
+  Epoch 17 | Batch   60 | Acc:  47.86%  Loss: 1.6045
+  Epoch 17 | Batch   70 | Acc:  48.12%  Loss: 1.5837
+  Epoch 17 | Batch   80 | Acc:  48.36%  Loss: 1.5113
+  Epoch 17 | Batch   90 | Acc:  48.51%  Loss: 1.6217
+  Epoch 17 | Batch  100 | Acc:  48.50%  Loss: 1.6233
+  Epoch 17 | Batch  110 | Acc:  48.74%  Loss: 1.6065
+  [Proxy] Epoch 17  tr_loss=1.5950  tr_acc=48.74%  te_loss=1.5547  te_acc=50.88%
+  Epoch 18 | Batch   10 | Acc:  50.62%  Loss: 1.5838
+  Epoch 18 | Batch   20 | Acc:  49.92%  Loss: 1.5736
+  Epoch 18 | Batch   30 | Acc:  48.85%  Loss: 1.5982
+  Epoch 18 | Batch   40 | Acc:  48.91%  Loss: 1.5795
+  Epoch 18 | Batch   50 | Acc:  48.91%  Loss: 1.5821
+  Epoch 18 | Batch   60 | Acc:  48.57%  Loss: 1.6046
+  Epoch 18 | Batch   70 | Acc:  49.06%  Loss: 1.5681
+  Epoch 18 | Batch   80 | Acc:  49.63%  Loss: 1.5158
+  Epoch 18 | Batch   90 | Acc:  49.72%  Loss: 1.5510
+  Epoch 18 | Batch  100 | Acc:  49.92%  Loss: 1.5407
+  Epoch 18 | Batch  110 | Acc:  50.17%  Loss: 1.5832
+  [Proxy] Epoch 18  tr_loss=1.5710  tr_acc=50.17%  te_loss=1.5309  te_acc=51.86%
+  Epoch 19 | Batch   10 | Acc:  52.19%  Loss: 1.5368
+  Epoch 19 | Batch   20 | Acc:  50.47%  Loss: 1.5926
+  Epoch 19 | Batch   30 | Acc:  50.57%  Loss: 1.5507
+  Epoch 19 | Batch   40 | Acc:  50.62%  Loss: 1.5927
+  Epoch 19 | Batch   50 | Acc:  51.22%  Loss: 1.5593
+  Epoch 19 | Batch   60 | Acc:  51.51%  Loss: 1.5311
+  Epoch 19 | Batch   70 | Acc:  51.54%  Loss: 1.5357
+  Epoch 19 | Batch   80 | Acc:  51.45%  Loss: 1.5037
+  Epoch 19 | Batch   90 | Acc:  51.32%  Loss: 1.5475
+  Epoch 19 | Batch  100 | Acc:  51.58%  Loss: 1.4987
+  Epoch 19 | Batch  110 | Acc:  51.34%  Loss: 1.5491
+  [Proxy] Epoch 19  tr_loss=1.5453  tr_acc=51.34%  te_loss=1.5073  te_acc=52.83%
+  Epoch 20 | Batch   10 | Acc:  52.03%  Loss: 1.5307
+  Epoch 20 | Batch   20 | Acc:  52.11%  Loss: 1.5115
+  Epoch 20 | Batch   30 | Acc:  51.61%  Loss: 1.5486
+  Epoch 20 | Batch   40 | Acc:  51.76%  Loss: 1.5330
+  Epoch 20 | Batch   50 | Acc:  51.75%  Loss: 1.5005
+  Epoch 20 | Batch   60 | Acc:  51.74%  Loss: 1.5239
+  Epoch 20 | Batch   70 | Acc:  51.61%  Loss: 1.5318
+  Epoch 20 | Batch   80 | Acc:  51.82%  Loss: 1.5208
+  Epoch 20 | Batch   90 | Acc:  51.94%  Loss: 1.5139
+  Epoch 20 | Batch  100 | Acc:  52.05%  Loss: 1.5112
+  Epoch 20 | Batch  110 | Acc:  52.00%  Loss: 1.5394
+  [Proxy] Epoch 20  tr_loss=1.5241  tr_acc=52.00%  te_loss=1.4841  te_acc=54.27%
+  Epoch 21 | Batch   10 | Acc:  54.84%  Loss: 1.5131
+  Epoch 21 | Batch   20 | Acc:  55.62%  Loss: 1.4914
+  Epoch 21 | Batch   30 | Acc:  54.17%  Loss: 1.5211
+  Epoch 21 | Batch   40 | Acc:  53.75%  Loss: 1.4970
+  Epoch 21 | Batch   50 | Acc:  53.41%  Loss: 1.5026
+  Epoch 21 | Batch   60 | Acc:  53.36%  Loss: 1.4548
+  Epoch 21 | Batch   70 | Acc:  53.28%  Loss: 1.5292
+  Epoch 21 | Batch   80 | Acc:  53.26%  Loss: 1.5102
+  Epoch 21 | Batch   90 | Acc:  53.26%  Loss: 1.5042
+  Epoch 21 | Batch  100 | Acc:  53.27%  Loss: 1.5008
+  Epoch 21 | Batch  110 | Acc:  53.21%  Loss: 1.5087
+  [Proxy] Epoch 21  tr_loss=1.5030  tr_acc=53.21%  te_loss=1.4621  te_acc=55.80%
+  Epoch 22 | Batch   10 | Acc:  53.44%  Loss: 1.5176
+  Epoch 22 | Batch   20 | Acc:  54.22%  Loss: 1.4941
+  Epoch 22 | Batch   30 | Acc:  53.96%  Loss: 1.5222
+  Epoch 22 | Batch   40 | Acc:  53.28%  Loss: 1.5208
+  Epoch 22 | Batch   50 | Acc:  53.59%  Loss: 1.4514
+  Epoch 22 | Batch   60 | Acc:  54.35%  Loss: 1.4164
+  Epoch 22 | Batch   70 | Acc:  53.88%  Loss: 1.5045
+  Epoch 22 | Batch   80 | Acc:  54.00%  Loss: 1.4636
+  Epoch 22 | Batch   90 | Acc:  53.78%  Loss: 1.5203
+  Epoch 22 | Batch  100 | Acc:  54.03%  Loss: 1.4421
+  Epoch 22 | Batch  110 | Acc:  54.13%  Loss: 1.4433
+  [Proxy] Epoch 22  tr_loss=1.4815  tr_acc=54.13%  te_loss=1.4393  te_acc=56.40%
+  Epoch 23 | Batch   10 | Acc:  52.97%  Loss: 1.5315
+  Epoch 23 | Batch   20 | Acc:  53.28%  Loss: 1.4885
+  Epoch 23 | Batch   30 | Acc:  54.22%  Loss: 1.4256
+  Epoch 23 | Batch   40 | Acc:  54.02%  Loss: 1.4786
+  Epoch 23 | Batch   50 | Acc:  54.34%  Loss: 1.4575
+  Epoch 23 | Batch   60 | Acc:  54.97%  Loss: 1.4284
+  Epoch 23 | Batch   70 | Acc:  54.91%  Loss: 1.4522
+  Epoch 23 | Batch   80 | Acc:  55.00%  Loss: 1.4379
+  Epoch 23 | Batch   90 | Acc:  55.14%  Loss: 1.4936
+  Epoch 23 | Batch  100 | Acc:  55.06%  Loss: 1.4728
+  Epoch 23 | Batch  110 | Acc:  55.31%  Loss: 1.3888
+  [Proxy] Epoch 23  tr_loss=1.4596  tr_acc=55.31%  te_loss=1.4182  te_acc=57.27%
+  Epoch 24 | Batch   10 | Acc:  60.16%  Loss: 1.3602
+  Epoch 24 | Batch   20 | Acc:  58.67%  Loss: 1.4676
+  Epoch 24 | Batch   30 | Acc:  58.44%  Loss: 1.4297
+  Epoch 24 | Batch   40 | Acc:  57.81%  Loss: 1.4210
+  Epoch 24 | Batch   50 | Acc:  57.09%  Loss: 1.4910
+  Epoch 24 | Batch   60 | Acc:  56.80%  Loss: 1.4382
+  Epoch 24 | Batch   70 | Acc:  57.14%  Loss: 1.4446
+  Epoch 24 | Batch   80 | Acc:  56.48%  Loss: 1.4559
+  Epoch 24 | Batch   90 | Acc:  56.44%  Loss: 1.4334
+  Epoch 24 | Batch  100 | Acc:  56.42%  Loss: 1.4556
+  Epoch 24 | Batch  110 | Acc:  56.51%  Loss: 1.4357
+  [Proxy] Epoch 24  tr_loss=1.4393  tr_acc=56.51%  te_loss=1.3960  te_acc=58.19%
+  Epoch 25 | Batch   10 | Acc:  57.66%  Loss: 1.4081
+  Epoch 25 | Batch   20 | Acc:  57.50%  Loss: 1.3899
+  Epoch 25 | Batch   30 | Acc:  57.45%  Loss: 1.4091
+  Epoch 25 | Batch   40 | Acc:  57.73%  Loss: 1.3978
+  Epoch 25 | Batch   50 | Acc:  57.25%  Loss: 1.4709
+  Epoch 25 | Batch   60 | Acc:  57.42%  Loss: 1.3800
+  Epoch 25 | Batch   70 | Acc:  57.70%  Loss: 1.3849
+  Epoch 25 | Batch   80 | Acc:  57.46%  Loss: 1.4364
+  Epoch 25 | Batch   90 | Acc:  57.31%  Loss: 1.4384
+  Epoch 25 | Batch  100 | Acc:  57.31%  Loss: 1.4396
+  Epoch 25 | Batch  110 | Acc:  57.10%  Loss: 1.4507
+  [Proxy] Epoch 25  tr_loss=1.4187  tr_acc=57.10%  te_loss=1.3741  te_acc=58.96%
+  Epoch 26 | Batch   10 | Acc:  59.06%  Loss: 1.3413
+  Epoch 26 | Batch   20 | Acc:  58.28%  Loss: 1.4160
+  Epoch 26 | Batch   30 | Acc:  56.98%  Loss: 1.4128
+  Epoch 26 | Batch   40 | Acc:  56.68%  Loss: 1.4332
+  Epoch 26 | Batch   50 | Acc:  56.38%  Loss: 1.4520
+  Epoch 26 | Batch   60 | Acc:  56.74%  Loss: 1.4018
+  Epoch 26 | Batch   70 | Acc:  56.67%  Loss: 1.4410
+  Epoch 26 | Batch   80 | Acc:  57.44%  Loss: 1.3684
+  Epoch 26 | Batch   90 | Acc:  57.64%  Loss: 1.3712
+  Epoch 26 | Batch  100 | Acc:  57.78%  Loss: 1.3746
+  Epoch 26 | Batch  110 | Acc:  57.90%  Loss: 1.3609
+  [Proxy] Epoch 26  tr_loss=1.3975  tr_acc=57.90%  te_loss=1.3535  te_acc=59.47%
+  Epoch 27 | Batch   10 | Acc:  60.16%  Loss: 1.3491
+  Epoch 27 | Batch   20 | Acc:  58.59%  Loss: 1.4291
+  Epoch 27 | Batch   30 | Acc:  59.06%  Loss: 1.3431
+  Epoch 27 | Batch   40 | Acc:  58.98%  Loss: 1.3638
+  Epoch 27 | Batch   50 | Acc:  58.97%  Loss: 1.3766
+  Epoch 27 | Batch   60 | Acc:  58.80%  Loss: 1.3984
+  Epoch 27 | Batch   70 | Acc:  58.71%  Loss: 1.3663
+  Epoch 27 | Batch   80 | Acc:  58.93%  Loss: 1.3478
+  Epoch 27 | Batch   90 | Acc:  58.72%  Loss: 1.4109
+  Epoch 27 | Batch  100 | Acc:  58.47%  Loss: 1.3917
+  Epoch 27 | Batch  110 | Acc:  58.59%  Loss: 1.3805
+  [Proxy] Epoch 27  tr_loss=1.3779  tr_acc=58.59%  te_loss=1.3334  te_acc=60.54%
+  Epoch 28 | Batch   10 | Acc:  57.97%  Loss: 1.4078
+  Epoch 28 | Batch   20 | Acc:  60.08%  Loss: 1.3402
+  Epoch 28 | Batch   30 | Acc:  59.38%  Loss: 1.3625
+  Epoch 28 | Batch   40 | Acc:  59.61%  Loss: 1.3164
+  Epoch 28 | Batch   50 | Acc:  59.31%  Loss: 1.3498
+  Epoch 28 | Batch   60 | Acc:  59.38%  Loss: 1.3740
+  Epoch 28 | Batch   70 | Acc:  59.44%  Loss: 1.3358
+  Epoch 28 | Batch   80 | Acc:  59.30%  Loss: 1.3802
+  Epoch 28 | Batch   90 | Acc:  59.13%  Loss: 1.3933
+  Epoch 28 | Batch  100 | Acc:  59.30%  Loss: 1.3420
+  Epoch 28 | Batch  110 | Acc:  59.33%  Loss: 1.3221
+  [Proxy] Epoch 28  tr_loss=1.3567  tr_acc=59.33%  te_loss=1.3139  te_acc=61.41%
+  Epoch 29 | Batch   10 | Acc:  57.81%  Loss: 1.3592
+  Epoch 29 | Batch   20 | Acc:  58.67%  Loss: 1.3585
+  Epoch 29 | Batch   30 | Acc:  59.48%  Loss: 1.3039
+  Epoch 29 | Batch   40 | Acc:  59.41%  Loss: 1.3451
+  Epoch 29 | Batch   50 | Acc:  59.25%  Loss: 1.3664
+  Epoch 29 | Batch   60 | Acc:  59.58%  Loss: 1.3199
+  Epoch 29 | Batch   70 | Acc:  59.24%  Loss: 1.4018
+  Epoch 29 | Batch   80 | Acc:  58.93%  Loss: 1.3947
+  Epoch 29 | Batch   90 | Acc:  59.31%  Loss: 1.3072
+  Epoch 29 | Batch  100 | Acc:  59.62%  Loss: 1.2955
+  Epoch 29 | Batch  110 | Acc:  59.99%  Loss: 1.2610
+  [Proxy] Epoch 29  tr_loss=1.3376  tr_acc=59.99%  te_loss=1.2954  te_acc=62.06%
+  Epoch 30 | Batch   10 | Acc:  59.38%  Loss: 1.3889
+  Epoch 30 | Batch   20 | Acc:  59.14%  Loss: 1.3427
+  Epoch 30 | Batch   30 | Acc:  59.58%  Loss: 1.3595
+  Epoch 30 | Batch   40 | Acc:  60.59%  Loss: 1.2757
+  Epoch 30 | Batch   50 | Acc:  60.69%  Loss: 1.3471
+  Epoch 30 | Batch   60 | Acc:  60.23%  Loss: 1.3365
+  Epoch 30 | Batch   70 | Acc:  60.42%  Loss: 1.2889
+  Epoch 30 | Batch   80 | Acc:  60.49%  Loss: 1.2855
+  Epoch 30 | Batch   90 | Acc:  60.36%  Loss: 1.2937
+  Epoch 30 | Batch  100 | Acc:  60.50%  Loss: 1.2890
+  Epoch 30 | Batch  110 | Acc:  60.33%  Loss: 1.3503
+  [Proxy] Epoch 30  tr_loss=1.3234  tr_acc=60.33%  te_loss=1.2767  te_acc=62.60%
+  Epoch metrics  -> runs/huang_proxy_epoch_metrics.csv
+  [Proxy] Best test CA: 62.60%
+
+====================================================================
+ PHASE 2 — Sequential trigger generation (Algorithm 1, faithful)
+====================================================================
+
+============================================================
+ End time  : Fri Mar 20 11:44:33 PM MDT 2026
+ Exit code : 1
+============================================================

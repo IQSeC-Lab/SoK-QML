@@ -1,0 +1,2 @@
+timestamp,run_id,target_class,theta_target,cda_pct,asr_pct,epochs_trained,train_time_s,accuracy_pct,loss,precision,recall,f1,fpr,fnr,roc_auc,pr_auc
+2026-03-14T04:20:38,2,0,0.785398,51.95,0.88,30,38850.3,51.95,1.43049,0.490641,0.511672,0.500936,0.053417,0.488328,0.878196,0.515087

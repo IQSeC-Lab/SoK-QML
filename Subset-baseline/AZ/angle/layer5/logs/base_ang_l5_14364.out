@@ -1,0 +1,141 @@
+Python 3.10.19
+/home/vcadena1/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 14364
+Node        : hopper002
+GPUs        : MIG-f605ee0e-9e81-5b4f-8e7d-6120fe61bae9
+CPUs        : 4
+Start time  : Sun Mar 22 01:31:39 PM MDT 2026
+========================================
+Sun Mar 22 13:31:39 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.51.03              Driver Version: 575.51.03      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          Off |   00000000:1C:00.0 Off |                   On |
+| N/A   29C    P0             70W /  700W |     107MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA H100 80GB HBM3          Off |   00000000:2B:00.0 Off |                   On |
+| N/A   28C    P0             71W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA H100 80GB HBM3          Off |   00000000:AC:00.0 Off |                   On |
+| N/A   25C    P0             71W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA H100 80GB HBM3          Off |   00000000:BC:00.0 Off |                   On |
+| N/A   26C    P0             69W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0   10   0   0  |              15MiB /  9984MiB    | 16      0 |  1   0    1    0    1 |
+|                  |                 0MiB / 16383MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Changing directory...
+Now in: /work/vcadena1/Nowmi/Sok/Baseline/AZ/angle/layer5
+Files: baseline_ang_l5.slurm
+baseline_layer5
+logs
+NN_baseline_az_angle_layer5.py
+Running python script...
+============================================================
+  Baseline | AZ-Class 23-family | 9-qubit | 5 layers
+  Runs: 1  Epochs: 30  MIG slices per job: 2 (QOS limit: 2)
+  No attack — No defense
+============================================================
+[GPU] 1 CUDA device(s) visible to PyTorch
+  cuda:0 -> NVIDIA H100 80GB HBM3 MIG 1g.10gb
+[WARN] Only 1 CUDA device visible — both workers will use cuda:0 sequentially.
+[Data] Classes : 23  Train : (184342, 9)  Test : (20482, 9)
+
+[Main] Task schedule (2 concurrent, then 1):
+  Run  cuda-device
+  ---  -----------
+  1    cuda:0
+============================================================
+  [L5|R1|GPU0] Starting
+============================================================
+  [L5|R1|GPU0] Subset: 16100 samples (700/class from 184342 total)
+  [L5|R1|GPU0] Epoch   TrainAcc%   TrainLoss   TestAcc%  Patience
+  [L5|R1|GPU0] -----  ----------  ----------   --------  --------
+  [L5|R1|GPU0]     1     11.3540    3.074180    14.5201         0/5
+  [L5|R1|GPU0]     2     22.3168    2.848104    26.6576         0/5
+  [L5|R1|GPU0]     3     31.3043    2.580506    32.9558         0/5
+  [L5|R1|GPU0]     4     37.4099    2.364895    37.4573         0/5
+  [L5|R1|GPU0]     5     39.9938    2.219028    38.7560         0/5
+  [L5|R1|GPU0]     6     41.1801    2.118583    40.1230         0/5
+  [L5|R1|GPU0]     7     42.4783    2.046078    41.2509         0/5
+  [L5|R1|GPU0]     8     43.4783    1.991803    41.8319         0/5
+  [L5|R1|GPU0]     9     44.1242    1.949599    42.4373         0/5
+  [L5|R1|GPU0]    10     44.7391    1.915199    43.3112         0/5
+  [L5|R1|GPU0]    11     45.2671    1.886559    43.8092         0/5
+  [L5|R1|GPU0]    12     45.7329    1.862866    43.9606         0/5
+  [L5|R1|GPU0]    13     46.0186    1.842351    44.2193         0/5
+  [L5|R1|GPU0]    14     46.3416    1.824763    44.3853         0/5
+  [L5|R1|GPU0]    15     46.5839    1.809209    44.7564         0/5
+  [L5|R1|GPU0]    16     46.8137    1.795459    44.9126         0/5
+  [L5|R1|GPU0]    17     46.9938    1.783166    44.8784         1/5
+  [L5|R1|GPU0]    18     47.2795    1.771675    45.3276         0/5
+  [L5|R1|GPU0]    19     47.2671    1.761567    45.4350         0/5
+  [L5|R1|GPU0]    20     47.5093    1.751996    45.4253         1/5
+  [L5|R1|GPU0]    21     47.6273    1.743329    45.8695         0/5
+  [L5|R1|GPU0]    22     47.6584    1.735119    45.9867         0/5
+  [L5|R1|GPU0]    23     48.0435    1.727094    45.9037         1/5
+  [L5|R1|GPU0]    24     48.0000    1.720039    46.1088         0/5
+  [L5|R1|GPU0]    25     48.0621    1.713365    46.8167         0/5
+  [L5|R1|GPU0]    26     48.3913    1.706995    46.1185         1/5
+  [L5|R1|GPU0]    27     48.2484    1.700957    46.4505         2/5
+  [L5|R1|GPU0]    28     48.5901    1.695291    46.3871         3/5
+  [L5|R1|GPU0]    29     48.3727    1.689768    47.0950         0/5
+  [L5|R1|GPU0]    30     48.4410    1.684437    47.0071         1/5
+
+  [L5|R1|GPU0] Training time: 1467.97s  Best test acc: 47.0950%
+  [R1] Epoch CSV    -> baseline_layer5/baseline_layer5_run1_epoch_metrics.csv
+  [R1] Model saved  -> baseline_layer5/best_model_run1.pt
+  [R1] Per-run CSV  -> baseline_layer5/baseline_layer5_run1_metrics.csv
+
+  [L5|R1|GPU0] Final metrics:
+  [L5|R1|GPU0]   Test Accuracy % : 47.095010
+  [L5|R1|GPU0]   Loss            : 1.714037
+  [L5|R1|GPU0]   FNR             : 0.519286
+  [L5|R1|GPU0]   FPR             : 0.024027
+  [L5|R1|GPU0]   ROC-AUC         : 0.910099
+  [L5|R1|GPU0]   PR-AUC          : 0.459582
+  [L5|R1|GPU0]   Precision       : 0.460406
+  [L5|R1|GPU0]   Recall          : 0.480714
+  [L5|R1|GPU0]   F1              : 0.470341
+  [L5|R1|GPU0] Done.
+============================================================
+  All 3 runs complete in 24.9 min
+============================================================
+  Layer 5 — mean ± std across 1 runs:
+  Test Accuracy : 47.0950% ± 0.0000%
+  FNR           : 0.519286 ± 0.000000
+  FPR           : 0.024027 ± 0.000000
+  ROC-AUC       : 0.910099 ± 0.000000
+  PR-AUC        : 0.459582 ± 0.000000
+
+  Summary CSV  -> baseline_layer5/baseline_layer5_summary.csv
+  Epoch CSVs   -> baseline_layer5/baseline_layer5_run*_epoch_metrics.csv
+  Per-run CSVs -> baseline_layer5/baseline_layer5_run*_metrics.csv
+============================================================
