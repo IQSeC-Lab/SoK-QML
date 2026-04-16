@@ -1,0 +1,24 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 376604
+Node        : cnode001
+CPUs        : 8
+Start time  : Sun Mar 22 04:50:11 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/QUID/MNIST/amplitude/layer2
+Files: depo_job_mnist_amp_l2.slurm
+depo_logs
+depo_quid_mnist_amplitude_l2.py
+depo_runs
+eps0.1
+eps0.3
+eps0.5
+logs
+NN_quid_mnist_amplitude_l2.py
+quid_job_mnist_amp_l2.slurm
+rho_proto_cache_amplitude.npy
+runs
+Running python script...

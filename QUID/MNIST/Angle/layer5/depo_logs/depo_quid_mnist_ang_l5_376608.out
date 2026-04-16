@@ -1,0 +1,685 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 376608
+Node        : cnode006
+CPUs        : 8
+Start time  : Sun Mar 22 04:57:48 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/QUID/MNIST/Angle/layer5
+Files: depo_job_mnist_ang_l5.slurm
+depo_logs
+depo_quid_mnist_angle_l5.py
+eps0.1
+eps0.3
+eps0.5
+logs
+NN_quid_mnist_angle_l5.py
+quid_mnist_angle_l5_job.slurm
+rho_proto_cache_mnist_angle.npy
+runs
+Running python script...
+[Device] Torch device: cpu
+====================================================================
+ Depolarizing Noise Evaluation | QUID MNIST-Angle L5 | p=0.01
+ Noise backend : default.mixed + DepolarizingChannel (exact, no shots)
+ Batch size    : 256
+ Models        : 3 runs × 3 eps × 2 attacks × 2 defenses = 36 total
+====================================================================
+[Data] Train: (60000, 9)  Test: (10000, 9)
+[ProtoCache] Loaded 10 prototypes from rho_proto_cache_mnist_angle.npy
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.1 | quid | none]
+  Model: eps0.1/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.1_quid_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3442
+  Loss        : 1.9953
+  Precision   : 0.3254
+  Recall      : 0.3341
+  F1          : 0.3297
+  Fpr         : 0.0730
+  Fnr         : 0.6659
+  Roc_auc     : 0.8102
+  Pr_auc      : 0.3365
+  Asr         : 6.4286
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_quid_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.1 | quid | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.1_quid_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3325
+  Loss        : 2.1485
+  Precision   : 0.3261
+  Recall      : 0.3235
+  F1          : 0.3248
+  Fpr         : 0.0741
+  Fnr         : 0.6765
+  Roc_auc     : 0.8002
+  Pr_auc      : 0.3138
+  Asr         : 0.0000
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.1 | random | none]
+  Model: eps0.1/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.1_random_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4079
+  Loss        : 1.9345
+  Precision   : 0.3991
+  Recall      : 0.3997
+  F1          : 0.3994
+  Fpr         : 0.0658
+  Fnr         : 0.6003
+  Roc_auc     : 0.8197
+  Pr_auc      : 0.3840
+  Asr         : 6.8571
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_random_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.1 | random | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.1_random_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3351
+  Loss        : 2.0686
+  Precision   : 0.3098
+  Recall      : 0.3266
+  F1          : 0.3180
+  Fpr         : 0.0740
+  Fnr         : 0.6734
+  Roc_auc     : 0.8038
+  Pr_auc      : 0.3483
+  Asr         : 8.5714
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.1_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.3 | quid | none]
+  Model: eps0.3/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.3_quid_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.3414
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.5732
+  Pr_auc      : 0.1377
+  Asr         : 54.1905
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_quid_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.3 | quid | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.3_quid_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.1590
+  Loss        : 2.2027
+  Precision   : 0.1852
+  Recall      : 0.1592
+  F1          : 0.1712
+  Fpr         : 0.0934
+  Fnr         : 0.8408
+  Roc_auc     : 0.6962
+  Pr_auc      : 0.2126
+  Asr         : 1.5238
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.3 | random | none]
+  Model: eps0.3/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.3_random_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3751
+  Loss        : 2.0281
+  Precision   : 0.3846
+  Recall      : 0.3633
+  F1          : 0.3736
+  Fpr         : 0.0697
+  Fnr         : 0.6367
+  Roc_auc     : 0.8054
+  Pr_auc      : 0.3550
+  Asr         : 7.3333
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_random_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.3 | random | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.3_random_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.2762
+  Loss        : 2.1654
+  Precision   : 0.2777
+  Recall      : 0.2636
+  F1          : 0.2705
+  Fpr         : 0.0808
+  Fnr         : 0.7364
+  Roc_auc     : 0.7909
+  Pr_auc      : 0.3200
+  Asr         : 8.9524
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.3_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.5 | quid | none]
+  Model: eps0.5/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.5_quid_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.3635
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.4623
+  Pr_auc      : 0.1070
+  Asr         : 54.1714
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_quid_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.5 | quid | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.5_quid_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.3772
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.4597
+  Pr_auc      : 0.1059
+  Asr         : 54.1714
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.5 | random | none]
+  Model: eps0.5/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.5_random_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3386
+  Loss        : 2.1485
+  Precision   : 0.3303
+  Recall      : 0.3242
+  F1          : 0.3272
+  Fpr         : 0.0738
+  Fnr         : 0.6758
+  Roc_auc     : 0.7993
+  Pr_auc      : 0.3530
+  Asr         : 7.3714
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_random_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 1 | eps=0.5 | random | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run1-layer5-noiseless-Angle_eps0.5_random_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.1423
+  Loss        : 2.2625
+  Precision   : 0.0674
+  Recall      : 0.1413
+  F1          : 0.0912
+  Fpr         : 0.0954
+  Fnr         : 0.8587
+  Roc_auc     : 0.6637
+  Pr_auc      : 0.2336
+  Asr         : 9.7143
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run1-layer5_quid_eps0.5_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.1 | quid | none]
+  Model: eps0.1/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.1_quid_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4017
+  Loss        : 1.8932
+  Precision   : 0.4434
+  Recall      : 0.3927
+  F1          : 0.4165
+  Fpr         : 0.0668
+  Fnr         : 0.6073
+  Roc_auc     : 0.8333
+  Pr_auc      : 0.4059
+  Asr         : 2.7143
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_quid_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.1 | quid | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.1_quid_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4279
+  Loss        : 1.9434
+  Precision   : 0.4321
+  Recall      : 0.4188
+  F1          : 0.4253
+  Fpr         : 0.0637
+  Fnr         : 0.5812
+  Roc_auc     : 0.8274
+  Pr_auc      : 0.3968
+  Asr         : 3.8571
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.1 | random | none]
+  Model: eps0.1/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.1_random_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4577
+  Loss        : 1.8380
+  Precision   : 0.4363
+  Recall      : 0.4493
+  F1          : 0.4427
+  Fpr         : 0.0604
+  Fnr         : 0.5507
+  Roc_auc     : 0.8328
+  Pr_auc      : 0.4142
+  Asr         : 7.0000
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_random_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.1 | random | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.1_random_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3985
+  Loss        : 1.9040
+  Precision   : 0.4398
+  Recall      : 0.3924
+  F1          : 0.4148
+  Fpr         : 0.0669
+  Fnr         : 0.6076
+  Roc_auc     : 0.8250
+  Pr_auc      : 0.3921
+  Asr         : 8.8571
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.1_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.3 | quid | none]
+  Model: eps0.3/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.3_quid_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0481
+  Loss        : 2.3178
+  Precision   : 0.0199
+  Recall      : 0.0485
+  F1          : 0.0283
+  Fpr         : 0.1059
+  Fnr         : 0.9515
+  Roc_auc     : 0.5325
+  Pr_auc      : 0.1491
+  Asr         : 73.0952
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_quid_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.3 | quid | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.3_quid_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.1928
+  Loss        : 2.2199
+  Precision   : 0.2322
+  Recall      : 0.1932
+  F1          : 0.2109
+  Fpr         : 0.0898
+  Fnr         : 0.8068
+  Roc_auc     : 0.7186
+  Pr_auc      : 0.2204
+  Asr         : 13.5238
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.3 | random | none]
+  Model: eps0.3/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.3_random_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4363
+  Loss        : 1.9553
+  Precision   : 0.4204
+  Recall      : 0.4274
+  F1          : 0.4238
+  Fpr         : 0.0628
+  Fnr         : 0.5726
+  Roc_auc     : 0.8234
+  Pr_auc      : 0.3920
+  Asr         : 6.8571
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_random_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.3 | random | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.3_random_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3321
+  Loss        : 2.0518
+  Precision   : 0.3780
+  Recall      : 0.3260
+  F1          : 0.3501
+  Fpr         : 0.0742
+  Fnr         : 0.6740
+  Roc_auc     : 0.8116
+  Pr_auc      : 0.3541
+  Asr         : 8.0952
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.3_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.5 | quid | none]
+  Model: eps0.5/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.5_quid_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0829
+  Loss        : 2.3492
+  Precision   : 0.0086
+  Recall      : 0.0846
+  F1          : 0.0155
+  Fpr         : 0.1017
+  Fnr         : 0.9154
+  Roc_auc     : 0.4692
+  Pr_auc      : 0.1146
+  Asr         : 57.3714
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_quid_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.5 | quid | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.5_quid_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0908
+  Loss        : 2.3565
+  Precision   : 0.0098
+  Recall      : 0.0926
+  F1          : 0.0178
+  Fpr         : 0.1008
+  Fnr         : 0.9074
+  Roc_auc     : 0.4527
+  Pr_auc      : 0.1050
+  Asr         : 56.0286
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.5 | random | none]
+  Model: eps0.5/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.5_random_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3761
+  Loss        : 2.0915
+  Precision   : 0.3730
+  Recall      : 0.3664
+  F1          : 0.3697
+  Fpr         : 0.0695
+  Fnr         : 0.6336
+  Roc_auc     : 0.8036
+  Pr_auc      : 0.3586
+  Asr         : 8.0857
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_random_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 2 | eps=0.5 | random | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run2-layer5-noiseless-Angle_eps0.5_random_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3304
+  Loss        : 2.1730
+  Precision   : 0.3162
+  Recall      : 0.3233
+  F1          : 0.3197
+  Fpr         : 0.0744
+  Fnr         : 0.6767
+  Roc_auc     : 0.7915
+  Pr_auc      : 0.3419
+  Asr         : 8.5143
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run2-layer5_quid_eps0.5_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.1 | quid | none]
+  Model: eps0.1/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.1_quid_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4010
+  Loss        : 1.8928
+  Precision   : 0.4405
+  Recall      : 0.3919
+  F1          : 0.4147
+  Fpr         : 0.0667
+  Fnr         : 0.6081
+  Roc_auc     : 0.8469
+  Pr_auc      : 0.4419
+  Asr         : 10.8571
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_quid_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.1 | quid | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.1_quid_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3303
+  Loss        : 2.1230
+  Precision   : 0.3215
+  Recall      : 0.3205
+  F1          : 0.3210
+  Fpr         : 0.0746
+  Fnr         : 0.6795
+  Roc_auc     : 0.7955
+  Pr_auc      : 0.3242
+  Asr         : 11.2857
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.1 | random | none]
+  Model: eps0.1/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.1_random_none.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4471
+  Loss        : 1.8540
+  Precision   : 0.4317
+  Recall      : 0.4379
+  F1          : 0.4348
+  Fpr         : 0.0616
+  Fnr         : 0.5621
+  Roc_auc     : 0.8430
+  Pr_auc      : 0.4298
+  Asr         : 6.2857
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_random_none.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.1 | random | q-detection]
+  Model: eps0.1/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.1_random_qdetection.pt
+  Poisoned replay: 700 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4207
+  Loss        : 1.9515
+  Precision   : 0.3947
+  Recall      : 0.4122
+  F1          : 0.4032
+  Fpr         : 0.0644
+  Fnr         : 0.5878
+  Roc_auc     : 0.8390
+  Pr_auc      : 0.4157
+  Asr         : 6.2857
+  Metrics saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.1/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.1_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.3 | quid | none]
+  Model: eps0.3/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.3_quid_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.3324
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.5431
+  Pr_auc      : 0.1259
+  Asr         : 53.8571
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_quid_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.3 | quid | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.3_quid_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.2214
+  Loss        : 2.1986
+  Precision   : 0.2481
+  Recall      : 0.2211
+  F1          : 0.2338
+  Fpr         : 0.0867
+  Fnr         : 0.7789
+  Roc_auc     : 0.7186
+  Pr_auc      : 0.2392
+  Asr         : 22.0476
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.3 | random | none]
+  Model: eps0.3/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.3_random_none.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.4163
+  Loss        : 1.9953
+  Precision   : 0.4120
+  Recall      : 0.4067
+  F1          : 0.4093
+  Fpr         : 0.0650
+  Fnr         : 0.5933
+  Roc_auc     : 0.8311
+  Pr_auc      : 0.4080
+  Asr         : 7.1429
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_random_none.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.3 | random | q-detection]
+  Model: eps0.3/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.3_random_qdetection.pt
+  Poisoned replay: 2100 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3917
+  Loss        : 2.0629
+  Precision   : 0.3341
+  Recall      : 0.3815
+  F1          : 0.3562
+  Fpr         : 0.0677
+  Fnr         : 0.6185
+  Roc_auc     : 0.8278
+  Pr_auc      : 0.3967
+  Asr         : 7.4762
+  Metrics saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.3/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.3_random_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.5 | quid | none]
+  Model: eps0.5/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.5_quid_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.3718
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.4840
+  Pr_auc      : 0.1100
+  Asr         : 53.2857
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_quid_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_quid_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.5 | quid | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.5_quid_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.0980
+  Loss        : 2.5194
+  Precision   : 0.0098
+  Recall      : 0.1000
+  F1          : 0.0179
+  Fpr         : 0.1000
+  Fnr         : 0.9000
+  Roc_auc     : 0.4905
+  Pr_auc      : 0.1147
+  Asr         : 53.4000
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_quid_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_quid_qdetection_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.5 | random | none]
+  Model: eps0.5/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.5_random_none.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3896
+  Loss        : 2.0859
+  Precision   : 0.4371
+  Recall      : 0.3803
+  F1          : 0.4067
+  Fpr         : 0.0681
+  Fnr         : 0.6197
+  Roc_auc     : 0.8168
+  Pr_auc      : 0.3822
+  Asr         : 7.2857
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_random_none.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_random_none_cm.png
+
+--------------------------------------------------------------------
+ [Run 3 | eps=0.5 | random | q-detection]
+  Model: eps0.5/qmlp-mnist-quid-run3-layer5-noiseless-Angle_eps0.5_random_qdetection.pt
+  Poisoned replay: 3500 samples
+  Weights loaded. Running noisy inference ...
+  Accuracy    : 0.3308
+  Loss        : 2.1819
+  Precision   : 0.3969
+  Recall      : 0.3230
+  F1          : 0.3561
+  Fpr         : 0.0744
+  Fnr         : 0.6770
+  Roc_auc     : 0.8122
+  Pr_auc      : 0.3740
+  Asr         : 7.7429
+  Metrics saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_random_qdetection.csv
+  Confusion matrix saved → depo_eps0.5/depo-qmlp-mnist-quid-run3-layer5_quid_eps0.5_random_qdetection_cm.png
+
+====================================================================
+ Done. Evaluated 36 model(s), skipped 0.
+ Summary → depo_runs/depo_quid_qdetection_MNIST_angle_l5_summary.csv
+====================================================================
