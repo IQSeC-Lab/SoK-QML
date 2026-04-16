@@ -1,0 +1,101 @@
+Python 3.10.19
+/home/vcadena1/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 14388
+Node        : hopper002
+GPUs        : MIG-8db24f16-d161-5d19-a852-b8552c5d7845
+CPUs        : 8
+Start time  : Mon Mar 23 08:03:21 PM MDT 2026
+========================================
+Mon Mar 23 20:03:21 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.51.03              Driver Version: 575.51.03      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 80GB HBM3          Off |   00000000:1C:00.0 Off |                   On |
+| N/A   28C    P0             70W /  700W |     104MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA H100 80GB HBM3          Off |   00000000:2B:00.0 Off |                   On |
+| N/A   29C    P0             71W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA H100 80GB HBM3          Off |   00000000:AC:00.0 Off |                   On |
+| N/A   26C    P0             70W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA H100 80GB HBM3          Off |   00000000:BC:00.0 Off |                   On |
+| N/A   26C    P0             69W /  700W |     102MiB /  81559MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    8   0   0  |              15MiB /  9984MiB    | 16      0 |  1   0    1    0    1 |
+|                  |                 0MiB / 16383MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Changing directory...
+Now in: /work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer10
+Files: depo_logs
+depo_qtrojan_mnist_angle_vca_l10.py
+depo_qtrojan_mnist_ang_vca_l10.slurm
+logs
+qtrojan
+qtrojan_ang_l10.slurm
+qtrojan_mnist_angle_l10.py
+runs
+Running python script...
+[Device] Torch device: cpu
+====================================================================
+ Depolarizing Noise Evaluation | QTrojan MNIST Angle | p=0.01
+ Noise backend : default.mixed + DepolarizingChannel (exact)
+ Layers        : 10  |  Classes: 10
+ Target class  : 0  |  theta_target: 0.7854 rad
+ Source model  : qtrojan/qtrojan-layer10-noiseless-Angle_best.pt
+====================================================================
+[Data] Train: (60000, 9)  Test: (10000, 9)
+
+[Model] Loading weights from qtrojan/qtrojan-layer10-noiseless-Angle_best.pt ...
+[Model] Weights loaded. Running noisy inference ...
+
+[Eval] Backdoor DISABLED — Clean-Data Accuracy (CDA) + metrics ...
+  CDA          : 55.7500%
+  Loss        : 1.5761
+  Precision   : 0.6008
+  Recall      : 0.5538
+  F1          : 0.5764
+  Fpr         : 0.0490
+  Fnr         : 0.4462
+  Roc_auc     : 0.9046
+  Pr_auc      : 0.5811
+
+[Eval] Backdoor ENABLED  — Attack Success Rate (ASR) under noise ...
+  ASR (→ class 0): 0.0000%
+  Metrics saved → depo_qtrojan/depo_qtrojan_mnist-layer10-noiseless-Angle_metrics.csv
+  Confusion matrix saved → depo_qtrojan/depo_qtrojan_mnist-layer10-noiseless-Angle_cm.png
+
+====================================================================
+ Done.
+  CDA under noise : 55.7500%
+  ASR under noise : 0.0000%
+  Metrics CSV     → depo_qtrojan/depo_qtrojan_mnist-layer10-noiseless-Angle_metrics.csv
+  Confusion matrix→ depo_qtrojan/depo_qtrojan_mnist-layer10-noiseless-Angle_cm.png
+  Summary CSV     → depo_runs/depo_qtrojan_mnist_angle_summary.csv
+====================================================================

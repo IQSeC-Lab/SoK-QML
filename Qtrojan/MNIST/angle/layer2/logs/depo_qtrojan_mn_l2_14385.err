@@ -1,0 +1,62 @@
+/work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer2/depo_qtrojan_mnist_angle_vca_l2.py:400: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(SOURCE_MODEL_PATH, map_location=device))
+Traceback (most recent call last):
+  File "/work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer2/depo_qtrojan_mnist_angle_vca_l2.py", line 454, in <module>
+    main()
+  File "/work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer2/depo_qtrojan_mnist_angle_vca_l2.py", line 406, in main
+    metrics, cm = evaluation(model, test_loader)
+  File "/work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer2/depo_qtrojan_mnist_angle_vca_l2.py", line 237, in evaluation
+    out = model(x_batch)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/vcadena1/Nowmi/Sok/Qtrojan/MNIST/angle/layer2/depo_qtrojan_mnist_angle_vca_l2.py", line 174, in forward
+    out = self.qlayer(x)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/qnn/torch.py", line 408, in forward
+    results = self._evaluate_qnode(inputs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/qnn/torch.py", line 434, in _evaluate_qnode
+    res = self.qnode(**kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 922, in __call__
+    return self._impl_call(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/workflow/qnode.py", line 895, in _impl_call
+    res = execute(
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/workflow/execution.py", line 233, in execute
+    results = run(tapes, device, config, inner_transform)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/workflow/run.py", line 291, in run
+    results = inner_execute(tapes)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/workflow/run.py", line 256, in inner_execute
+    results = device.execute(transformed_tapes, execution_config=execution_config)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/modifiers/simulator_tracking.py", line 28, in execute
+    results = untracked_execute(self, circuits, execution_config)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/modifiers/single_tape_support.py", line 30, in execute
+    results = batch_execute(self, circuits, execution_config)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/logging/decorators.py", line 61, in wrapper_entry
+    return func(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/default_mixed.py", line 270, in execute
+    return tuple(
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/default_mixed.py", line 271, in <genexpr>
+    simulate(
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/qubit_mixed/simulate.py", line 269, in simulate
+    state, is_state_batched = get_final_state(
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/qubit_mixed/simulate.py", line 70, in get_final_state
+    state = apply_operation(
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/functools.py", line 889, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/qubit_mixed/apply_operation.py", line 371, in apply_operation
+    return _apply_operation_default(op, state, is_state_batched, debugger, **_)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/qubit_mixed/apply_operation.py", line 388, in _apply_operation_default
+    return apply_operation_einsum(op, state, is_state_batched, debugger, **_)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/devices/qubit_mixed/apply_operation.py", line 241, in apply_operation_einsum
+    return math.einsum(einsum_indices, kraus, state, kraus_dagger)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/pennylane/math/multi_dispatch.py", line 572, in einsum
+    return np.einsum(indices, *operands, like=like)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/autoray/autoray.py", line 81, in do
+    return func(*args, **kwargs)
+  File "/home/vcadena1/work/Nowmi/Sok/quid_env/lib/python3.10/site-packages/torch/functional.py", line 386, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore[attr-defined]
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 9.75 GiB of which 546.06 MiB is free. Including non-PyTorch memory, this process has 9.20 GiB memory in use. Of the allocated memory 9.03 GiB is allocated by PyTorch, and 1.98 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

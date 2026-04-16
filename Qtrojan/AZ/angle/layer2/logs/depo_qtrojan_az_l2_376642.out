@@ -1,0 +1,57 @@
+Python 3.10.19
+/home/clalarcon/work/Nowmi/Sok/quid_env/bin/python
+Python 3.10.19
+========================================
+Job ID      : 376642
+Node        : cnode007
+CPUs        : 8
+Start time  : Mon Mar 23 01:36:53 PM MDT 2026
+========================================
+Changing directory...
+Now in: /home/clalarcon/work/Nowmi/Sok/Qtrojan/AZ/angle/layer2
+Files: depo_logs
+depo_qtrojan_az23_ang_l2.slurm
+depo_qtrojan_az23_angle_l2.py
+logs
+qtrojan
+qtrojan_az23_ang_l2.slurm
+qtrojan_az23_angle_l2.py
+runs
+Running python script...
+[Device] Torch device: cpu
+====================================================================
+ Depolarizing Noise Evaluation | QTrojan AZ-23 Angle | p=0.01
+ Noise backend : default.mixed + DepolarizingChannel (exact)
+ Layers        : 2
+ Target class  : 0  |  theta_target: 0.7854 rad
+ Source model  : qtrojan/qtrojan_az23-layer2-noiseless-Angle_best.pt
+====================================================================
+[Data] Train: (184342, 9)  Test: (20482, 9)
+
+[Model] Loading weights from qtrojan/qtrojan_az23-layer2-noiseless-Angle_best.pt ...
+[Model] Weights loaded. Running noisy inference ...
+
+[Eval] Backdoor DISABLED — Clean-Data Accuracy (CDA) + metrics ...
+  CDA          : 46.1185%
+  Loss        : 1.7538
+  Precision   : 0.4327
+  Recall      : 0.4681
+  F1          : 0.4497
+  Fpr         : 0.0245
+  Fnr         : 0.5319
+  Roc_auc     : 0.9089
+  Pr_auc      : 0.4363
+
+[Eval] Backdoor ENABLED  — Attack Success Rate (ASR) under noise ...
+  ASR (→ class 0): 6.8450%
+  Metrics saved → depo_qtrojan/depo_qtrojan_az23-layer2-noiseless-Angle_metrics.csv
+  Confusion matrix saved → depo_qtrojan/depo_qtrojan_az23-layer2-noiseless-Angle_cm.png
+
+====================================================================
+ Done.
+  CDA under noise : 46.1185%
+  ASR under noise : 6.8450%
+  Metrics CSV     → depo_qtrojan/depo_qtrojan_az23-layer2-noiseless-Angle_metrics.csv
+  Confusion matrix→ depo_qtrojan/depo_qtrojan_az23-layer2-noiseless-Angle_cm.png
+  Summary CSV     → depo_runs/depo_qtrojan_az23_angle_summary.csv
+====================================================================

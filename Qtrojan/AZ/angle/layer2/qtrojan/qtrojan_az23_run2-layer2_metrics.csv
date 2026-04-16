@@ -1,0 +1,16 @@
+Metric,Value
+timestamp,2026-03-14T08:20:26
+run_id,2
+cda_pct,43.194
+asr_pct,10.4531
+epochs_trained,30
+train_time_s,33716.9
+accuracy_pct,43.194
+loss,1.843246
+precision,0.395793
+recall,0.438009
+f1,0.415832
+fpr,0.025797
+fnr,0.561991
+roc_auc,0.898338
+pr_auc,0.423049
